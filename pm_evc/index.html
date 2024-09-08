@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>This folder primarily contains auxiliary materials for our paper</title>
+ <style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center; /* 让所有单元格的内容居中 */
+  }
+
+  th, td {
+    border: 1px solid #ccc; /* 灰色的竖线 */
+    padding: 8px;
+  }
+
+  th {
+    background-color: #f9f9f9;
+  }
+
+  audio {
+    width: 130px;
+  }
+</style>
+        
+</head>
+<body class="vscode-body vscode-light">
+<ul>
+<div class="row">
+  <h3>Voice Conversion</h3>
+  <p>
+    We conduct English any-to-any VC comparisons using the 
+    <br>
+    <br>
+  </p>
+  <div class="english_vc_examples">
+    <div class="english_vc active" data-page="1">
+      <table class="table" style="margin-top: 20px;">
+        <thead>
+          <tr>
+            <!-- 第一行，合并的cell -->
+            <th colspan="2"></th> <!-- 合并Source Speech和Target Speaker的两列 -->
+            <th colspan="6">Under Our Framework </th> <!-- 合并ProgRE到Whisper的六列 -->
+            <th colspan="2">Baseline methods</th> <!-- 合并ConsistencyVC和Wav2vec-VC的两列 -->
+        </tr>
+          <tr>
+            <th>Source Speech</th>
+            <th>Target Speaker</th>
+            <th><b>ProgRE</b></th>
+            <th><a >Data2vec</a></th>
+            <th><a >HuBERT</a></th>
+            <th><a >Wav2vec2.0</a></th>
+            <th><a >WavLM</a></th>
+            <th><a >Whisper</a></th>
+            <th><a >ConsistencyVC</a></th>
+            <th><a >Wav2vec-VC</a></th>
+          </tr>
+        </thead>
+        <tbody id="">
+          <tr>
+            <td><audio src="./audios/vc/MSP-PODCAST_2927_0034.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/MSP-PODCAST_0083_0003.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/progre/283_MSP-PODCAST_2927_0034_srcspkmsp-1374_tgtspkmsp-285_srcemoneutral_tgtemoneutral.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/data2vec/283_MSP-PODCAST_2927_0034_srcspkmsp-1374_tgtspkmsp-285_srcemoneutral_tgtemoneutral.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/hubert/283_MSP-PODCAST_2927_0034_srcspkmsp-1374_tgtspkmsp-285_srcemoneutral_tgtemoneutral.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/wav2vec/283_MSP-PODCAST_2927_0034_srcspkmsp-1374_tgtspkmsp-285_srcemoneutral_tgtemoneutral.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/wavlm/283_MSP-PODCAST_2927_0034_srcspkmsp-1374_tgtspkmsp-285_srcemoneutral_tgtemoneutral.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/whisper/283_MSP-PODCAST_2927_0034_srcspkmsp-1374_tgtspkmsp-285_srcemoneutral_tgtemoneutral.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/consis_vc/283_MSP-PODCAST_2927_0034_srcspkmsp-1374_tgtspkmsp-285_srcemoneutral_tgtemoneutral.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/wav2vec_vc/283_MSP-PODCAST_2927_0034_srcspkmsp-1374_tgtspkmsp-285_srcemoneutral_tgtemoneutral.wav" controls="" style="width:130px"></audio></td>
+          </tr>
+          
+        </tbody>
+        <tbody id="">
+          <tr>
+            <td><audio src="./audios/MSP-PODCAST_2894_0284.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/0016_000721.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/progre/spk_cv_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/data2vec/spk_cv_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/hubert/spk_cv_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/wav2vec/spk_cv_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/wavlm/spk_cv_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/whisper/spk_cv_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/consis_vc/spk_cv_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/wav2vec_vc/spk_cv_fbank.wav" controls="" style="width:130px"></audio></td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<hr style="height:10px;border:0px dashed #ffffff;" />
+<hr style="height:1px;border:2px;border-top:2px dashed #555555;" />
+
+<div class="row">
+  <h3>Emotion Conversion</h3>
+  <p>
+    We conduct English any-to-any VC comparisons using the 
+    <br>
+    <br>
+  </p>
+  <div class="english_vc_examples">
+    <div class="english_vc active" data-page="1">
+      <table class="table" style="margin-top: 20px;">
+        <thead>
+          <tr>
+            <!-- 第一行，合并的cell -->
+            <th colspan="2"></th> <!-- 合并Source Speech和Target Speaker的两列 -->
+            <th colspan="6">Under Our Framework</th> <!-- 合并ProgRE到Whisper的六列 -->
+            <th colspan="2">Baseline methods</th> <!-- 合并ConsistencyVC和Wav2vec-VC的两列 -->
+        </tr>
+          <tr>
+            <th>Source Speech</th>
+            <th>Target Emotion</th>
+            <th><b>ProgRE</b></th>
+            <th><a >Data2vec</a></th>
+            <th><a >HuBERT</a></th>
+            <th><a >Wav2vec2.0</a></th>
+            <th><a >WavLM</a></th>
+            <th><a >Whisper</a></th>
+            <th><a >ConsistencyVC</a></th>
+            <th><a >Wav2vec-VC</a></th>
+          </tr>
+        </thead>
+        <tbody id="">
+          <tr>
+            <td><audio src="./audios/ec/neutral_197_224_0200.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/ec/anger_367-392_0372.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/ec/progre/320_neutral_197_224_0200_srcspkemovdb-sam_tgtspkemovdb-sam_srcemoneutral_tgtemoangry.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/ec/data2vec/320_neutral_197_224_0200_srcspkemovdb-sam_tgtspkemovdb-sam_srcemoneutral_tgtemoangry.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/ec/hubert/320_neutral_197_224_0200_srcspkemovdb-sam_tgtspkemovdb-sam_srcemoneutral_tgtemoangry.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/ec/wav2vec/320_neutral_197_224_0200_srcspkemovdb-sam_tgtspkemovdb-sam_srcemoneutral_tgtemoangry.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/ec/wavlm/320_neutral_197_224_0200_srcspkemovdb-sam_tgtspkemovdb-sam_srcemoneutral_tgtemoangry.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/ec/whisper/320_neutral_197_224_0200_srcspkemovdb-sam_tgtspkemovdb-sam_srcemoneutral_tgtemoangry.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/ec/consis_vc/320_neutral_197_224_0200_srcspkemovdb-sam_tgtspkemovdb-sam_srcemoneutral_tgtemoangry.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/ec/wav2vec_vc/320_neutral_197_224_0200_srcspkemovdb-sam_tgtspkemovdb-sam_srcemoneutral_tgtemoangry.wav" controls="" style="width:130px"></audio></td>
+          </tr>
+          
+        </tbody>
+        <tbody id="">
+          <tr>
+            <td><audio src="./audios/MSP-PODCAST_2894_0284.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/0016_000721.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/ec/progre/emo_cv_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/ec/data2vec/emo_cv_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/ec/hubert/emo_cv_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/ec/wav2vec/emo_cv_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/ec/wavlm/emo_cv_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/ec/whisper/emo_cv_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/ec/consis_vc/emo_cv_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/ec/wav2vec_vc/emo_cv_fbank.wav" controls="" style="width:130px"></audio></td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<hr style="height:10px;border:0px dashed #ffffff;" />
+<hr style="height:1px;border:2px;border-top:2px dashed #555555;" />
+
+<div class="row">
+  <h3>Emotion and Voice Conversion</h3>
+  <p>
+    We conduct English any-to-any VC comparisons using the 
+    <br>
+    <br>
+  </p>
+  <div class="english_vc_examples">
+    <div class="english_vc active" data-page="1">
+      <table class="table" style="margin-top: 20px;">
+        <thead>
+          <tr>
+            <!-- 第一行，合并的cell -->
+            <th colspan="3"></th> <!-- 合并Source Speech和Target Speaker的两列 -->
+            <th colspan="6">Under Our Framework</th> <!-- 合并ProgRE到Whisper的六列 -->
+            <th colspan="2">Baseline methods</th> <!-- 合并ConsistencyVC和Wav2vec-VC的两列 -->
+        </tr>
+          <tr>
+            <th>Source Speech</th>
+            <th>Target Emotion</th>
+            <th>Target Speaker</th>
+            <th><b>ProgRE</b></th>
+            <th><a >Data2vec</a></th>
+            <th><a >HuBERT</a></th>
+            <th><a >Wav2vec2.0</a></th>
+            <th><a >WavLM</a></th>
+            <th><a >Whisper</a></th>
+            <th><a >ConsistencyVC</a></th>
+            <th><a >Wav2vec-VC</a></th>
+          </tr>
+        </thead>
+        <tbody id="">
+          <tr>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+          </tr>
+          
+        </tbody>
+        <tbody id="">
+          <tr>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<hr style="height:10px;border:0px dashed #ffffff;" />
+<hr style="height:1px;border:2px;border-top:2px dashed #555555;" />
+
+<div class="row">
+  <h3>Reconstruction</h3>
+  <p>
+    We conduct English any-to-any VC comparisons using the 
+    <br>
+    <br>
+  </p>
+  <div class="english_vc_examples">
+    <div class="english_vc active" data-page="1">
+      <table class="table" style="margin-top: 20px;">
+        <thead>
+          <tr>
+            <!-- 第一行，合并的cell -->
+            <th colspan="1"></th> <!-- 合并Source Speech和Target Speaker的两列 -->
+            <th colspan="6">Under Our Framework</th> <!-- 合并ProgRE到Whisper的六列 -->
+            <th colspan="2">Baseline methods</th> <!-- 合并ConsistencyVC和Wav2vec-VC的两列 -->
+        </tr>
+          <tr>
+            <th>Source Speech</th>
+            <th><b>ProgRE</b></th>
+            <th><a >Data2vec</a></th>
+            <th><a >HuBERT</a></th>
+            <th><a >Wav2vec2.0</a></th>
+            <th><a >WavLM</a></th>
+            <th><a >Whisper</a></th>
+            <th><a >ConsistencyVC</a></th>
+            <th><a >Wav2vec-VC</a></th>
+          </tr>
+        </thead>
+        <tbody id="">
+          <tr>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+          </tr>
+          
+        </tbody>
+        <tbody id="">
+          <tr>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="" controls="" style="width:130px"></audio></td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<hr style="height:10px;border:0px dashed #ffffff;" />
+<hr style="height:1px;border:2px;border-top:2px dashed #555555;" />
+
+</li>
+</ul>
+
+            
+            
+</body>
+</html>
