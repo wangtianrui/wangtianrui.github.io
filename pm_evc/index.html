@@ -28,9 +28,9 @@
 <body class="vscode-body vscode-light">
 <ul>
 <div class="row">
-  <h3>Voice Conversion</h3>
+  <h2>Voice Conversion</h2>
   <p>
-    We conduct English any-to-any VC comparisons using the 
+    Our framework employs ProgRE as the pre-trained model, <b>enabling stable voice conversion</b> while <b>preserving the original emotional state</b>.
     <br>
     <br>
   </p>
@@ -40,11 +40,12 @@
         <thead>
           <tr>
             <!-- 第一行，合并的cell -->
-            <th colspan="2"></th> <!-- 合并Source Speech和Target Speaker的两列 -->
-            <th colspan="6">Under Our Framework </th> <!-- 合并ProgRE到Whisper的六列 -->
+            <th colspan="3"></th> <!-- 合并Source Speech和Target Speaker的两列 -->
+            <th colspan="6">24-layer Pre-trained Model 24-layer Pre-trained Model Under Our Framework </th> <!-- 合并ProgRE到Whisper的六列 -->
             <th colspan="2">Baseline methods</th> <!-- 合并ConsistencyVC和Wav2vec-VC的两列 -->
         </tr>
           <tr>
+            <th></th>
             <th>Source Speech</th>
             <th>Target Speaker</th>
             <th><b>ProgRE</b></th>
@@ -59,6 +60,7 @@
         </thead>
         <tbody id="">
           <tr>
+            <th>same emotion between<br>source and target</th>
             <td><audio src="./audios/vc/MSP-PODCAST_2927_0034.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/vc/MSP-PODCAST_0083_0003.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/vc/progre/283_MSP-PODCAST_2927_0034_srcspkmsp-1374_tgtspkmsp-285_srcemoneutral_tgtemoneutral.wav" controls="" style="width:130px"></audio></td>
@@ -74,6 +76,7 @@
         </tbody>
         <tbody id="">
           <tr>
+            <th>different emotion between<br>source and target</th>
             <td><audio src="./audios/MSP-PODCAST_2894_0284.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/0016_000721.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/vc/progre/spk_cv_fbank.wav" controls="" style="width:130px"></audio></td>
@@ -82,7 +85,7 @@
             <td><audio src="./audios/vc/wav2vec/spk_cv_fbank.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/vc/wavlm/spk_cv_fbank.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/vc/whisper/spk_cv_fbank.wav" controls="" style="width:130px"></audio></td>
-            <td><audio src="./audios/vc/consis_vc/spk_cv_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/consis_vc/MSP-PODCAST_2894_0284_to_0016_000721.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/vc/wav2vec_vc/spk_cv_fbank.wav" controls="" style="width:130px"></audio></td>
           </tr>
           
@@ -96,9 +99,9 @@
 <hr style="height:1px;border:2px;border-top:2px dashed #555555;" />
 
 <div class="row">
-  <h3>Emotion Conversion</h3>
+  <h2>Emotion Conversion</h2>
   <p>
-    We conduct English any-to-any VC comparisons using the 
+    Our framework employs ProgRE as the pre-trained model, <b>enabling stable global emotion state conversion</b> while <b>preserving the original speaker identification</b>.
     <br>
     <br>
   </p>
@@ -108,11 +111,12 @@
         <thead>
           <tr>
             <!-- 第一行，合并的cell -->
-            <th colspan="2"></th> <!-- 合并Source Speech和Target Speaker的两列 -->
-            <th colspan="6">Under Our Framework</th> <!-- 合并ProgRE到Whisper的六列 -->
+            <th colspan="3"></th> <!-- 合并Source Speech和Target Speaker的两列 -->
+            <th colspan="6">24-layer Pre-trained Model Under Our Framework</th> <!-- 合并ProgRE到Whisper的六列 -->
             <th colspan="2">Baseline methods</th> <!-- 合并ConsistencyVC和Wav2vec-VC的两列 -->
         </tr>
           <tr>
+            <th> </th>
             <th>Source Speech</th>
             <th>Target Emotion</th>
             <th><b>ProgRE</b></th>
@@ -127,6 +131,7 @@
         </thead>
         <tbody id="">
           <tr>
+            <th>same speaker between<br>source and target</th>
             <td><audio src="./audios/ec/neutral_197_224_0200.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/ec/anger_367-392_0372.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/ec/progre/320_neutral_197_224_0200_srcspkemovdb-sam_tgtspkemovdb-sam_srcemoneutral_tgtemoangry.wav" controls="" style="width:130px"></audio></td>
@@ -142,6 +147,7 @@
         </tbody>
         <tbody id="">
           <tr>
+            <th>different speaker between<br>source and target</th>
             <td><audio src="./audios/MSP-PODCAST_2894_0284.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/0016_000721.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/ec/progre/emo_cv_fbank.wav" controls="" style="width:130px"></audio></td>
@@ -150,7 +156,7 @@
             <td><audio src="./audios/ec/wav2vec/emo_cv_fbank.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/ec/wavlm/emo_cv_fbank.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/ec/whisper/emo_cv_fbank.wav" controls="" style="width:130px"></audio></td>
-            <td><audio src="./audios/ec/consis_vc/emo_cv_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/ec/consis_vc/MSP-PODCAST_2894_0284_to_0016_000721.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/ec/wav2vec_vc/emo_cv_fbank.wav" controls="" style="width:130px"></audio></td>
           </tr>
           
@@ -164,7 +170,7 @@
 <hr style="height:1px;border:2px;border-top:2px dashed #555555;" />
 
 <div class="row">
-  <h3>Emotion and Voice Conversion</h3>
+  <h2>Emotion and Voice Conversion</h2>
   <p>
     We conduct English any-to-any VC comparisons using the 
     <br>
@@ -176,11 +182,12 @@
         <thead>
           <tr>
             <!-- 第一行，合并的cell -->
-            <th colspan="3"></th> <!-- 合并Source Speech和Target Speaker的两列 -->
-            <th colspan="6">Under Our Framework</th> <!-- 合并ProgRE到Whisper的六列 -->
+            <th colspan="4"></th> <!-- 合并Source Speech和Target Speaker的两列 -->
+            <th colspan="6">24-layer Pre-trained Model Under Our Framework</th> <!-- 合并ProgRE到Whisper的六列 -->
             <th colspan="2">Baseline methods</th> <!-- 合并ConsistencyVC和Wav2vec-VC的两列 -->
         </tr>
           <tr>
+            <th></th>
             <th>Source Speech</th>
             <th>Target Emotion</th>
             <th>Target Speaker</th>
@@ -196,33 +203,49 @@
         </thead>
         <tbody id="">
           <tr>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <th>same target of<br>emotion and speaker</th>
+            <td><audio src="./audios/evc/028.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/evc/017.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/evc/017.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/evc/progre/190_028_srcspkmead-M037_tgtspkmead-M033_srcemoangry_tgtemocontempt.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/evc/data2vec/190_028_srcspkmead-M037_tgtspkmead-M033_srcemoangry_tgtemocontempt.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/evc/hubert/190_028_srcspkmead-M037_tgtspkmead-M033_srcemoangry_tgtemocontempt.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/evc/wav2vec/190_028_srcspkmead-M037_tgtspkmead-M033_srcemoangry_tgtemocontempt.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/evc/wavlm/190_028_srcspkmead-M037_tgtspkmead-M033_srcemoangry_tgtemocontempt.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/evc/whisper/190_028_srcspkmead-M037_tgtspkmead-M033_srcemoangry_tgtemocontempt.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/evc/consis_vc/190_028_srcspkmead-M037_tgtspkmead-M033_srcemoangry_tgtemocontempt.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/evc/wav2vec_vc/190_028_srcspkmead-M037_tgtspkmead-M033_srcemoangry_tgtemocontempt.wav" controls="" style="width:130px"></audio></td>
           </tr>
           
         </tbody>
         <tbody id="">
           <tr>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <th>different target of<br>emotion and speaker</th>
+            <td><audio src="./audios/MSP-PODCAST_2894_0284.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/anger_336-364_0349.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/0016_000721.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/evc/progre/spk_emo_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/evc/data2vec/spk_emo_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/evc/hubert/spk_emo_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/evc/wav2vec/spk_emo_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/evc/wavlm/spk_emo_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/evc/whisper/spk_emo_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td>
+              <div style="display: flex; flex-direction: column;">
+                <span style="width:130px">can't control emotion and speaker from different speech</span>
+                <div style="border-top: 1px dashed gray; width: 100%; margin: 10px 0;"></div>
+
+                <audio src="./audios/evc/consis_vc/MSP-PODCAST_2894_0284_to_anger_336-364_0349.wav" controls="" style="width:130px"></audio>
+                <span>Emotion Target</span>
+                
+                <!-- 添加虚线 -->
+                <div style="border-top: 1px dashed gray; width: 100%; margin: 10px 0;"></div>
+                
+                <audio src="./audios/evc/consis_vc/MSP-PODCAST_2894_0284_to_0016_000721.wav" controls="" style="width:130px"></audio>
+                <span>Speaker Target</span>
+            </div>
+          </td>
+            <td><audio src="./audios/evc/wav2vec_vc/spk_emo_fbank.wav" controls="" style="width:130px"></audio></td>
           </tr>
           
         </tbody>
@@ -236,7 +259,7 @@
 <hr style="height:1px;border:2px;border-top:2px dashed #555555;" />
 
 <div class="row">
-  <h3>Reconstruction</h3>
+  <h2>Reconstruction</h2>
   <p>
     We conduct English any-to-any VC comparisons using the 
     <br>
@@ -249,7 +272,7 @@
           <tr>
             <!-- 第一行，合并的cell -->
             <th colspan="1"></th> <!-- 合并Source Speech和Target Speaker的两列 -->
-            <th colspan="6">Under Our Framework</th> <!-- 合并ProgRE到Whisper的六列 -->
+            <th colspan="6">24-layer Pre-trained Model Under Our Framework</th> <!-- 合并ProgRE到Whisper的六列 -->
             <th colspan="2">Baseline methods</th> <!-- 合并ConsistencyVC和Wav2vec-VC的两列 -->
         </tr>
           <tr>
@@ -266,29 +289,29 @@
         </thead>
         <tbody id="">
           <tr>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/rec/MSP-PODCAST_1671_0025_0016.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/rec/progre/2_MSP-PODCAST_1671_0025_0016_srcspkmsp-924_tgtspkmsp-924_srcemohappy_tgtemohappy.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/rec/data2vec/2_MSP-PODCAST_1671_0025_0016_srcspkmsp-924_tgtspkmsp-924_srcemohappy_tgtemohappy.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/rec/hubert/2_MSP-PODCAST_1671_0025_0016_srcspkmsp-924_tgtspkmsp-924_srcemohappy_tgtemohappy.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/rec/wav2vec/2_MSP-PODCAST_1671_0025_0016_srcspkmsp-924_tgtspkmsp-924_srcemohappy_tgtemohappy.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/rec/wavlm/2_MSP-PODCAST_1671_0025_0016_srcspkmsp-924_tgtspkmsp-924_srcemohappy_tgtemohappy.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/rec/whisper/2_MSP-PODCAST_1671_0025_0016_srcspkmsp-924_tgtspkmsp-924_srcemohappy_tgtemohappy.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/rec/consis_vc/2_MSP-PODCAST_1671_0025_0016_srcspkmsp-924_tgtspkmsp-924_srcemohappy_tgtemohappy.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/rec/wav2vec_vc/2_MSP-PODCAST_1671_0025_0016_srcspkmsp-924_tgtspkmsp-924_srcemohappy_tgtemohappy.wav" controls="" style="width:130px"></audio></td>
           </tr>
           
         </tbody>
         <tbody id="">
           <tr>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
-            <td><audio src="" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/rec/002.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/rec/progre/3_002_srcspkmead-M026_tgtspkmead-M026_srcemohappy_tgtemohappy.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/rec/data2vec/3_002_srcspkmead-M026_tgtspkmead-M026_srcemohappy_tgtemohappy.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/rec/hubert/3_002_srcspkmead-M026_tgtspkmead-M026_srcemohappy_tgtemohappy.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/rec/wav2vec/3_002_srcspkmead-M026_tgtspkmead-M026_srcemohappy_tgtemohappy.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/rec/wavlm/3_002_srcspkmead-M026_tgtspkmead-M026_srcemohappy_tgtemohappy.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/rec/whisper/3_002_srcspkmead-M026_tgtspkmead-M026_srcemohappy_tgtemohappy.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/rec/consis_vc/3_002_srcspkmead-M026_tgtspkmead-M026_srcemohappy_tgtemohappy.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/rec/wav2vec_vc/3_002_srcspkmead-M026_tgtspkmead-M026_srcemohappy_tgtemohappy.wav" controls="" style="width:130px"></audio></td>
           </tr>
           
         </tbody>
@@ -300,6 +323,63 @@
 
 <hr style="height:10px;border:0px dashed #ffffff;" />
 <hr style="height:1px;border:2px;border-top:2px dashed #555555;" />
+
+<h2>Performance of Flow Predictor</h2>
+  <p>
+    <br>
+    <br>
+  </p>
+  <div class="english_vc_examples">
+    <div class="english_vc active" data-page="1">
+      <table class="table" style="margin-top: 20px;">
+        <thead>
+          
+          <tr>
+            <th>without Flow Predictor</th>
+            <th><b>with Flow Predictor</b></th>
+          </tr>
+        </thead>
+        <tbody id="">
+          <tr>
+            <!-- 第二列，插入图片 -->
+            <td><img src="./audios/abs/1nfm.png" alt="Audio Image 2" style="width:350px; height:200px;"><br>lab: THAT IS ALL I GOT TO SAY ON THAT I AM TIRED OF IT IT IS IRRITATING IT IS VERY CORNY TO ME <br>rec: THAT IS ALL I GOT TO SAY ON THAT I AM TIRED OF IT IT IS IRRITATING IT IS VERY CORNY TO ME<br>WER by Whisper Large V3: <b>0.0%</b> </td>
+            <td><img src="./audios/abs/1fm.png" alt="Audio Image 1" style="width:350px; height:200px;"><br>lab: THAT IS ALL I&nbsp;&nbsp;&nbsp;&nbsp;GOT TO SAY ON THAT I AM TIRED OF IT IT IS IRRITATING IT IS VERY CORNY TO ME <br>rec: THAT IS ALL THAT IS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ON&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I AM TIRED OF IT IT IS IRRITATING IT IS VERY CORNY TO ME<br>WER by Whisper Large V3: <b>21.74 %</b></td>
+        </tr>
+        <tr>
+          <td><audio src="./audios/abs/635_MSP-PODCAST_3561_0400_srcspkmsp-1765_tgtspkmsp-1765_srcemoneutral_tgtemoneutral-nfm.wav" controls="" style="width:350px"></audio></td>
+          <td><audio src="./audios/abs/635_MSP-PODCAST_3561_0400_srcspkmsp-1765_tgtspkmsp-1765_srcemoneutral_tgtemoneutral-fm.wav" controls="" style="width:350px"></audio></td>
+        </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="english_vc_examples">
+    <div class="english_vc active" data-page="1">
+      <table class="table" style="margin-top: 20px;">
+        <thead>
+          
+          <tr>
+            <th>without Flow Predictor</th>
+            <th><b>with Flow Predictor</b></th>
+          </tr>
+        </thead>
+        <tbody id="">
+          <tr>
+            <!-- 第二列，插入图片 -->
+            <td><img src="./audios/abs/2nfm.png" alt="Audio Image 2" style="width:350px; height:200px;"><br>lab: THOSE MUSICIANS HARMONIZE MARVELOUSLY<br>rec: THOSE MUSICIANS HARMONIZE MARVELOUSLY<br>WER by Whisper Large V3: <b>0.0%</b> </td>
+            <td><img src="./audios/abs/2fm.png" alt="Audio Image 1" style="width:350px; height:200px;"><br>lab: THOSE MUSICIANS HARMONIZE MARVELOUSLY<br>rec: THOSE MUSICIANS HARMONIZE MERRILY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>WER by Whisper Large V3: <b>25.0%</b></td>
+        </tr>
+        <tr>
+          <td><audio src="./audios/abs/134_004_srcspkmead-W038_tgtspkmead-W038_srcemohappy_tgtemohappy-nfm.wav" controls="" style="width:350px"></audio></td>
+          <td><audio src="./audios/abs/134_004_srcspkmead-W038_tgtspkmead-W038_srcemohappy_tgtemohappy-fm.wav" controls="" style="width:350px"></audio></td>
+        </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
 
 </li>
 </ul>
