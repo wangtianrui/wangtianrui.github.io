@@ -103,6 +103,7 @@
   <p>
     Our framework employs ProgRE as the pre-trained model, <b>enabling stable global emotion state conversion</b> while <b>preserving the original speaker identification</b>.
     <br>
+    <em>Please note that our definition of emotional state is at the utterance level and does not affect speech duration. Instead, it is primarily reflected in stress and pitch variations.</em>
     <br>
   </p>
   <div class="english_vc_examples">
@@ -172,7 +173,7 @@
 <div class="row">
   <h2>Emotion and Voice Conversion</h2>
   <p>
-    We conduct English any-to-any VC comparisons using the 
+    Our framework enables simultaneous <b>conversion of emotion and speaker</b>, with the <b>emotion and speaker originating from different speech samples.</b>
     <br>
     <br>
   </p>
@@ -261,7 +262,7 @@
 <div class="row">
   <h2>Reconstruction</h2>
   <p>
-    We conduct English any-to-any VC comparisons using the 
+    Our framework reliably reconstructs high-quality speech based on intermediate representations. This allows for the integration of vector quantization to encode the content and the Transformer encoder's input, both of which are frame-level representations, enabling controllable speech synthesis.
     <br>
     <br>
   </p>
@@ -326,6 +327,7 @@
 
 <h2>Performance of Flow Predictor</h2>
   <p>
+    The addition of the flow predictor significantly enhances perceptual quality, but it reduces the recognition accuracy of the Whisper model. We hypothesize that this is similar to the artificial artifacts introduced by speech enhancement in robust ASR, as the flow matching process is akin to noise reduction.
     <br>
     <br>
   </p>
