@@ -41,7 +41,7 @@
           <tr>
             <!-- 第一行，合并的cell -->
             <th colspan="3"></th> <!-- 合并Source Speech和Target Speaker的两列 -->
-            <th colspan="6">24-layer Pre-trained Model 24-layer Pre-trained Model Under Our Framework </th> <!-- 合并ProgRE到Whisper的六列 -->
+            <th colspan="6">24-layer Pre-trained Model Under Our Framework </th> <!-- 合并ProgRE到Whisper的六列 -->
             <th colspan="2">Baseline methods</th> <!-- 合并ConsistencyVC和Wav2vec-VC的两列 -->
         </tr>
           <tr>
@@ -327,7 +327,8 @@
 
 <h2>Performance of Flow Predictor</h2>
   <p>
-    The addition of the flow predictor significantly enhances perceptual quality, but it reduces the recognition accuracy of the Whisper model. We hypothesize that this is similar to the artificial artifacts introduced by speech enhancement in robust ASR, as the flow matching process is akin to noise reduction.
+    <!-- The addition of the flow predictor significantly enhances perceptual quality, but it reduces the recognition accuracy of the Whisper model. We hypothesize that this is similar to the artificial artifacts introduced by speech enhancement in robust ASR, as the flow matching process is akin to noise reduction. -->
+    Despite the improvements in speech quality, the randomness and artifacts introduced during inference reduce the accuracy of speech recognition models. We believe this reflects a limitation of the evaluation method rather than a flaw in the generation process.
     <br>
     <br>
   </p>
