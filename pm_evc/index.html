@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-        <html>
-        <head>
-            <meta charset="UTF-8">
-            <title>This folder primarily contains auxiliary materials for our paper</title>
- <style>
+<html>
+<head>
+  <meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.88.1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href=""https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+	<link rel="stylesheet" href="css/custom.css">
+	<link rel="stylesheet" href="css/normalize.css">
+  <title>This folder primarily contains auxiliary materials for our paper</title>
+<style>
   table {
     width: 100%;
     border-collapse: collapse;
@@ -23,10 +29,21 @@
     width: 130px;
   }
 </style>
-        
+<style>
+  /* 只修改具有 custom-spacing 类的 p 标签和 ul 列表的间距 */
+  .custom-spacing p {
+      margin-bottom: 5px; /* 调整 p 标签的下边距 */
+  }
+  .custom-spacing ul {
+      margin-top: 0; /* 去掉 ul 列表的上边距 */
+  }
+</style>
 </head>
 <body class="vscode-body vscode-light">
 <ul>
+
+
+
 <div class="row">
   <h2>Voice Conversion</h2>
   <p>
@@ -329,6 +346,26 @@
   <p>
     <!-- The addition of the flow predictor significantly enhances perceptual quality, but it reduces the recognition accuracy of the Whisper model. We hypothesize that this is similar to the artificial artifacts introduced by speech enhancement in robust ASR, as the flow matching process is akin to noise reduction. -->
     Despite the improvements in speech quality, the randomness and artifacts introduced during inference reduce the accuracy of speech recognition models. We believe this reflects a limitation of the evaluation method rather than a flaw in the generation process.
+
+    <div class="custom-spacing">
+      <p>Benefits of Flow Predictor:</p>
+      <ul>
+          <li>In the results with Flow predictor, the acoustic structure (harmonics) of the speech is more complete.</li>
+          <li>The result with Flow predictor makes the speech sound less mechanical.</li>
+          <li>In summary, Flow Predictor can significantly improve the perceptual quality of speech.</li>
+      </ul>
+    </div>
+
+
+    <div class="custom-spacing">
+      <p>We speculate that the main reason for the decline in speech recognition and other indicators measured by deep learning models is that the artificial artifacts and randomness come from the inference process of the flow predictor.</p>
+      <ul>
+          <li>In the results with Flow predictor, the acoustic structure (harmonics) of the speech is more complete.</li>
+          <li>The result with Flow predictor makes the speech sound less mechanical.</li>
+          <li>In summary, Flow Predictor can significantly improve the perceptual quality of speech.</li>
+      </ul>
+    </div>
+
     <br>
     <br>
   </p>

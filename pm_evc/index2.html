@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.88.1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href=""https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+	<link rel="stylesheet" href="css/custom.css">
+	<link rel="stylesheet" href="css/normalize.css">
+
+	<title>VIOLA</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body data-new-gr-c-s-check-loaded="14.1091.0" data-gr-ext-installed="">
+
+<div class="container" >
+<header role="banner">
+</header>
+<main role="main">
+<article itemscope itemtype="https://schema.org/BlogPosting">
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+	<div class="text-center">
+	<h1>VIOLA</h1>
+        <h4>VIOLA: Causal Language Models for Speech Recognition, Synthesis, and Translation</h4>
+		<!-- [<a href="https://arxiv.org/abs/2305.16107">Paper</a>] -->
+		
+        <p class="fst-italic mb-0">
+          <br>
+            Tianrui Wang*, &nbsp Long Zhou*, &nbsp Ziqiang Zhang, &nbsp Yu Wu, &nbsp Shujie Liu, &nbsp Yashesh Gaur, &nbsp  <br>
+			Zhuo Chen, &nbsp Jinyu Li, &nbsp Furu Wei 
+      <p></p>
+        </p>
+        <p><b>Microsoft</b></p>
+	</div>
+	<p>
+        <b>Abstract.</b> 
+		Recent research shows a big convergence in model architecture, training objectives, and inference methods across various tasks for different modalities. In this paper, we propose VIOLA, a single auto-regressive Transformer decoder-only network that unifies various cross-modal tasks involving speech and text, such as speech-to-text, text-to-text, text-to-speech, and speech-to-speech tasks, as a conditional language model task via multi-task learning framework. To accomplish this, we first convert the speech utterances to discrete tokens (similar to the textual data) using an offline neural codec encoder. In such a way, all these tasks are converted to token-based sequence prediction problems, which can be naturally handled with one conditional language model. We further integrate task IDs (TID) and language IDs (LID) into the proposed model to enhance the modeling capability of handling different languages and tasks. Experimental results demonstrate that the proposed VIOLA model can support both single-modal and cross-modal tasks well, and the decoder-only model achieves a comparable and even better performance than the strong baselines. Audio samples are available at https://violademo.github.io/.
+      </p>     
+	  <p>This page is for <b>research demonstration purposes</b> only.</p>
+
+	<p>
+	<b>Contents</b>
+      <ul>
+        <li><a href="#model-overview">Model Overview</a></li>
+        <li><a href="#xtts-samples">Zero-Shot Text to Speech</a></li>
+        <li><a href="#s2st-samples">Zero-Shot Cross-Lingual Text to Speech</a></li>
+        <li><a href="#lid-samples">Zero-Shot Speech-to-Speech Translation</a></li>
+        <li><a href="#emotion-samples">Voice Emotion Maintenance In Speech-to-Speech Translation</a></li>
+        <!-- <li><a href="#more-samples">More Examples</a></li> -->
+        <li><a href="#Ethics-Statement">Ethics Statement</a></li>
+      </ul>
+	</p>   
+
+	
+</div>
+
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">		
+	<h2 id="model-overview" style="text-align: center;">Model Overview</h2>
+	<body>
+	<p style="text-align: center;">
+		<img src="pics/model_framework.png" height="500" width="1000">
+	</p>
+	</body>
+		<p>
+			<b>Figure.</b> 
+			The overall framework of VIOLA, which regards various speech processing tasks as a conditional language model task. The model training is conducted on a multi-task learning framework with ASR, MT, and TTS tasks, and the model is capable of performing speech-to-text recognition and translation, text-to-text translation, text-to-speech synthesis, and speech-to-speech translation tasks.
+		</p>
+</div>
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+	<h2 id="xtts-samples" style="text-align: center;">Zero-Shot Text to Speech</h2>
+
+  <h2>Voice Conversion</h2>
+  <p>
+    Our framework employs ProgRE as the pre-trained model, <b>enabling stable voice conversion</b> while <b>preserving the original emotional state</b>.
+    <br>
+    <br>
+  </p>
+  <div class="english_vc_examples">
+    <div class="english_vc active" data-page="1">
+      <table class="table" style="margin-top: 20px;">
+        <thead>
+          <tr>
+            <!-- 第一行，合并的cell -->
+            <th colspan="3"></th> <!-- 合并Source Speech和Target Speaker的两列 -->
+            <th colspan="6">24-layer Pre-trained Model Under Our Framework </th> <!-- 合并ProgRE到Whisper的六列 -->
+            <th colspan="2">Baseline methods</th> <!-- 合并ConsistencyVC和Wav2vec-VC的两列 -->
+        </tr>
+          <tr>
+            <th></th>
+            <th>Source Speech</th>
+            <th>Target Speaker</th>
+            <th><b>ProgRE</b></th>
+            <th><a >Data2vec</a></th>
+            <th><a >HuBERT</a></th>
+            <th><a >Wav2vec2.0</a></th>
+            <th><a >WavLM</a></th>
+            <th><a >Whisper</a></th>
+            <th><a >ConsistencyVC</a></th>
+            <th><a >Wav2vec-VC</a></th>
+          </tr>
+        </thead>
+        <tbody id="">
+          <tr>
+            <th>same emotion between<br>source and target</th>
+            <td><audio src="./audios/vc/MSP-PODCAST_2927_0034.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/MSP-PODCAST_0083_0003.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/progre/283_MSP-PODCAST_2927_0034_srcspkmsp-1374_tgtspkmsp-285_srcemoneutral_tgtemoneutral.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/data2vec/283_MSP-PODCAST_2927_0034_srcspkmsp-1374_tgtspkmsp-285_srcemoneutral_tgtemoneutral.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/hubert/283_MSP-PODCAST_2927_0034_srcspkmsp-1374_tgtspkmsp-285_srcemoneutral_tgtemoneutral.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/wav2vec/283_MSP-PODCAST_2927_0034_srcspkmsp-1374_tgtspkmsp-285_srcemoneutral_tgtemoneutral.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/wavlm/283_MSP-PODCAST_2927_0034_srcspkmsp-1374_tgtspkmsp-285_srcemoneutral_tgtemoneutral.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/whisper/283_MSP-PODCAST_2927_0034_srcspkmsp-1374_tgtspkmsp-285_srcemoneutral_tgtemoneutral.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/consis_vc/283_MSP-PODCAST_2927_0034_srcspkmsp-1374_tgtspkmsp-285_srcemoneutral_tgtemoneutral.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/wav2vec_vc/283_MSP-PODCAST_2927_0034_srcspkmsp-1374_tgtspkmsp-285_srcemoneutral_tgtemoneutral.wav" controls="" style="width:130px"></audio></td>
+          </tr>
+          
+        </tbody>
+        <tbody id="">
+          <tr>
+            <th>different emotion between<br>source and target</th>
+            <td><audio src="./audios/MSP-PODCAST_2894_0284.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/0016_000721.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/progre/spk_cv_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/data2vec/spk_cv_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/hubert/spk_cv_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/wav2vec/spk_cv_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/wavlm/spk_cv_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/whisper/spk_cv_fbank.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/consis_vc/MSP-PODCAST_2894_0284_to_0016_000721.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/vc/wav2vec_vc/spk_cv_fbank.wav" controls="" style="width:130px"></audio></td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+	<h2 id="s2st-samples" style="text-align: center;">Zero-Shot Cross-lingual Text to Speech</h2>
+
+		<div class="table-responsive pt-3">
+			<p style="text-align: center;">
+			<b>English TTS with Chinese prompts and accent </b> (Samples are from EMIME).</b>
+			</p>
+			<table class="table table-hover pt-2">
+			<thead>
+			<tr>
+				<th style="text-align: center">English Text</th>
+				<th style="text-align: center">Speaker Prompt</th>
+				<th style="text-align: center">Baseline</th>
+				<th style="text-align: center">VIOLA</th>
+			</tr>
+			</thead>
+			<tbody>
+				
+					</tr>
+					<tr><td style="text-align: left;vertical-align:middle;width: 600px">The fishermen are inactive tired and disappointed.</td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\ref_698.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\vallex\output_698_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\viola\output_698_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					</tr>
+				<tr><td style="text-align: left;vertical-align:middle;width: 600px">Unfortunately others separate on the basis of accumulated hatred.</td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\ref_10.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\vallex\output_10_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\viola\output_10_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					</tr>				
+					</tr>
+					<tr><td style="text-align: left;vertical-align:middle;width: 600px">In reality the european parliament is practising delay tactics.</td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\ref_360.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\vallex\output_358_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\viola\output_358_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					</tr>	
+					</tr>
+					<tr><td style="text-align: left;vertical-align:middle;width: 600px">Summer time has in practice become normal time.</td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\ref_176.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\vallex\output_176_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\viola\output_176_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					</tr>
+					</tr>
+					<tr><td style="text-align: left;vertical-align:middle;width: 600px">There is a connection between all of this.</td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\ref_640.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\vallex\output_640_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\viola\output_640_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					</tr>
+					<tr><td style="text-align: left;vertical-align:middle;width: 600px">This parliament represents the people of europe.</td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\ref_187.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\vallex\output_187_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\viola\output_187_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					</tr>
+					</tr>
+					<tr><td style="text-align: left;vertical-align:middle;width: 600px">Turkey must come to terms with the truth.</td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\ref_694.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\vallex\output_694_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\viola\output_694_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					</tr>
+					<tr><td style="text-align: left;vertical-align:middle;width: 600px">The problems I mentioned are not insurmountable.</td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\ref_303.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\vallex\output_303_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\viola\output_303_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					</tr>
+					</tr>
+					<tr><td style="text-align: left;vertical-align:middle;width: 600px">We reject this socially unacceptable reform.</td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\ref_571.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\vallex\output_571_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\viola\output_571_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					</tr>
+					</tr>
+					<tr><td style="text-align: left;vertical-align:middle;width: 600px">In reality the european parliament is practising delay tactics.</td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\ref_659.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\vallex\output_659_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\zh2en_tts\viola\output_659_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					</tr>
+					
+					
+			</tbody>
+			</table>
+			
+		</div>
+</div>
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+	<h2 id="lid-samples" style="text-align: center;">Zero-Shot Speech-to-Speech Translation</h2>
+		<div class="table-responsive pt-3">
+			<p style="text-align: center;">
+			<b>Chinese to English on EMIME dataset. </b>
+			</p>
+			<table class="table table-hover pt-2">
+			<thead>
+			<tr>
+				<th style="text-align: center">Chinese Speech (Input)</th>
+				<th style="text-align: center">Model</th>
+				<th style="text-align: center">Chinese Transcription (ASR Result)</th>
+				<th style="text-align: center">English Text (MT Result)</th>
+				<th style="text-align: center">English Speech (TTS Result)</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+			<tr>
+			<tr>
+			<td style="text-align: center; vertical-align:middle" rowspan="3"><audio controls="controls" style="width: 120px;"><source src="audios\s2st\ref_252.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center;vertical-align:middle;width: 200px">Ground Truth</td>
+			<td style="text-align: center;vertical-align:middle;width: 200px">我提到的这个问题并不难处理</td>
+			<td style="text-align: center;vertical-align:middle;width: 250px">The problems I mentioned are not insurmountable.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 120px;"><source src="audios\s2st\GT\gt_252.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+			<td style="text-align: center;vertical-align:middle;width: 200px">AED->AED->VALLEX</td>
+			<td style="text-align: center;vertical-align:middle;width: 200px">我提到的这个问题并不难处理</td>
+			<td style="text-align: center;vertical-align:middle;width: 250px">The problem I mentioned is not difficult to deal with.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 120px;"><source src="audios\s2st\vallex\output_252_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+			<tr>
+			<td style="text-align: center;vertical-align:middle;width: 200px">VIOLA</td>
+			<td style="text-align: center;vertical-align:middle;width: 200px">我提到的这个问题并不难处理</td>
+			<td style="text-align: center;vertical-align:middle;width: 250px">The problem I mentioned is not difficult to deal with.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 120px;"><source src="audios\s2st\viola\output_252_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+			<!-- new one -->
+			<tr>
+			<tr>
+			<td style="text-align: center; vertical-align:middle" rowspan="3"><audio controls="controls" style="width: 120px;"><source src="audios\s2st\ref_259.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center;vertical-align:middle;width: 200px">Ground Truth</td>
+			<td style="text-align: center;vertical-align:middle;width: 200px">实际上欧洲议会正在施展拖延战术</td>
+			<td style="text-align: center;vertical-align:middle;width: 250px">In reality the european parliament is practising delay tactics.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 120px;"><source src="audios\s2st\GT\gt_259.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+			<tr>
+			<td style="text-align: center;vertical-align:middle;width: 200px">AED->AED->VALLEX</td>
+			<td style="text-align: center;vertical-align:middle;width: 200px">实际上欧洲议会正在施展拖延战术</td>
+			<td style="text-align: center;vertical-align:middle;width: 250px">In fact europe is using delaying tactics once and for all.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 120px;"><source src="audios\s2st\vallex\output_259_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+			<tr>
+			<td style="text-align: center;vertical-align:middle;width: 200px">VIOLA</td>
+			<td style="text-align: center;vertical-align:middle;width: 200px">实际上欧洲议会正在施展拖延战术</td>
+			<td style="text-align: center;vertical-align:middle;width: 250px">In practice europe is once again staging its procrastination tactics.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 120px;"><source src="audios\s2st\viola\output_259_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+			<!-- new one -->
+
+			<tr>
+				<td style="text-align: center; vertical-align:middle" rowspan="3"><audio controls="controls" style="width: 120px;"><source src="audios\s2st\ref_441.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<td style="text-align: center;vertical-align:middle;width: 200px">Ground Truth</td>
+				<td style="text-align: center;vertical-align:middle;width: 200px">这一切之间皆有关联</td>
+				<td style="text-align: center;vertical-align:middle;width: 250px">There is a connection between all of this.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 120px;"><source src="audios\s2st\GT\gt_441.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				<tr>
+				<td style="text-align: center;vertical-align:middle;width: 200px">AED->AED->VALLEX</td>
+				<td style="text-align: center;vertical-align:middle;width: 200px">这一切之间皆有关联</td>
+				<td style="text-align: center;vertical-align:middle;width: 250px">There is a link between all this.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 120px;"><source src="audios\s2st\vallex\output_441_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr>
+				<td style="text-align: center;vertical-align:middle;width: 200px">VIOLA</td>
+				<td style="text-align: center;vertical-align:middle;width: 200px">这一切之间皆有关联</td>
+				<td style="text-align: center;vertical-align:middle;width: 250px">There is a connection between all of this.</td>
+				<td style="text-align: center"><audio controls="controls" style="width: 120px;"><source src="audios\s2st\viola\output_441_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<!-- new one -->
+
+
+			<tr>
+			<tr>
+			<td style="text-align: center; vertical-align:middle" rowspan="3"><audio controls="controls" style="width: 120px;"><source src="audios\s2st\ref_298.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center;vertical-align:middle;width: 200px">Ground Truth</td>
+			<td style="text-align: center;vertical-align:middle;width: 200px">渔夫们没在工作显得累而失望</td>
+			<td style="text-align: center;vertical-align:middle;width: 250px">The fishermen are inactive tired and disappointed.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 120px;"><source src="audios\s2st\GT\gt_298.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+			<tr>
+			<td style="text-align: center;vertical-align:middle;width: 200px">AED->AED->VALLEX</td>
+			<td style="text-align: center;vertical-align:middle;width: 200px">渔夫们没在工作是累而失望</td>
+			<td style="text-align: center;vertical-align:middle;width: 250px">The fishermen were tired and disappointed when they were not working.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 120px;"><source src="audios\s2st\vallex\output_298_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+			<tr>
+			<td style="text-align: center;vertical-align:middle;width: 200px">VIOLA</td>
+			<td style="text-align: center;vertical-align:middle;width: 200px">渔夫们没在工作显得累而失望</td>
+			<td style="text-align: center;vertical-align:middle;width: 250px">The fishermen looked tired and disappointed when they were not working.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 120px;"><source src="audios\s2st\viola\output_298_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+			<!-- new one -->
+
+			<tr>
+			<tr>
+			<td style="text-align: center; vertical-align:middle" rowspan="3"><audio controls="controls" style="width: 120px;"><source src="audios\s2st\ref_318.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center;vertical-align:middle;width: 200px">Ground Truth</td>
+			<td style="text-align: center;vertical-align:middle;width: 200px">立法已经到位以便达成这些目标</td>
+			<td style="text-align: center;vertical-align:middle;width: 250px">Legislation is already in place to achieve these aims.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 120px;"><source src="audios\s2st\GT\gt_318.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+			<tr>
+			<td style="text-align: center;vertical-align:middle;width: 200px">AED->AED->VALLEX</td>
+			<td style="text-align: center;vertical-align:middle;width: 200px">立法已经到位已变成这些目标</td>
+			<td style="text-align: center;vertical-align:middle;width: 250px">Legislation is in place and has become one of those objectives.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 120px;"><source src="audios\s2st\vallex\output_318_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+			<tr>
+			<td style="text-align: center;vertical-align:middle;width: 200px">VIOLA</td>
+			<td style="text-align: center;vertical-align:middle;width: 200px">立法已经到位已变成这些目标</td>
+			<td style="text-align: center;vertical-align:middle;width: 250px">Legislation is already in place and has become these targets.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 120px;"><source src="audios\s2st\viola\output_318_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+			<!-- new one -->
+
+			
+
+
+			</tbody>
+			</table>
+		</div>
+</div>
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">		
+	<h2 id="emotion-samples" style="text-align: center;"> Voice Emotion Maintenance </h2>
+		<p> 
+		VIOLA can translate speech while maintaining the emotion in the source speech. The source audio are sampled from the Emotional Voices Database ESD.
+		</p>
+	<div class="table-responsive pt-3">
+		<table class="table table-hover pt-2">
+		<thead>
+		<tr>
+		<th style="text-align: center">Emotion</th>
+		<th style="text-align: center">Chinese Speech</th>
+		<th style="text-align: center">English Speech Generated by VIOLA<br>(Speech-to-Speech Translation)</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+		<td style="text-align: center;vertical-align:middle;width: 500px">Happy</td>
+		<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\emotion\happy2_source.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+		<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\emotion\happy2_est.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+		</tr>
+		<tr>
+		<td style="text-align: center;vertical-align:middle;width: 500px">Neutral</td>
+		<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\emotion\neutral1_source.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+		<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\emotion\neutral1_est.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+		</tr>
+		<tr>
+		<td style="text-align: center;vertical-align:middle;width: 500px">Angry</td>
+		<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\emotion\angry1_source.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+		<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\emotion\angry1_est.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+		</tr>
+		<tr>
+		<td style="text-align: center;vertical-align:middle;width: 500px">Sad</td>
+		<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\emotion\sad1_source.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+		<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\emotion\sad1_est.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+		</tr>
+		<tr>
+		<td style="text-align: center;vertical-align:middle;width: 500px">Surprise	</td>
+		<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\emotion\surprise1_source.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+		<td style="text-align: center"><audio controls="controls" style="width: 140px;"><source src="audios\emotion\surprise1_est.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+		</tr>
+		</tbody>
+		</table>	
+	</div>
+</div>
+
+
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">		
+	<h2 id="Ethics-Statement" style="text-align: center;">Ethics Statement</h2>
+	<p>
+	Since VIOLA could synthesize speech that maintains speaker identity, it may carry potential risks in misuse of the model, such as spoofing voice identification or impersonating a specific speaker. We conducted the experiments under the assumption that the user agree to be the target speaker in speech synthesis. If the model is generalized to unseen speakers in the real world, it should include a protocol to ensure that the speaker approves the use of their voice and a synthesized speech detection model.
+	</p>
+</div>
+ 
+</article>
+</main>
+</div>
+
+</body>
+</html>
