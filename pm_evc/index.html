@@ -81,12 +81,12 @@
 <div class="block-style">
   <h2 style="text-align: center">Model Overview</h2>
   <img src="./evc.jpg" alt="Audio Image 2" style="width: 60%; display: block; margin: 0 auto;" >
-  <p class="abstract">Our four-stage emotional voice conversion framework, trained on self-supervised mel-spectrogram reconstruction, enables emotion and voice conversion (EVC), emotion conversion (EC), and voice conversion (VC) by altering emotional state or speaker representation during inference.</p>
+  <p style="text-align: center">Our four-stage emotional voice conversion framework, trained on self-supervised mel-spectrogram reconstruction, enables emotion and voice conversion (EVC), emotion conversion (EC), and voice conversion (VC) by altering emotional state or speaker representation during inference.</p>
 
 </div>
 
 <div class="block-style">
-  <h2 class="center">Voice Conversion</h2>
+  <h2 style="text-align: center">Voice Conversion</h2>
   <p>
     Our framework employs ProgRE as the pre-trained model, <b>enabling stable voice conversion</b> while <b>preserving the original emotional state</b>.
     <br>
@@ -157,7 +157,7 @@
 <hr style="height:1px;border:2px;border-top:2px dashed #555555;" /> -->
 
 <div class="block-style">
-  <h2 class="center">Emotion Conversion</h2>
+  <h2 style="text-align: center">Emotion Conversion</h2>
   <p>
     Our framework employs ProgRE as the pre-trained model, <b>enabling stable global emotion state conversion</b> while <b>preserving the original speaker identification</b>.
     <br>
@@ -226,7 +226,7 @@
 </div>
 
 <div class="block-style">
-  <h2 class="center">Emotion and Voice Conversion</h2>
+  <h2 style="text-align: center">Emotion and Voice Conversion</h2>
   <p>
     Our framework enables simultaneous <b>conversion of emotion and speaker</b>, with the <b>emotion and speaker originating from different speech samples.</b>
     <br>
@@ -312,7 +312,7 @@
 
 
 <div class="block-style">
-  <h2 class="center">Reconstruction</h2>
+  <h2 style="text-align: center">Reconstruction</h2>
   <p>
     Our framework reliably reconstructs high-quality speech based on intermediate representations. This allows for the integration of vector quantization to encode the content and the Transformer encoder's input, both of which are frame-level representations, enabling controllable speech synthesis.
     <br>
@@ -375,7 +375,7 @@
 
 
 <div class="block-style">
-  <h2 class="center">Performance of Flow Predictor</h2>
+  <h2 style="text-align: center">Performance of Flow Predictor</h2>
   <p>
     <!-- The addition of the flow predictor significantly enhances perceptual quality, but it reduces the recognition accuracy of the Whisper model. We hypothesize that this is similar to the artificial artifacts introduced by speech enhancement in robust ASR, as the flow matching process is akin to noise reduction. -->
     Despite the improvements in speech quality, the randomness and artifacts introduced during inference reduce the accuracy of speech recognition models. We believe this reflects a limitation of the evaluation method rather than a flaw in the generation process.
