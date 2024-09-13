@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-	<meta name="generator" content="Hugo 0.88.1" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href=""https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
 	<link rel="stylesheet" href="css/custom.css">
@@ -28,6 +26,26 @@
   audio {
     width: 130px;
   }
+
+  .block-style {
+    display: block;
+    border: 2px solid #e1dede;
+    box-shadow: 5px 5px 5px rgba(193, 192, 192, 0.763); /* 阴影效果 */
+    padding: 10px;
+    margin-top: 80px;
+}
+.center {
+  text-align: center; /* 将 h2 文本居中 */
+  box-shadow: 5px 5px 5px rgba(225, 224, 224, 0.95); /* 阴影效果 */
+  padding: 10px;
+}
+.authorcenter {
+  text-align: center; /* 将 h2 文本居中 */
+}
+.abstract {
+  padding: 30px; /* 将 h2 文本居中 */
+  word-wrap: break-word; /* 让长单词换行 */
+}
 </style>
 <style>
   /* 只修改具有 custom-spacing 类的 p 标签和 ul 列表的间距 */
@@ -42,10 +60,33 @@
 <body class="vscode-body vscode-light">
 <ul>
 
+  <div>
+    <h1 class="authorcenter">A Controllable Emotion Voice Conversion Framework with Pre-trained Speech Representations</h1>
+    <!-- <p class="authorcenter">Tianrui Wang$^1$, Meng Ge$^1$, Zhikang Niu$^2$, Chunyu Qiang$^1$, Cheng Gong$^1$, Ziyang Ma$^2$, Xiaobao Wang$^1$,\\Xie Chen$^2$, Longbiao Wang$^1$, Jianwu Dang$^3$</p> -->
+    <p class="authorcenter">
+      <br>
+      Tianrui Wang<sup>1</sup>, Meng Ge<sup>1</sup>, Zhikang Niu<sup>2</sup>, Chunyu Qiang<sup>1</sup>, Cheng Gong<sup>1</sup>, Ziyang Ma<sup>2</sup>, Xiaobao Wang<sup>1</sup>,Xie Chen<sup>2</sup>, Longbiao Wang<sup>1</sup>, Jianwu Dang<sup>3</sup>  <br>
+      <br>
+      <sup>1</sup><em>Tianjin Key Laboratory of Cognitive Computing and Application, College of Intelligence and Computing, Tianjin University, Tianjin, China</em>
+      <br>
+      <sup>2</sup><em>MoE Key Lab of Artificial Intelligence, AI Institute, Shanghai Jiao Tong University, Shanghai, China</em>
+      <br>
+      <sup>3</sup><em>Shenzhen Institute of Advanced Technology, Chinese Academy of Sciences, Guangdong, China</em>
+  <p></p>
+  <p class="abstract">
+    <b>Abstract.</b> 
+    Speech disentanglement is crucial for tasks like controllable speech synthesis, voice conversion, and speech emotion conversion. While many self-supervised or weak supervised speech pre-trained models have shown remarkable performance in speech recognition and speaker identification, their potential for speech disentanglement remains underexplored. Typically, speech pre-trained models used in speech synthesis focus on extracting strong task-specific representations, often overlooking their capacity for speech disentanglement in controllable speech generation. To address this gap, we propose a four-stage decoder model that integrates a speech disentanglement module, progressive generator, acoustic compensator, and flow predictor, leveraging the layer-wise task characteristics of pre-trained models and enabling controllable emotion and voice conversion with any pre-trained speech encoder. We evaluate this framework using six established speech pre-trained models, and experimental results demonstrate that several pre-trained models significantly outperform baseline methods within our framework on emotion and voice conversion. Moreover, our framework serves as a valuable benchmark for evaluating pre-trained models' capabilities in disentangling emotional state, speaker, and content from speech. We also release our code at <a href="https://github.com/wangtianrui/PM-EVC">https://github.com/wangtianrui/PM-EVC.</a>
+  </div>
 
+<div class="block-style">
+  <h2 class="center">Model Overview</h2>
+  <img src="./evc.jpg" alt="Audio Image 2" style="width: 60%; display: block; margin: 0 auto;" >
+  <p class="abstract">Our four-stage emotional voice conversion framework, trained on self-supervised mel-spectrogram reconstruction, enables emotion and voice conversion (EVC), emotion conversion (EC), and voice conversion (VC) by altering emotional state or speaker representation during inference.</p>
 
-<div class="row">
-  <h2>Voice Conversion</h2>
+</div>
+
+<div class="block-style">
+  <h2 class="center">Voice Conversion</h2>
   <p>
     Our framework employs ProgRE as the pre-trained model, <b>enabling stable voice conversion</b> while <b>preserving the original emotional state</b>.
     <br>
@@ -77,7 +118,7 @@
         </thead>
         <tbody id="">
           <tr>
-            <th>same emotion between<br>source and target</th>
+            <th>Same emotion between<br>source and target</th>
             <td><audio src="./audios/vc/MSP-PODCAST_2927_0034.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/vc/MSP-PODCAST_0083_0003.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/vc/progre/283_MSP-PODCAST_2927_0034_srcspkmsp-1374_tgtspkmsp-285_srcemoneutral_tgtemoneutral.wav" controls="" style="width:130px"></audio></td>
@@ -93,9 +134,9 @@
         </tbody>
         <tbody id="">
           <tr>
-            <th>different emotion between<br>source and target</th>
-            <td><audio src="./audios/MSP-PODCAST_2894_0284.wav" controls="" style="width:130px"></audio></td>
-            <td><audio src="./audios/0016_000721.wav" controls="" style="width:130px"></audio></td>
+            <th>Different emotion between<br>source and target</th>
+            <td><audio src="./audios/sad_man.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/happy_girl.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/vc/progre/spk_cv_fbank.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/vc/data2vec/spk_cv_fbank.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/vc/hubert/spk_cv_fbank.wav" controls="" style="width:130px"></audio></td>
@@ -112,11 +153,11 @@
   </div>
 </div>
 
-<hr style="height:10px;border:0px dashed #ffffff;" />
-<hr style="height:1px;border:2px;border-top:2px dashed #555555;" />
+<!-- <hr style="height:10px;border:0px dashed #ffffff;" />
+<hr style="height:1px;border:2px;border-top:2px dashed #555555;" /> -->
 
-<div class="row">
-  <h2>Emotion Conversion</h2>
+<div class="block-style">
+  <h2 class="center">Emotion Conversion</h2>
   <p>
     Our framework employs ProgRE as the pre-trained model, <b>enabling stable global emotion state conversion</b> while <b>preserving the original speaker identification</b>.
     <br>
@@ -149,7 +190,7 @@
         </thead>
         <tbody id="">
           <tr>
-            <th>same speaker between<br>source and target</th>
+            <th>Same speaker between<br>source and target</th>
             <td><audio src="./audios/ec/neutral_197_224_0200.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/ec/anger_367-392_0372.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/ec/progre/320_neutral_197_224_0200_srcspkemovdb-sam_tgtspkemovdb-sam_srcemoneutral_tgtemoangry.wav" controls="" style="width:130px"></audio></td>
@@ -165,9 +206,9 @@
         </tbody>
         <tbody id="">
           <tr>
-            <th>different speaker between<br>source and target</th>
-            <td><audio src="./audios/MSP-PODCAST_2894_0284.wav" controls="" style="width:130px"></audio></td>
-            <td><audio src="./audios/0016_000721.wav" controls="" style="width:130px"></audio></td>
+            <th>Different speaker between<br>source and target</th>
+            <td><audio src="./audios/sad_man.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/happy_girl.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/ec/progre/emo_cv_fbank.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/ec/data2vec/emo_cv_fbank.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/ec/hubert/emo_cv_fbank.wav" controls="" style="width:130px"></audio></td>
@@ -184,11 +225,8 @@
   </div>
 </div>
 
-<hr style="height:10px;border:0px dashed #ffffff;" />
-<hr style="height:1px;border:2px;border-top:2px dashed #555555;" />
-
-<div class="row">
-  <h2>Emotion and Voice Conversion</h2>
+<div class="block-style">
+  <h2 class="center">Emotion and Voice Conversion</h2>
   <p>
     Our framework enables simultaneous <b>conversion of emotion and speaker</b>, with the <b>emotion and speaker originating from different speech samples.</b>
     <br>
@@ -221,7 +259,7 @@
         </thead>
         <tbody id="">
           <tr>
-            <th>same target of<br>emotion and speaker</th>
+            <th>Same target of<br>emotion and speaker</th>
             <td><audio src="./audios/evc/028.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/evc/017.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/evc/017.wav" controls="" style="width:130px"></audio></td>
@@ -238,10 +276,10 @@
         </tbody>
         <tbody id="">
           <tr>
-            <th>different target of<br>emotion and speaker</th>
-            <td><audio src="./audios/MSP-PODCAST_2894_0284.wav" controls="" style="width:130px"></audio></td>
+            <th>Different target of<br>emotion and speaker</th>
+            <td><audio src="./audios/sad_man.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/anger_336-364_0349.wav" controls="" style="width:130px"></audio></td>
-            <td><audio src="./audios/0016_000721.wav" controls="" style="width:130px"></audio></td>
+            <td><audio src="./audios/happy_girl.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/evc/progre/spk_emo_fbank.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/evc/data2vec/spk_emo_fbank.wav" controls="" style="width:130px"></audio></td>
             <td><audio src="./audios/evc/hubert/spk_emo_fbank.wav" controls="" style="width:130px"></audio></td>
@@ -250,7 +288,7 @@
             <td><audio src="./audios/evc/whisper/spk_emo_fbank.wav" controls="" style="width:130px"></audio></td>
             <td>
               <div style="display: flex; flex-direction: column;">
-                <span style="width:130px">can't control emotion and speaker from different speech</span>
+                <span style="width:130px">Can't control emotion and speaker from different speech</span>
                 <div style="border-top: 1px dashed gray; width: 100%; margin: 10px 0;"></div>
 
                 <audio src="./audios/evc/consis_vc/MSP-PODCAST_2894_0284_to_anger_336-364_0349.wav" controls="" style="width:130px"></audio>
@@ -273,11 +311,8 @@
 </div>
 
 
-<hr style="height:10px;border:0px dashed #ffffff;" />
-<hr style="height:1px;border:2px;border-top:2px dashed #555555;" />
-
-<div class="row">
-  <h2>Reconstruction</h2>
+<div class="block-style">
+  <h2 class="center">Reconstruction</h2>
   <p>
     Our framework reliably reconstructs high-quality speech based on intermediate representations. This allows for the integration of vector quantization to encode the content and the Transformer encoder's input, both of which are frame-level representations, enabling controllable speech synthesis.
     <br>
@@ -339,10 +374,8 @@
 </div>
 
 
-<hr style="height:10px;border:0px dashed #ffffff;" />
-<hr style="height:1px;border:2px;border-top:2px dashed #555555;" />
-
-<h2>Performance of Flow Predictor</h2>
+<div class="block-style">
+  <h2 class="center">Performance of Flow Predictor</h2>
   <p>
     <!-- The addition of the flow predictor significantly enhances perceptual quality, but it reduces the recognition accuracy of the Whisper model. We hypothesize that this is similar to the artificial artifacts introduced by speech enhancement in robust ASR, as the flow matching process is akin to noise reduction. -->
     Despite the improvements in speech quality, the randomness and artifacts introduced during inference reduce the accuracy of speech recognition models. We believe this reflects a limitation of the evaluation method rather than a flaw in the generation process.
