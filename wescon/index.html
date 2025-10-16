@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
+    <link href="style.css" rel="stylesheet">
+    <meta charset="utf-8">
+
+	<title>WeSCon</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    
+</head>
+
+<body data-new-gr-c-s-check-loaded="14.1091.0" data-gr-ext-installed="">
+
+<style>
+        table {
+          border-collapse: collapse;
+        }
+        th, td {
+          padding: 8px;
+        }
+      
+        td:nth-child(4), th:nth-child(4) {
+          position: relative;
+        }
+      
+        td:nth-child(4)::after, th:nth-child(4)::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 1px;           /* 线的宽度 */
+          height: 100%;
+          background-color: rgb(219, 207, 207);
+          transform: translateX(5px); /* 相当于“右边padding” */
+        }
+      </style>
+<div class="container" >
+<header role="banner">
+</header>
+<main role="main">
+<article itemscope itemtype="https://schema.org/BlogPosting">
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+    <div class="column has-text-centered">
+    <!-- <h1 class="title is-1 publication-title"> <b>WeSCon:</b>  </h1> -->
+    <h3 class="title is-2 publication-title"> <b>Word-Level Emotional Expression Control in Zero-Shot Text-to-Speech Synthesis</b></h3>
+    </div>
+    <br>
+    <!-- authors -->
+    <!-- <div class="is-size-5">
+        <span class="author-block">
+          <h4 style="text-align: center;"><b>Authors: </h4>
+    </div> -->
+    <!-- unit -->
+    <!-- <div class="is-size-5 publication-authors"> -->
+        <!-- <span class="author-block"><h4 style="text-align: center;"><b style="color:#d76100; font-weight:normal">&#x25B6 </b></h4></span> -->
+    <!-- </div> -->
+
+
+    <div class="column has-text-centered">
+
+        <!-- <span class="link-block">
+            <a href="?????" target="_blank"
+            class="external-link button is-normal is-rounded is-dark">
+            <span class="icon">
+                <i class="ai ai-arxiv"></i>
+            </span>
+            <span>Paper</span>
+            </a>
+        </span> -->
+        
+        <span class="link-block">
+            <a href="https://anonymousdemo999.github.io" target="_blank"
+            class="external-link button is-normal is-rounded is-dark">
+            <span class="icon">
+                <i class="fab fa-github"></i>
+            </span>
+            <span>Github will be released soon</span>
+            </a>
+        </span>
+    </div>
+
+
+
+
+</div>
+
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+    <div class="columns is-centered has-text-centered">
+        <div class="column is-six-fifths">
+          <h2 class="title is-3">Overview</h2>
+        </div>
+    </div>
+    <p style="font-size: 18px;">
+        While emotional text-to-speech (TTS) has made significant progress, most existing research focuses on utterance-level emotional expression. Recently, there has been increasing interest in more fine-grained control of emotion and speaking rate, both of which are essential to expressive speech. This has led to the emergence of a more challenging task known as word-level emotion and speaking rate control, which remains difficult due to the lack of annotated data capturing intra-sentence emotional variation and prosodic dynamics.
+To overcome this challenge, we propose WeSCon, a novel approach that activates and enhances the word-level emotional expression capability of a pretrained zero-shot TTS model using only a small-scale public emotional dataset without emotion transitions.
+Our method incorporates a transition-smoothing strategy and a dynamic speed control mechanism to enable a non-finetuned TTS model to perform word-level expressive synthesis through a multi-round inference process. To further simplify the inference procedure, we introduce a dynamic attention bias mechanism along with a self-training strategy to fine-tune the original TTS model and activate its capability for fine-grained emotional and prosodic control. Experimental results demonstrate that WeSCon achieves state-of-the-art performance in word-level emotional expression control while preserving the strong zero-shot TTS capability of the pretrained model.    
+    </p>
+    <br>
+    <br>
+    <div class="text-center">
+        <!-- 第一张图片单独一行 -->
+        <img id="teaser" width="70%" src="imgs/overview.png">     
+        <br><br>
+        <p style="font-style: italic; margin-top: 8px;">
+            <b>Figure 1.</b> 
+            Overview of WeSCon. The 1st-stage teacher extends a zero-shot TTS model with dynamic speed control, transition smoothing, and multi-round inference to enable word-level emotion and speaking rate control. In the 2nd stage, it supervises a student model with a dynamic emotion attention bias (DEAB) to achieve the same control in an end-to-end manner with reduced inference complexity.
+        </p>
+
+    </div>
+    
+    <br><br>
+    
+    <!-- 第二行：两张图并排显示 -->
+    <div style="display: flex; justify-content: center; gap: 20px;">
+        <div style="text-align: center; width: 47%;">
+            <img id="teaser" style="width: 100%;" src="imgs/first.png">  
+            <p style="font-style: italic; margin-top: 8px;">
+                <b>Figure 2.</b> Word-level emotion and speaking rate control using a transition-smoothing module and dynamic speed adjustment. At each inference round, an emotional prompt is used to generate a speech segment, with the tail of the previous output appended to ensure continuity. Speaking rate is controlled by interpolating or downsampling prompt speech tokens. The final utterance is produced by concatenating all segments and decoding them through flow matching and a vocoder.            </p>
+        </div>
+        <div style="text-align: center; width: 47%;">
+            <img id="teaser" style="width: 100%; background: white" src="imgs/second.png">    
+            <p style="font-style: italic; margin-top: 8px;">
+                <b>Figure 3.</b> The proposed self-training strategy. A teacher model under a complex multi-round inference manner supervises a student TTS model to enable word-level emotion and speaking rate control. The dynamic emotional attention bias mechanism further enhances expressive generation in a simplified end-to-end single-pass inference manner.            </p>
+        </div>
+    </div>
+</div>
+
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+    <h3>Cross-Speaker Word-Level Emotion and Speaking Rate Control</h3>
+    <h6>Current models are incapable of accomplishing this task, as multi-round inference alone cannot ensure consistency with the target speaker. However, our WeSCon achieves this in a remarkably elegant manner.</h6>
+    <div class="table-responsive pt-3">
+        <table class="table table-hover pt-2 text-center">
+            <thead>
+                <tr>
+                    <th class="align-middle" style="min-width: 150px;">Target Text</th>
+                    <th class="align-middle">Target Emotion</th>
+                    <th class="align-middle" style="width: 100px;">Target Speaking Rate</th>
+                    <th class="align-middle">Target Speaker</th>
+                    <th class="align-middle">Index-TTS</th>
+                    <th class="align-middle">Spark-TTS</th>
+                    <th class="align-middle">F5-TTS</th>
+                    <th class="align-middle">CosyVoice2</th>
+                    <th class="align-middle">WeSCon</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 第一组样本 -->
+                <tr>
+                    <td style="vertical-align: middle; text-align: center;">You failed again <u>⏭</u> how could you <u>⏭</u> but don't worry I'll handle it'</td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <div style="width:100px; word-wrap: break-word;">Angry→Surprise→Neutral</div>
+                        <audio controls style="width:100px;">
+                            
+                          <source src="wav/ref_wav/en_0.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;"><b>Moderate</b>→<b>Slightly Slow</b>→<b>Slightly Fast</b></td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/ref_spk/0013_000046.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">                        
+                        <audio controls style="width:100px;">
+                            <source src="wav1/Index-TTS/en_0_2.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav1/Spark-TTS/en_0_2.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav1/F5-TTS/en_0_2.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav1/CosyVoice2/en_0_2.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav1/Ours/en_0_2.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                </tr>
+
+        
+                <tr>
+                    <td style="vertical-align: middle; text-align: center;">You came late <u>⏭</u> and I was surprised <u>⏭</u> but it's okay..</td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <div style="width:100px; word-wrap: break-word;">Angry→Surprise→Neutral</div>
+                        <audio controls style="width:100px;">
+                          <source src="wav/ref_wav/en_1.wav" type="audio/wav">
+                        </audio>
+                      </td>
+                    <td style="vertical-align: middle; text-align: center;"><b>Moderate</b>→<b>Slightly Fast</b>→<b>Moderate</b></td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/ref_spk/0012_000049.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">                        
+                        <audio controls style="width:100px;">
+                            <source src="wav1/Index-TTS/en_0_9.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav1/Spark-TTS/en_0_9.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav1/F5-TTS/en_0_9.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav1/CosyVoice2/en_0_9.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav1/Ours/en_0_9.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: middle; text-align: center;">我被拒绝了 <u>⏭</u> 我愤怒地摔门 <u>⏭</u> 后来又有点想哭</td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <div style="width:100px; word-wrap: break-word;">Sad→Angry→Sad</div>
+                        <audio controls style="width:100px;">
+                          <source src="wav/ref_wav/zh_0.wav" type="audio/wav">
+                        </audio>
+                      </td>
+                    <td style="vertical-align: middle; text-align: center;"><b>Moderate</b>→<b>Slightly Fast</b>→<b>Slightly Slow</b></td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/ref_spk/0002_000026.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">                        
+                        <audio controls style="width:100px;">
+                            <source src="wav1/Index-TTS/zh_0_8.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav1/Spark-TTS/zh_0_8.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav1/F5-TTS/zh_0_8.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav1/CosyVoice2/zh_0_8.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav1/Ours/zh_0_8.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td style="vertical-align: middle; text-align: center;">你怎么能这样 <u>⏭</u> 我真的很伤心 <u>⏭</u> 但我已经释怀了</td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <div style="width:100px; word-wrap: break-word;">Angry→Sad→Neutral</div>
+                        <audio controls style="width:100px;">
+                          <source src="wav/ref_wav/zh_1.wav" type="audio/wav">
+                        </audio>
+                      </td>
+                    <td style="vertical-align: middle; text-align: center;"><b>Slightly Fast</b>→<b>Slow</b>→<b>Moderate</b></td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/ref_spk/0002_000050.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">                        
+                        <audio controls style="width:100px;">
+                            <source src="wav1/Index-TTS/zh_0_1.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav1/Spark-TTS/zh_0_1.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav1/F5-TTS/zh_0_1.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav1/CosyVoice2/zh_0_1.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav1/Ours/zh_0_1.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+    <h3>Word-Level Emotion and Speaking Rate Control for the Same Speaker</h3>
+    <h6>Although existing methods can accomplish this task through multi-round inference, the generated segments are independent of each other, resulting in noticeable unnaturalness and abrupt transitions. In contrast, our method produces speech with smooth intra-sentence emotional shifts and speaking rate variations that sound highly natural.</h6>
+    <i>This serves as the primary evaluation task in our paper, as the baseline performs very poorly on the first cross-speaker task.</i>
+    <div class="table-responsive pt-3">
+        <table class="table table-hover pt-2 text-center">
+            <thead>
+                <tr>
+                    <th class="align-middle" style="min-width: 150px;">Target Text</th>
+                    <th class="align-middle">Target Emotion</th>
+                    <th class="align-middle" style="min-width: 120px;">Target Speaking Rate</th>
+                    <th class="align-middle">Target Speaker</th>
+                    <th class="align-middle">Index-TTS</th>
+                    <th class="align-middle">Spark-TTS</th>
+                    <th class="align-middle">F5-TTS</th>
+                    <th class="align-middle">CosyVoice2</th>
+                    <th class="align-middle">WeSCon</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 第一组样本 -->
+                <tr>
+                    <td style="vertical-align: middle; text-align: center;">You failed again <u>⏭</u> how could you <u>⏭</u> but don't worry I'll handle it'</td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <div style="width:100px; word-wrap: break-word;">Angry→Surprise→Neutral</div>
+                        <audio controls style="width:100px;">
+                            
+                          <source src="wav/ref_wav/en_0_2.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;"><b>Moderate</b>→<b>Slightly Fast</b>→<b>Slightly Slow</b></td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/ref_spk/0012_000046.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">                        
+                        <audio controls style="width:100px;">
+                            <source src="wav/Index-TTS/en_0_2.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/Spark-TTS/en_0_2.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/F5-TTS/en_0_2.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/CosyVoice2/en_0_2.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/Ours/en_0_2.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="vertical-align: middle; text-align: center;">I begged you <u>⏭</u> I screamed at you <u>⏭</u> and now I'm just tired</td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <div style="width:100px; word-wrap: break-word;">Sad→Angry→Neutral</div>
+                        <audio controls style="width:100px;">
+                          <source src="wav/ref_wav/en_0_7.wav" type="audio/wav">
+                        </audio>
+                      </td>
+                    <td style="vertical-align: middle; text-align: center;"><b>Moderate</b>→<b>Slightly Fast</b>→<b>Moderate</b></td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/ref_spk/0012_000046.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">                        
+                        <audio controls style="width:100px;">
+                            <source src="wav/Index-TTS/en_0_7.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/Spark-TTS/en_0_7.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/F5-TTS/en_0_7.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/CosyVoice2/en_0_7.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/Ours/en_0_7.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="vertical-align: middle; text-align: center;">I worked so hard <u>⏭</u> you mocked me <u>⏭</u> but now I'm okay with it</td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <div style="width:100px; word-wrap: break-word;">Angry→Sad→Neutral</div>
+                        <audio controls style="width:100px;">
+                          <source src="wav/ref_wav/en_1_3.wav" type="audio/wav">
+                        </audio>
+                      </td>
+                    <td style="vertical-align: middle; text-align: center;"><b>Moderate</b>→<b>Slightly Slow</b>→<b>Slightly Fast</b></td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/ref_spk/0013_000022.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">                        
+                        <audio controls style="width:100px;">
+                            <source src="wav/Index-TTS/en_1_3.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/Spark-TTS/en_1_3.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/F5-TTS/en_1_3.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/CosyVoice2/en_1_3.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/Ours/en_1_3.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: middle; text-align: center;">You came late <u>⏭</u> and I was surprised <u>⏭</u> but it's okay..</td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <div style="width:100px; word-wrap: break-word;">Angry→Surprise→Neutral</div>
+                        <audio controls style="width:100px;">
+                          <source src="wav/ref_wav/en_1_9.wav" type="audio/wav">
+                        </audio>
+                      </td>
+                    <td style="vertical-align: middle; text-align: center;"><b>Moderate</b>→<b>Slightly Fast</b>→<b>Moderate</b></td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/ref_spk/0013_000022.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">                        
+                        <audio controls style="width:100px;">
+                            <source src="wav/Index-TTS/en_1_9.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/Spark-TTS/en_1_9.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/F5-TTS/en_1_9.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/CosyVoice2/en_1_9.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/Ours/en_1_9.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: middle; text-align: center;">我被拒绝了 <u>⏭</u> 我愤怒地摔门 <u>⏭</u> 后来又有点想哭</td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <div style="width:100px; word-wrap: break-word;">Sad→Angry→Sad</div>
+                        <audio controls style="width:100px;">
+                          <source src="wav/ref_wav/zh_1_8.wav" type="audio/wav">
+                        </audio>
+                      </td>
+                    <td style="vertical-align: middle; text-align: center;"><b>Moderate</b>→<b>Slightly Fast</b>→<b>Slightly Slow</b></td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/ref_spk/0005_000046.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">                        
+                        <audio controls style="width:100px;">
+                            <source src="wav/Index-TTS/zh_1_8.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/Spark-TTS/zh_1_8.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/F5-TTS/zh_1_8.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/CosyVoice2/zh_1_8.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/Ours/zh_1_8.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: middle; text-align: center;">我等了你很久 <u>⏭</u> 你居然忘了我 <u>⏭</u> 算了吧</td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <div style="width:100px; word-wrap: break-word;">Sad→Surprise→Neutral</div>
+                        <audio controls style="width:100px;">
+                          <source src="wav/ref_wav/zh_0_0.wav" type="audio/wav">
+                        </audio>
+                      </td>
+                    <td style="vertical-align: middle; text-align: center;"><b>Slow</b>→<b>Slightly Fast</b>→<b>Moderate</b></td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/ref_spk/0002_000023.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">                        
+                        <audio controls style="width:100px;">
+                            <source src="wav/Index-TTS/zh_0_0.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/Spark-TTS/zh_0_0.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/F5-TTS/zh_0_0.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/CosyVoice2/zh_0_0.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/Ours/zh_0_0.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: middle; text-align: center;">你怎么能这样 <u>⏭</u> 我真的很伤心 <u>⏭</u> 但我已经释怀了</td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <div style="width:100px; word-wrap: break-word;">Angry→Sad→Neutral</div>
+                        <audio controls style="width:100px;">
+                          <source src="wav/ref_wav/zh_1_1.wav" type="audio/wav">
+                        </audio>
+                      </td>
+                    <td style="vertical-align: middle; text-align: center;"><b>Slightly Fast</b>→<b>Moderate</b>→<b>Moderate</b></td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/ref_spk/0005_000046.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">                        
+                        <audio controls style="width:100px;">
+                            <source src="wav/Index-TTS/zh_1_1.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/Spark-TTS/zh_1_1.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/F5-TTS/zh_1_1.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/CosyVoice2/zh_1_1.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/Ours/zh_1_1.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: middle; text-align: center;">他们突然为我鼓掌 <u>⏭</u> 我吓了一跳 <u>⏭</u> 然后忍不住笑了</td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <div style="width:100px; word-wrap: break-word;">Surprise→Angry→Happy</div>
+                        <audio controls style="width:100px;">
+                          <source src="wav/ref_wav/zh_0_2.wav" type="audio/wav">
+                        </audio>
+                      </td>
+                    <td style="vertical-align: middle; text-align: center;"><b>Moderate</b>→<b>Moderate</b>→<b>Moderate</b></td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/ref_spk/0002_000023.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">                        
+                        <audio controls style="width:100px;">
+                            <source src="wav/Index-TTS/zh_0_2.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/Spark-TTS/zh_0_2.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/F5-TTS/zh_0_2.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/CosyVoice2/zh_0_2.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <audio controls style="width:100px;">
+                            <source src="wav/Ours/zh_0_2.wav" type="audio/wav">
+                        </audio>
+                    </td>
+                </tr>
+               
+            </tbody>
+        </table>
+    </div>
+</div>

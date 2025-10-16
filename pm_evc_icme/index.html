@@ -43,20 +43,17 @@
 <body class="vscode-body vscode-light">
   
 <ul>
-  <h1 class="authorcenter">A Progressive Generation Framework with Speech Pre-trained Model for Expressive Voice Conversion</h1>
+  <h1 class="authorcenter">A Controllable Emotion Voice Conversion Framework with Pre-trained Speech Representations</h1>
+    <!-- <p class="authorcenter">Tianrui Wang$^1$, Meng Ge$^1$, Zhikang Niu$^2$, Chunyu Qiang$^1$, Cheng Gong$^1$, Ziyang Ma$^2$, Xiaobao Wang$^1$,\\Xie Chen$^2$, Longbiao Wang$^1$, Jianwu Dang$^3$</p> -->
   <p class="abstract">
     <b>Abstract.</b> 
-    Expressive voice conversion (EVC) aims to modify the speaker identity and emotional style of speech while preserving its content. Existing approaches often focus on disentangling speaker, emotion, and content information but overlook the progressive generation mechanisms in human speech production. To address this, we propose a three-stage framework that includes a speech disentanglement module, a progressive generator, and an acoustic refiner. This framework enables speech pre-trained models to parse linguistic content, emotional style, and speaker identity, which are then progressively integrated into the speech reconstruction branch to generate high-quality speech with replaceable emotional style and speaker identity. Experiments with six different pre-trained models show that our framework activates their disentanglement capabilities, surpassing baseline performance in EVC, and supports speaker and emotion control from different target samples. This framework also provides a valuable reference for evaluating the disentanglement capabilities of speech pre-training models.</a>
+    Speech disentanglement is crucial for tasks like controllable speech synthesis, voice conversion, and speech emotion conversion. While many self-supervised or weak supervised speech pre-trained models have shown remarkable performance in speech recognition and speaker identification, their potential for speech disentanglement remains underexplored. Typically, speech pre-trained models used in speech synthesis focus on extracting strong task-specific representations, often overlooking their capacity for speech disentanglement in controllable speech generation. To address this gap, we propose a four-stage decoder model that integrates a speech disentanglement module, progressive generator, acoustic compensator, and flow predictor, leveraging the layer-wise task characteristics of pre-trained models and enabling controllable emotion and voice conversion with any pre-trained speech encoder. We evaluate this framework using six established speech pre-trained models, and experimental results demonstrate that several pre-trained models significantly outperform baseline methods within our framework on emotion and voice conversion. Moreover, our framework serves as a valuable benchmark for evaluating pre-trained models' capabilities in disentangling emotional state, speaker, and content from speech. We also release our code at <a href="https://github.com/wangtianrui/PM-EVC">https://github.com/wangtianrui/PM-EVC.</a>
   </div>
-
-  <h2 class="authorcenter"> [The codes will be open source soon.] </h2>
-  <br>
-  <br>
 
 <div class="block-style">
   <h2 style="text-align: center">Model Overview</h2>
-  <img src="./ecvc.jpg" alt="Audio Image 2" style="width: 60%; display: block; margin: 0 auto;" >
-  <p style="text-align: center">Our three-stage expressive voice conversion framework, in which three downstream tasks supervise the speech disentanglement module, while the progressive generator and acoustic refiner are trained on mel-spectrogram reconstruction, enables expressive voice conversion (EVC), emotion conversion (EC), and voice conversion (VC) by altering the emotion or speaker representation during inference.</p>
+  <img src="./evc.jpg" alt="Audio Image 2" style="width: 60%; display: block; margin: 0 auto;" >
+  <p style="text-align: center">Our four-stage emotional voice conversion framework, trained on self-supervised mel-spectrogram reconstruction, enables emotion and voice conversion (EVC), emotion conversion (EC), and voice conversion (VC) by altering emotional state or speaker representation during inference.</p>
 
 </div>
   <hr style="height:10px;border:0px dashed #ffffff;" />
