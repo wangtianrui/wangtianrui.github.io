@@ -1,7 +1,7 @@
 /* ============================================================
  * main.js  — 站点行为脚本
  * 1) 中英双语切换：通过 data-i18n-key + I18N 字典完成
- * 2) 论文列表渲染：按年份倒序、可按"一作 / 类别"筛选
+ * 2) 论文列表渲染：按年份倒序、可按类别 / 任务筛选
  * 3) 杂项：当前年份、平滑滚动等
  *
  * 添加新文案翻译时：
@@ -22,22 +22,22 @@ const I18N = {
     nav_contact: "联系方式",
 
     hero_name: "王天锐 · Tianrui Wang",
-    hero_title: "天津大学 / 南洋理工大学 联培博士生 · 语音合成 · 语音理解生成统一建模",
+    hero_title: "天津大学博士生 · 语音合成 · 语音理解生成统一建模",
     hero_bio: "研究方向聚焦于语音合成中的细粒度情感控制、基于 LLM 的可控语音合成，以及语音理解与生成统一大模型。先后在微软亚洲研究院、中国移动研究院、慧言科技、华为、腾讯等机构进行研究与实习。",
     hero_cv: "📄 下载完整简历 (PDF)",
 
     sec_about: "关于我",
-    about_p1: "我是王天锐，目前是<strong>天津大学</strong>智能与计算学部电子信息专业博士生（学位授予方）；博士阶段由四位导师<strong>联合指导</strong>：<a href=\"https://cic.tju.edu.cn/faculty/wanglongbiao/wang.html\" target=\"_blank\">王龙标 教授（TJU）</a>、党建武 教授（TJU）、<a href=\"https://personal.ntu.edu.sg/aseschng/speechLab_intro.html\" target=\"_blank\">Eng Siong Chng 教授（NTU）</a>、<a href=\"https://chenxie95.github.io/en\" target=\"_blank\">陈谐 副教授（SJTU）</a>。受国家公派留学奖学金资助，目前在<strong>南洋理工大学（NTU）</strong>访学交流；同时长期在<strong>上海交通大学</strong>跨媒体语言智能实验室（X-LANCE）联培研究。",
+    about_p1: "我是王天锐，目前是<strong>天津大学</strong>智能与计算学部电子信息专业博士生，<strong>主要导师为 <a href=\"https://cic.tju.edu.cn/faculty/wanglongbiao/wang.html\" target=\"_blank\">王龙标 教授（TJU）</a></strong>；同时由党建武 教授（TJU）、<a href=\"https://personal.ntu.edu.sg/aseschng/speechLab_intro.html\" target=\"_blank\">Eng Siong Chng 教授（NTU）</a>、<a href=\"https://chenxie95.github.io/en\" target=\"_blank\">陈谐 副教授（SJTU）</a>联合指导。受国家公派留学奖学金资助，目前在<strong>南洋理工大学（NTU）</strong>访学交流；同时长期在<strong>上海交通大学</strong>跨媒体语言智能实验室（X-LANCE）联培研究。",
     about_p2: "研究方向涵盖：语音合成（尤其是细粒度情感与韵律控制）、自监督语音预训练、语音理解与生成统一大模型、语音增强、鲁棒语音识别等。代表工作包括 ProgRE、VioLA、HGCN、Harmonic Attention、NeurIPS 2025 Spotlight 的 WeScon（Word-level Emotion Control）、以及 ACL 2026 Oral (Top 5%) 的 CEAEval（Expressive Appropriateness Evaluation）等。",
     about_p3: "我曾在微软亚洲研究院（自然语言计算组）、中国移动研究院（人工智能与智慧运营部）、慧言科技、华为 2012 实验室、腾讯（语音大模型算法中心）等机构进行研究与实习，并入选中国科协青年科技人才培育工程博士生专项计划、中国移动研究院\"超星计划\"。",
 
     sec_education: "教育背景",
     edu_tju_school: "天津大学（Tianjin University），天津",
-    edu_tju_detail: "电子信息博士，智能与计算学部。博士导师（联合指导）：<a href=\"https://cic.tju.edu.cn/faculty/wanglongbiao/wang.html\" target=\"_blank\">王龙标 教授 (TJU)</a>、党建武 教授 (TJU)、<a href=\"https://personal.ntu.edu.sg/aseschng/speechLab_intro.html\" target=\"_blank\">Eng Siong Chng 教授 (NTU)</a>、<a href=\"https://chenxie95.github.io/en\" target=\"_blank\">陈谐 副教授 (SJTU)</a>。荣誉：中国科协青年科技人才培育工程·博士生专项计划；一等学业奖学金。",
+    edu_tju_detail: "电子信息博士，智能与计算学部。主要导师：<strong><a href=\"https://cic.tju.edu.cn/faculty/wanglongbiao/wang.html\" target=\"_blank\">王龙标 教授 (TJU)</a></strong>；联合指导：党建武 教授 (TJU)、<a href=\"https://personal.ntu.edu.sg/aseschng/speechLab_intro.html\" target=\"_blank\">Eng Siong Chng 教授 (NTU)</a>、<a href=\"https://chenxie95.github.io/en\" target=\"_blank\">陈谐 副教授 (SJTU)</a>。荣誉：中国科协青年科技人才培育工程·博士生专项计划；一等学业奖学金。",
     edu_ntu_school: "南洋理工大学（NTU），新加坡 · 访学交流",
-    edu_ntu_detail: "计算与数据科学学院（CCDS），访问博士生（联合指导，不授予学位）。联合指导教师：<a href=\"https://personal.ntu.edu.sg/aseschng/speechLab_intro.html\" target=\"_blank\">Eng Siong Chng 教授</a>。由国家公派留学奖学金资助。",
+    edu_ntu_detail: "计算与数据科学学院（CCDS），访问博士生。联合指导教师：<a href=\"https://personal.ntu.edu.sg/aseschng/speechLab_intro.html\" target=\"_blank\">Eng Siong Chng 教授</a>。由国家公派留学奖学金资助。",
     edu_sjtu_school: "上海交通大学（SJTU）· 联培研究",
-    edu_sjtu_detail: "跨媒体语言智能实验室（X-LANCE），联培研究（联合指导，不授予学位）。联合指导教师：<a href=\"https://chenxie95.github.io/en\" target=\"_blank\">陈谐 副教授</a>。方向：语音自监督预训练、语音合成、鲁棒语音识别、音频理解生成统一。",
+    edu_sjtu_detail: "跨媒体语言智能实验室（X-LANCE），联培研究。联合指导教师：<a href=\"https://chenxie95.github.io/en\" target=\"_blank\">陈谐 副教授</a>。方向：语音自监督预训练、语音合成、鲁棒语音识别、音频理解生成统一。",
     edu_bjtu_school: "北京交通大学（BJTU），北京",
     edu_bjtu_detail: "信息与通信工程硕士，计算机与信息技术学院，导师：朱维彬 教授；方向：语音增强、语音识别、自监督学习；一等学业奖学金；校级优秀毕业论文。",
     edu_nuc_school: "中北大学（NUC），太原",
@@ -53,7 +53,7 @@ const I18N = {
     exp_msra_org: "微软亚洲研究院（MSRA）· 自然语言计算组",
     exp_msra_detail: "语音算法实习生；探索理解生成统一的语音大模型（语音识别、机器翻译、语音到文本翻译、语音合成）",
     exp_cmri_org: "中国移动研究院 · 人工智能与智慧运营部",
-    exp_cmri_detail: "语音算法实习生；负责流式语音增强与鲁棒语音识别系统的研发，成功评选\"超星计划\"（实习生人才计划，设立以来首例）",
+    exp_cmri_detail: "语音算法实习生；负责流式语音增强与鲁棒语音识别系统的研发，入选中国移动研究院\"超星计划\"（实习生人才计划）",
 
     sec_publications: "论文成果",
     pub_author_filter: "作者：",
@@ -70,7 +70,7 @@ const I18N = {
     pub_task_generation: "语音生成",
     pub_task_pretraining: "语音表征预训练",
     pub_task_enhancement: "语音增强",
-    pub_note: "论文按发表/收录年份倒序展示；标题前的 ★ 表示王天锐为第一作者；点击任务标签可筛选。",
+    pub_note: "论文按发表/收录年份倒序展示；点击任务标签可筛选。",
     info_title: "个人信息",
 
     sec_projects: "开源项目参与",
@@ -88,7 +88,7 @@ const I18N = {
     award_icagc: "ISCSLP 2024 ICAGC Challenge 中文情感可控语音合成比赛 第 2 名",
     award_neurodns: "Inter Neuromorphic DNS Challenge 第 2 名",
     award_dns22: "ICASSP 2022 Deep Noise Suppression Challenge 第 5 名",
-    award_chaoxing: "入选中国移动研究院\"超星计划\"（设立以来首例）",
+    award_chaoxing: "入选中国移动研究院\"超星计划\"",
     award_kaggle: "Kaggle 房价预测赛 全球前 10%（本科）",
     award_huabei: "华北五省计算机应用大赛 国家一等奖（\"营养大师\"）",
     award_internetplus: "\"互联网+\"大学生创新创业大赛 国家铜奖（\"吾乡\"）",
@@ -101,7 +101,6 @@ const I18N = {
     hero_email: "✉️ 点击查看邮箱",
 
     /* publications dynamic */
-    pub_first_author_tag: "一作",
     venue_label: "发表/收录："
   },
 
@@ -116,22 +115,22 @@ const I18N = {
     nav_contact: "Contact",
 
     hero_name: "Tianrui Wang · 王天锐",
-    hero_title: "Ph.D. Student at Tianjin University · Visiting at NTU · Speech Synthesis · Unified Speech Understanding & Generation",
+    hero_title: "Ph.D. Student at Tianjin University · Speech Synthesis · Unified Speech Understanding & Generation",
     hero_bio: "My research focuses on fine-grained emotional control in speech synthesis, LLM-based controllable TTS, and unified large models for speech understanding & generation. I have done research/internships at Microsoft Research Asia, China Mobile Research Institute, Huiyan Tech, Huawei, and Tencent.",
     hero_cv: "📄 Download Full CV (PDF)",
 
     sec_about: "About Me",
-    about_p1: "I am Tianrui Wang, a Ph.D. candidate in Electronic Information at the <strong>College of Intelligence and Computing, Tianjin University</strong> (the degree-granting institution). My Ph.D. is <strong>jointly supervised</strong> by four advisors: <a href=\"https://cic.tju.edu.cn/faculty/wanglongbiao/wang.html\" target=\"_blank\">Prof. Longbiao Wang (TJU)</a>, Prof. Jianwu Dang (TJU), <a href=\"https://personal.ntu.edu.sg/aseschng/speechLab_intro.html\" target=\"_blank\">Prof. Eng Siong Chng (NTU)</a>, and <a href=\"https://chenxie95.github.io/en\" target=\"_blank\">Assoc. Prof. Xie Chen (SJTU)</a>. Supported by the China Scholarship Council, I am currently a visiting Ph.D. student at <strong>Nanyang Technological University (NTU)</strong>; I have also been collaborating long-term with the X-LANCE Lab at <strong>Shanghai Jiao Tong University</strong>.",
+    about_p1: "I am Tianrui Wang, a Ph.D. candidate in Electronic Information at the <strong>College of Intelligence and Computing, Tianjin University</strong>, <strong>primarily advised by <a href=\"https://cic.tju.edu.cn/faculty/wanglongbiao/wang.html\" target=\"_blank\">Prof. Longbiao Wang (TJU)</a></strong>. I am also co-advised by Prof. Jianwu Dang (TJU), <a href=\"https://personal.ntu.edu.sg/aseschng/speechLab_intro.html\" target=\"_blank\">Prof. Eng Siong Chng (NTU)</a>, and <a href=\"https://chenxie95.github.io/en\" target=\"_blank\">Assoc. Prof. Xie Chen (SJTU)</a>. Supported by the China Scholarship Council, I am currently a visiting Ph.D. student at <strong>Nanyang Technological University (NTU)</strong>; I have also been collaborating long-term with the X-LANCE Lab at <strong>Shanghai Jiao Tong University</strong>.",
     about_p2: "My research covers speech synthesis (especially fine-grained emotion & prosody control), self-supervised speech pre-training, unified speech understanding/generation, speech enhancement, and robust speech recognition. Representative works include ProgRE, VioLA, HGCN, Harmonic Attention, WeScon (Word-level Emotion Control, NeurIPS 2025 Spotlight), and CEAEval (Expressive Appropriateness Evaluation, ACL 2026 Oral / Top 5%).",
-    about_p3: "I have done research and internships at Microsoft Research Asia (Natural Language Computing Group), China Mobile Research Institute (AI & Smart Operations), Huiyan Tech, Huawei 2012 Labs, and Tencent (Speech LLM Algorithm Center). I am a recipient of the CAST Young Talent Cultivation Program (Ph.D. Track) and the China Mobile \"Chaoxing\" Internship Program (the first awardee since its founding).",
+    about_p3: "I have done research and internships at Microsoft Research Asia (Natural Language Computing Group), China Mobile Research Institute (AI & Smart Operations), Huiyan Tech, Huawei 2012 Labs, and Tencent (Speech LLM Algorithm Center). I am a recipient of the CAST Young Talent Cultivation Program (Ph.D. Track) and the China Mobile \"Chaoxing\" Internship Program.",
 
     sec_education: "Education",
     edu_tju_school: "Tianjin University (TJU), Tianjin, China",
-    edu_tju_detail: "Ph.D. in Electronic Information, College of Intelligence and Computing. Jointly supervised by <a href=\"https://cic.tju.edu.cn/faculty/wanglongbiao/wang.html\" target=\"_blank\">Prof. Longbiao Wang (TJU)</a>, Prof. Jianwu Dang (TJU), <a href=\"https://personal.ntu.edu.sg/aseschng/speechLab_intro.html\" target=\"_blank\">Prof. Eng Siong Chng (NTU)</a>, and <a href=\"https://chenxie95.github.io/en\" target=\"_blank\">Assoc. Prof. Xie Chen (SJTU)</a>. Honors: CAST Young Talent Cultivation Program (Ph.D. Track); First-class Academic Scholarship.",
+    edu_tju_detail: "Ph.D. in Electronic Information, College of Intelligence and Computing. Primary advisor: <strong><a href=\"https://cic.tju.edu.cn/faculty/wanglongbiao/wang.html\" target=\"_blank\">Prof. Longbiao Wang (TJU)</a></strong>. Co-advisors: Prof. Jianwu Dang (TJU), <a href=\"https://personal.ntu.edu.sg/aseschng/speechLab_intro.html\" target=\"_blank\">Prof. Eng Siong Chng (NTU)</a>, and <a href=\"https://chenxie95.github.io/en\" target=\"_blank\">Assoc. Prof. Xie Chen (SJTU)</a>. Honors: CAST Young Talent Cultivation Program (Ph.D. Track); First-class Academic Scholarship.",
     edu_ntu_school: "Nanyang Technological University (NTU), Singapore · Visiting",
-    edu_ntu_detail: "Visiting Ph.D. student at the College of Computing and Data Science (CCDS). Co-supervisor: <a href=\"https://personal.ntu.edu.sg/aseschng/speechLab_intro.html\" target=\"_blank\">Prof. Eng Siong Chng</a>. Research exchange only — no degree conferred by NTU. Funded by the China Scholarship Council.",
+    edu_ntu_detail: "Visiting Ph.D. student at the College of Computing and Data Science (CCDS). Co-supervisor: <a href=\"https://personal.ntu.edu.sg/aseschng/speechLab_intro.html\" target=\"_blank\">Prof. Eng Siong Chng</a>. Funded by the China Scholarship Council.",
     edu_sjtu_school: "Shanghai Jiao Tong University (SJTU) · Joint Research",
-    edu_sjtu_detail: "Joint research at the X-LANCE Lab (co-supervision; no SJTU degree). Co-supervisor: <a href=\"https://chenxie95.github.io/en\" target=\"_blank\">Assoc. Prof. Xie Chen</a>. Topics: SSL speech pre-training, TTS, robust ASR, unified audio understanding & generation.",
+    edu_sjtu_detail: "Joint research at the X-LANCE Lab. Co-supervisor: <a href=\"https://chenxie95.github.io/en\" target=\"_blank\">Assoc. Prof. Xie Chen</a>. Topics: SSL speech pre-training, TTS, robust ASR, unified audio understanding & generation.",
     edu_bjtu_school: "Beijing Jiaotong University (BJTU), Beijing, China",
     edu_bjtu_detail: "M.Eng. in Information & Communication Engineering, School of Computer & Information Tech. Advisor: Prof. Weibin Zhu. Topics: speech enhancement, ASR, SSL. First-class Scholarship; Outstanding M.S. Thesis Award.",
     edu_nuc_school: "North University of China (NUC), Taiyuan, China",
@@ -147,7 +146,7 @@ const I18N = {
     exp_msra_org: "Microsoft Research Asia (MSRA) · Natural Language Computing Group",
     exp_msra_detail: "Speech Algorithm Intern. Researched unified speech LLMs covering ASR, MT, S2T translation, and TTS.",
     exp_cmri_org: "China Mobile Research Institute · AI & Smart Operations Department",
-    exp_cmri_detail: "Speech Algorithm Intern. Built streaming speech enhancement and robust ASR systems. Selected for the \"Chaoxing\" Internship Program (the first awardee since its founding).",
+    exp_cmri_detail: "Speech Algorithm Intern. Built streaming speech enhancement and robust ASR systems. Selected for the \"Chaoxing\" Internship Program at China Mobile Research Institute.",
 
     sec_publications: "Publications",
     pub_author_filter: "Author:",
@@ -164,7 +163,7 @@ const I18N = {
     pub_task_generation: "Speech Generation",
     pub_task_pretraining: "Speech Representation Pre-training",
     pub_task_enhancement: "Speech Enhancement",
-    pub_note: "Publications are listed in reverse chronological order. Items prefixed with ★ are first-authored by Tianrui Wang. Use the task chips above to filter.",
+    pub_note: "Publications are listed in reverse chronological order. Use the task chips above to filter.",
     info_title: "Personal Information",
 
     sec_projects: "Open-Source Project Contributions",
@@ -182,7 +181,7 @@ const I18N = {
     award_icagc: "ISCSLP 2024 ICAGC Challenge (Chinese Emotional Controllable TTS): 2nd place",
     award_neurodns: "Inter Neuromorphic DNS Challenge: 2nd place",
     award_dns22: "ICASSP 2022 Deep Noise Suppression Challenge: 5th place",
-    award_chaoxing: "Selected for the \"Chaoxing\" Internship Program at China Mobile Research Institute (the first awardee since its founding)",
+    award_chaoxing: "Selected for the \"Chaoxing\" Internship Program at China Mobile Research Institute",
     award_kaggle: "Kaggle House Price Prediction: Top 10% globally (during undergraduate)",
     award_huabei: "North China Five-Province Computer Application Competition: National First Prize (\"Nutrition Master\")",
     award_internetplus: "\"Internet+\" Innovation & Entrepreneurship Competition: National Bronze Award (\"Wuxiang\")",
@@ -195,7 +194,6 @@ const I18N = {
     hero_email: "✉️ Click to reveal email",
 
     /* publications dynamic */
-    pub_first_author_tag: "1st Author",
     venue_label: "Venue: "
   }
 };
@@ -244,9 +242,9 @@ function applyLang(lang) {
 
 /* ----------- 3) 论文渲染与筛选 ----------- */
 const filterState = {
-  author: 'all',  // 'all' | 'first'
-  type:   'all',  // 'all' | 'journal' | 'conference' | 'preprint'
-  task:   'all'   // 'all' | 'understanding' | 'generation' | 'pretraining' | 'enhancement'
+  author: 'all', // 'all' | 'first'
+  type: 'all',   // 'all' | 'journal' | 'conference' | 'preprint'
+  task: 'all'    // 'all' | 'understanding' | 'generation' | 'pretraining' | 'enhancement'
 };
 
 function getTypeBadgeText(t, lang) {
@@ -280,6 +278,13 @@ function getPrimaryUrl(p) {
   if (p.arxiv)     return 'https://arxiv.org/abs/' + p.arxiv;
   // 没有明确链接：返回 null，让标题保持为纯文本
   return null;
+}
+
+function formatAuthors(authors) {
+  if (!authors) return '';
+  return authors
+    .replace(/Tianrui Wang/g, '<strong>Tianrui Wang</strong>')
+    .replace(/T\. Wang/g, '<strong>Tianrui Wang</strong>');
 }
 
 function buildPaperButtons(p, primaryUrl) {
@@ -331,7 +336,6 @@ function renderPublications() {
   }
 
   const lang = CURRENT_LANG;
-  const dict = I18N[lang] || {};
   const labelAbstract    = (lang === 'zh') ? '摘要' : 'Abstract';
   const labelNoAbstract  = (lang === 'zh') ? '（未录入摘要；点击"论文链接"查看）' : '(Abstract not available; see paper link)';
 
@@ -342,10 +346,8 @@ function renderPublications() {
     byYear[y].forEach(p => {
       // 论文卡片内部统一使用英文 venue；即使页面切到中文，也不展示中文论文信息。
       const venue = p.venue_en || '';
-      const star = p.first ? '<span class="pub-star" title="First author">★</span>' : '';
       const badges = [];
       badges.push(`<span class="pub-badge badge-${p.type}">${getTypeBadgeText(p.type, lang)}</span>`);
-      if (p.first)     badges.push(`<span class="pub-badge badge-highlight">${dict.pub_first_author_tag}</span>`);
       if (p.highlight) badges.push(`<span class="pub-badge badge-highlight">${p.highlight}</span>`);
       (p.task_tags || []).forEach(task => {
         badges.push(`<span class="pub-badge badge-task">${getTaskBadgeText(task, lang)}</span>`);
@@ -359,7 +361,7 @@ function renderPublications() {
       const externals  = buildPaperButtons(p, primaryUrl);
 
       // 标题链接 -> 论文主页；若没有任何论文链接，标题渲染为纯文本
-      const titleInner = `${star}${p.title}`;
+      const titleInner = p.title;
       const titleHtml = primaryUrl
         ? `<a class="pub-title-link" href="${primaryUrl}" target="_blank" rel="noopener">${titleInner}</a>`
         : titleInner;
@@ -382,9 +384,9 @@ function renderPublications() {
         : '';
 
       html += `
-        <div class="pub-item${p.first ? ' is-first' : ''}">
+        <div class="pub-item">
           <div class="pub-title">${titleHtml}</div>
-          <div class="pub-authors">${p.authors}</div>
+          <div class="pub-authors">${formatAuthors(p.authors)}</div>
           <div class="pub-venue">${venue}</div>
           <div class="pub-badges">${badges.join('')}</div>
           ${keywordsHtml}

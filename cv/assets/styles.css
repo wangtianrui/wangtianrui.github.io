@@ -2,7 +2,7 @@
    styles.css — 个人主页样式
    配色思路：浅色背景 + 深蓝主色 + 金色强调，整体偏学术风
    - 主色 --c-primary  : 用于按钮、标题
-   - 强调 --c-accent   : 用于"一作"标记、Spotlight 等高亮
+   - 强调 --c-accent   : 用于 Spotlight 等高亮
    - 背景 --c-bg       : 主背景
    - 卡片 --c-card     : 卡片底色
    ============================================================ */
@@ -348,9 +348,6 @@ img { max-width: 100%; }
   box-shadow: var(--shadow-md);
   border-color: #cdd5e0;
 }
-.pub-item.is-first {
-  border-left: 4px solid var(--c-accent);
-}
 .pub-title {
   font-size: 15px;
   font-weight: 600;
@@ -367,14 +364,14 @@ img { max-width: 100%; }
   color: var(--c-primary);
   text-decoration: none;
 }
-.pub-star {
-  color: var(--c-accent);
-  margin-right: 4px;
-}
 .pub-authors {
   font-size: 13.5px;
   color: var(--c-text-soft);
   margin: 2px 0;
+}
+.pub-authors strong {
+  color: var(--c-primary);
+  font-weight: 700;
 }
 .pub-venue {
   font-size: 13px;
