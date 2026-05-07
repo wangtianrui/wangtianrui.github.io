@@ -1,12 +1,48 @@
 <!DOCTYPE html>
- <html>
- 
- <head>
- <meta charset="UTF-8">
- <title>Hello world</title>
- </head>
- 
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tianrui Wang · 王天锐 — Personal Homepage</title>
+
+  <!-- =========================================================
+       根 index.html 的作用：
+       1) 自动跳转到 ./cv/（个人主页）
+       2) 同时保留对所有原有子目录（demo 页面）的链接，
+          以便像 wangtianrui.github.io/wescon/、/pm_evc/ 等老链接
+          仍然有效（这些子目录的 index.html 没有改动）。
+       3) 如果以后想让根直接展示主页，把下方 <meta http-equiv="refresh">
+          的 url 改成想要的页面即可，或者把 cv/index.html 直接复制到这里。
+       ========================================================= -->
+  <meta http-equiv="refresh" content="0; url=./cv/" />
+  <link rel="canonical" href="./cv/" />
+
+  <style>
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans SC",sans-serif;
+         background:#fafbfc;color:#1f2937;margin:0;padding:40px 20px;text-align:center;}
+    .box{max-width:560px;margin:80px auto;padding:40px 30px;background:#fff;
+         border-radius:10px;box-shadow:0 2px 14px rgba(0,0,0,0.08);}
+    h1{color:#0d3b66;margin:0 0 12px;font-size:24px;}
+    p{color:#4b5563;font-size:15px;}
+    a{color:#0d3b66;font-weight:600;}
+    ul{margin:18px 0 0;padding:0;list-style:none;font-size:13px;color:#6b7280;}
+    ul li{display:inline-block;margin:0 6px;}
+  </style>
+</head>
 <body>
-    Hello world
+  <div class="box">
+    <h1>Tianrui Wang · 王天锐</h1>
+    <p>正在跳转到个人主页 / Redirecting to homepage…</p>
+    <p>如果未自动跳转，请点击 <a href="./cv/">这里</a> /
+       If you are not redirected, click <a href="./cv/">here</a>.</p>
+
+    <!-- 旧 demo 子目录入口（保持原有链接全部有效） -->
+    <ul>
+      <li><a href="./wescon/">wescon</a></li>
+      <li><a href="./pm_evc/">pm_evc</a></li>
+      <li><a href="./pm_evc_icme/">pm_evc_icme</a></li>
+      <li><a href="./progre_vc/">progre_vc</a></li>
+      <li><a href="./ceaeval/">ceaeval</a></li>
+    </ul>
+  </div>
 </body>
 </html>

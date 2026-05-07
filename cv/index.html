@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tianrui Wang · 王天锐 — Personal Homepage</title>
+
+  <!-- ========== Google Fonts ========== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <!-- ========== 站点样式 ========== -->
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+
+<!-- ========================================================================
+     顶部导航栏：固定在页面顶部，提供锚点跳转 + 语言切换
+     如需新增/修改导航项，直接在 <ul.nav-links> 里加一个 <li> 即可，
+     该 li 的 data-i18n-key 用于双语切换（在 main.js 的 I18N 字典中加键值）。
+     ======================================================================== -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="#top" class="logo" data-i18n-key="logo">王天锐 · Tianrui Wang</a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#about"        data-i18n-key="nav_about">关于</a></li>
+        <li><a href="#education"    data-i18n-key="nav_education">教育背景</a></li>
+        <li><a href="#experience"   data-i18n-key="nav_experience">科研与实习</a></li>
+        <li><a href="#publications" data-i18n-key="nav_publications">论文</a></li>
+        <li><a href="#projects"     data-i18n-key="nav_projects">开源项目</a></li>
+        <li><a href="#awards"       data-i18n-key="nav_awards">获奖</a></li>
+        <li><a href="#contact"      data-i18n-key="nav_contact">联系方式</a></li>
+      </ul>
+    </nav>
+    <!-- 语言切换按钮：点击在 zh / en 之间切换 -->
+    <button id="lang-toggle" class="btn-lang" aria-label="Switch language">EN</button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ====================================================================
+       Hero 头部：头像 + 姓名 + 简短自我介绍
+       要修改头像：替换 assets/avatar.jpg
+       要修改自我介绍：编辑下方 #hero-bio 的 data-i18n-key 对应字典即可
+       ==================================================================== -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <img src="assets/avatar.jpg" alt="Tianrui Wang" class="avatar" />
+      <div class="hero-text">
+        <h1 data-i18n-key="hero_name">王天锐 · Tianrui Wang</h1>
+        <p class="hero-title" data-i18n-key="hero_title">
+          天津大学 / 南洋理工大学 联培博士生 · 语音合成 · 语音理解生成统一建模
+        </p>
+        <p id="hero-bio" data-i18n-key="hero_bio">
+          研究方向聚焦于语音合成中的细粒度情感控制、基于 LLM 的可控语音合成，
+          以及语音理解与生成统一大模型。先后在微软亚洲研究院、中国移动研究院、慧言科技、
+          华为、腾讯等机构进行研究与实习。
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="assets/CV_TianruiWang.pdf" target="_blank" data-i18n-key="hero_cv">📄 下载完整简历 (PDF)</a>
+          <a class="btn" href="https://scholar.google.com/citations?user=eGqo7CYAAAAJ&hl=en" target="_blank">Google Scholar</a>
+          <a class="btn" href="https://github.com/wangtianrui" target="_blank">GitHub</a>
+          <a class="btn" href="mailto:wangtianrui@tju.edu.cn">Email</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       关于我（About）：可写一段较长的自我描述
+       ==================================================================== -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2 data-i18n-key="sec_about">关于我</h2>
+      <p data-i18n-key="about_p1">
+        我是王天锐，目前是天津大学智能与计算学部电子信息专业博士生（导师：王龙标教授、党建武教授），
+        同时获国家公派留学奖学金赴新加坡南洋理工大学（NTU）联合培养（联培导师：Eng Siong Chng 教授）。
+        我也长期与上海交通大学跨媒体语言智能实验室（联培导师：陈谐研究员）合作。
+      </p>
+      <p data-i18n-key="about_p2">
+        研究方向涵盖：语音合成（尤其是细粒度情感与韵律控制）、自监督语音预训练、
+        语音理解与生成统一大模型、语音增强、鲁棒语音识别等。代表工作包括 ProgRE、VioLA、HGCN、
+        Harmonic Attention、以及 NeurIPS 2025 Spotlight 的 WeScon（Word-level Emotion Control）等。
+      </p>
+      <p data-i18n-key="about_p3">
+        我曾在微软亚洲研究院（自然语言计算组）、中国移动研究院（人工智能与智慧运营部）、
+        慧言科技、华为、腾讯（语音大模型算法中心）等机构进行研究与实习，并入选中国科协
+        青年科技人才培育工程博士生专项计划、中国移动研究院"超星计划"。
+      </p>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       教育背景（Education）：以时间线 / 卡片形式呈现
+       新增条目：在 .timeline 里添加一个 .timeline-item
+       说明：
+       - 博士学位在天津大学（唯一学位授予方）；
+       - NTU 为访学交流（联合指导，不拿学位）；
+       - SJTU 为联培研究（联合指导，不拿学位）；
+       - NTU 与 SJTU 的重要程度相同，并列展示。
+       ==================================================================== -->
+  <section id="education" class="section section-alt">
+    <div class="container">
+      <h2 data-i18n-key="sec_education">教育背景</h2>
+      <ul class="timeline">
+
+        <li class="timeline-item">
+          <div class="timeline-date">2023.09 – Now</div>
+          <div class="timeline-body">
+            <h3 data-i18n-key="edu_tju_school">天津大学（Tianjin University），天津</h3>
+            <p data-i18n-key="edu_tju_detail">
+              电子信息博士，智能与计算学部。博士导师（联合指导）：
+              <a href="https://cic.tju.edu.cn/faculty/wanglongbiao/wang.html" target="_blank">王龙标 教授 (TJU)</a>、
+              党建武 教授 (TJU)、
+              <a href="https://personal.ntu.edu.sg/aseschng/speechLab_intro.html" target="_blank">Eng Siong Chng 教授 (NTU)</a>、
+              <a href="https://chenxie95.github.io/en" target="_blank">陈谐 副教授 (SJTU)</a>。
+              荣誉：中国科协青年科技人才培育工程·博士生专项计划；一等学业奖学金。
+            </p>
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-date">2025.02 – Now</div>
+          <div class="timeline-body">
+            <h3 data-i18n-key="edu_ntu_school">南洋理工大学（NTU），新加坡 · 访学交流</h3>
+            <p data-i18n-key="edu_ntu_detail">
+              计算与数据科学学院（CCDS），访问博士生（联合指导，不授予学位）。
+              联合指导教师：
+              <a href="https://personal.ntu.edu.sg/aseschng/speechLab_intro.html" target="_blank">Eng Siong Chng 教授</a>。
+              由国家公派留学奖学金资助。
+            </p>
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-date">2022.05 – Now</div>
+          <div class="timeline-body">
+            <h3 data-i18n-key="edu_sjtu_school">上海交通大学（SJTU）· 联培研究</h3>
+            <p data-i18n-key="edu_sjtu_detail">
+              跨媒体语言智能实验室（X-LANCE），联培研究（联合指导，不授予学位）。
+              联合指导教师：
+              <a href="https://chenxie95.github.io/en" target="_blank">陈谐 副教授</a>。
+              方向：语音自监督预训练、语音合成、鲁棒语音识别、音频理解生成统一。
+            </p>
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-date">2020.09 – 2023.07</div>
+          <div class="timeline-body">
+            <h3 data-i18n-key="edu_bjtu_school">北京交通大学（BJTU），北京</h3>
+            <p data-i18n-key="edu_bjtu_detail">信息与通信工程硕士，计算机与信息技术学院，导师：朱维彬 教授；
+              方向：语音增强、语音识别、自监督学习；一等学业奖学金；校级优秀毕业论文</p>
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-date">2016.09 – 2020.07</div>
+          <div class="timeline-body">
+            <h3 data-i18n-key="edu_nuc_school">中北大学（NUC），太原</h3>
+            <p data-i18n-key="edu_nuc_detail">物联网工程学士，大数据学院；专业排名 1/137；
+              AI+移动互联校级创新实验室负责人（110+ 人规模）；多项计算机赛事国家一等奖。
+              本科实验室开源仓库：
+              <a href="https://github.com/android-nuc" target="_blank">github.com/android-nuc</a></p>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       科研交流与实习（Experience）：与教育背景对称的时间线
+       ==================================================================== -->
+  <section id="experience" class="section">
+    <div class="container">
+      <h2 data-i18n-key="sec_experience">科研交流与实习</h2>
+      <ul class="timeline">
+
+        <li class="timeline-item">
+          <div class="timeline-date">2026.04 – Now</div>
+          <div class="timeline-body">
+            <h3 data-i18n-key="exp_tencent_org">腾讯集团 · 语音大模型算法中心</h3>
+            <p data-i18n-key="exp_tencent_detail">实习生，方向：音频理解生成统一相关模型研究</p>
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-date">2026.01 – Now</div>
+          <div class="timeline-body">
+            <h3 data-i18n-key="exp_huawei_org">华为技术有限公司</h3>
+            <p data-i18n-key="exp_huawei_detail">校企合作项目学生负责人；方向：细粒度情感可控端到端对话模型研究</p>
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-date">2023.10 – 2024.02</div>
+          <div class="timeline-body">
+            <h3 data-i18n-key="exp_huiyan_org">慧言科技有限公司</h3>
+            <p data-i18n-key="exp_huiyan_detail">语音合成算法实习生；主导中英双语语音合成系统的研发：
+              数据爬虫、海量数据预处理（15 万小时）、多语言语音合成系统的搭建和训练</p>
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-date">2022.12 – 2023.07</div>
+          <div class="timeline-body">
+            <h3 data-i18n-key="exp_msra_org">微软亚洲研究院（MSRA）· 自然语言计算组</h3>
+            <p data-i18n-key="exp_msra_detail">语音算法实习生；探索理解生成统一的语音大模型
+              （语音识别、机器翻译、语音到文本翻译、语音合成）</p>
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-date">2021.05 – 2022.11</div>
+          <div class="timeline-body">
+            <h3 data-i18n-key="exp_cmri_org">中国移动研究院 · 人工智能与智慧运营部</h3>
+            <p data-i18n-key="exp_cmri_detail">语音算法实习生；负责流式语音增强与鲁棒语音识别系统的研发，
+              成功评选"超星计划"（实习生人才计划，设立以来首例）</p>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       论文（Publications）：从 publications.js 自动渲染
+       - 顶部按钮：[全部] / [仅一作] 切换；以及类别筛选（期刊 / 会议 / 预印本）
+       - 列表自动按年份倒序分组
+       ==================================================================== -->
+  <section id="publications" class="section section-alt">
+    <div class="container">
+      <div class="pub-header">
+        <h2 data-i18n-key="sec_publications">论文成果</h2>
+        <div class="pub-toolbar">
+          <span class="filter-label" data-i18n-key="pub_author_filter">作者：</span>
+          <button class="chip chip-active" data-author="all"   data-i18n-key="pub_filter_all">全部</button>
+          <button class="chip"             data-author="first" data-i18n-key="pub_filter_first">仅一作</button>
+          <span class="filter-divider"></span>
+          <span class="filter-label" data-i18n-key="pub_type_filter">类型：</span>
+          <button class="chip chip-active" data-type="all"        data-i18n-key="pub_type_all">全部</button>
+          <button class="chip"             data-type="journal"    data-i18n-key="pub_type_journal">期刊</button>
+          <button class="chip"             data-type="conference" data-i18n-key="pub_type_conference">会议</button>
+          <button class="chip"             data-type="preprint"   data-i18n-key="pub_type_preprint">预印本</button>
+        </div>
+      </div>
+      <p class="pub-note" data-i18n-key="pub_note">
+        论文按发表/收录年份倒序展示；标题前的 ★ 表示王天锐为第一作者；点击标签可筛选。
+      </p>
+      <div id="publications-list"><!-- 由 main.js 渲染 --></div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       开源项目参与（Open-Source Project Contributions）
+       说明：
+       - 本节展示作者参与 / 主导的开源代码仓库；
+       - 论文对应的 Demo 页面不再单列；论文卡片自带 "Demo / Code" 链接，
+         直接跳到论文项目主页 / 仓库。
+       - 要新增一个仓库：在 .card-grid 里加一个 <a class="card"> 即可。
+       ==================================================================== -->
+  <section id="projects" class="section">
+    <div class="container">
+      <h2 data-i18n-key="sec_projects">开源项目参与</h2>
+      <div class="card-grid">
+
+        <a class="card" href="https://github.com/X-LANCE/SLAM-LLM" target="_blank">
+          <h3>SLAM-LLM (X-LANCE)</h3>
+          <p data-i18n-key="proj_slamllm">
+            X-LANCE 团队开源的大型语音语言模型框架，用于构建和训练语音 LLM。
+          </p>
+          <span class="card-tag">github.com/X-LANCE/SLAM-LLM</span>
+        </a>
+
+        <a class="card" href="https://github.com/CCA-Lab/VocalStory/tree/main/wescon" target="_blank">
+          <h3>WeScon (NeurIPS 2025 Spotlight)</h3>
+          <p data-i18n-key="proj_wescon">
+            零样本 TTS 中的词级情感与语速控制框架；多轮推理 + 自训练 + 动态情感注意力偏置。
+          </p>
+          <span class="card-tag">github.com/CCA-Lab/VocalStory</span>
+        </a>
+
+        <a class="card" href="https://github.com/CCA-Lab/ProgRE" target="_blank">
+          <h3>ProgRE (TASLP 2024)</h3>
+          <p data-i18n-key="proj_progre">
+            渐进式残差提取的自监督语音预训练；逐步解耦音高 / 说话人 / 内容信息，性能超越 WavLM。
+          </p>
+          <span class="card-tag">github.com/CCA-Lab/ProgRE</span>
+        </a>
+
+        <a class="card" href="https://github.com/wangtianrui/HGCN" target="_blank">
+          <h3>HGCN / HGCN+ (ICASSP 2022)</h3>
+          <p data-i18n-key="proj_hgcn">
+            谐波门控补偿语音增强网络，DNS Challenge 2022 第 5 名；高分辨率谐波积分谱。
+          </p>
+          <span class="card-tag">github.com/wangtianrui/HGCN</span>
+        </a>
+
+        <a class="card" href="https://github.com/caoruitju/RUI_SE" target="_blank">
+          <h3>RUI_SE</h3>
+          <p data-i18n-key="proj_ruise">
+            通用语音增强即插即用的精炼底层信息（RUI）框架开源实现。
+          </p>
+          <span class="card-tag">github.com/caoruitju/RUI_SE</span>
+        </a>
+
+        <a class="card" href="https://github.com/wangtianrui/NutritionMaster" target="_blank">
+          <h3>NutritionMaster</h3>
+          <p data-i18n-key="proj_nutrition">
+            本科国家一等奖作品"营养大师"：基于机器学习的膳食管家。
+          </p>
+          <span class="card-tag">github.com/wangtianrui/NutritionMaster</span>
+        </a>
+
+        <a class="card" href="https://github.com/android-nuc" target="_blank">
+          <h3 data-i18n-key="proj_nuc_title">本科实验室（中北大学）</h3>
+          <p data-i18n-key="proj_nuc">
+            AI+移动互联校级创新实验室开源组织，本科期间负责并组织。
+          </p>
+          <span class="card-tag">github.com/android-nuc</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       专业竞赛 / 获奖（Awards）
+       ==================================================================== -->
+  <section id="awards" class="section section-alt">
+    <div class="container">
+      <h2 data-i18n-key="sec_awards">专业竞赛 & 获奖</h2>
+      <ul class="award-list">
+        <li><span class="award-date">2024.11</span><span data-i18n-key="award_limmits">ICASSP 2025 LIMMITS'25 Challenge 低资源语音合成比赛 第 2 名（双赛道均第 2）</span></li>
+        <li><span class="award-date">2024.06</span><span data-i18n-key="award_icagc">ISCSLP 2024 ICAGC Challenge 中文情感可控语音合成比赛 第 2 名</span></li>
+        <li><span class="award-date">2023.11</span><span data-i18n-key="award_neurodns">Inter Neuromorphic DNS Challenge 第 2 名</span></li>
+        <li><span class="award-date">2022.02</span><span data-i18n-key="award_dns22">ICASSP 2022 Deep Noise Suppression Challenge 第 5 名</span></li>
+        <li><span class="award-date">2021.09</span><span data-i18n-key="award_chaoxing">入选中国移动研究院"超星计划"（设立以来首例）</span></li>
+        <li><span class="award-date">2019.03</span><span data-i18n-key="award_kaggle">Kaggle 房价预测赛 全球前 10%（本科）</span></li>
+        <li><span class="award-date">2018.11</span><span data-i18n-key="award_huabei">华北五省计算机应用大赛 国家一等奖（"营养大师"）</span></li>
+        <li><span class="award-date">2018.09</span><span data-i18n-key="award_internetplus">"互联网+"大学生创新创业大赛 国家铜奖（"吾乡"）</span></li>
+        <li><span class="award-date">2018.08</span><span data-i18n-key="award_compdesign">全国计算机设计大赛 国家一等奖（"识菜帮"）</span></li>
+        <li><span class="award-date">2018.05</span><span data-i18n-key="award_chuangqingchun">"创青春"浙大双创杯全国大学生创业大赛 省级金奖</span></li>
+        <li><span class="award-date">2017.04</span><span data-i18n-key="award_google_android">全国大学生 Google Android 挑战赛 优秀奖</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       联系方式（Contact）
+       ==================================================================== -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2 data-i18n-key="sec_contact">联系方式</h2>
+      <ul class="contact-list">
+        <li><strong>Email:</strong> <a href="mailto:wangtianrui@tju.edu.cn">wangtianrui@tju.edu.cn</a></li>
+        <li><strong>WeChat / 手机:</strong> 18381077123</li>
+        <li><strong>Google Scholar:</strong> <a href="https://scholar.google.com/citations?user=eGqo7CYAAAAJ&hl=en" target="_blank">scholar.google.com/citations?user=eGqo7CYAAAAJ</a></li>
+        <li><strong>GitHub:</strong> <a href="https://github.com/wangtianrui" target="_blank">github.com/wangtianrui</a></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© <span id="year"></span> Tianrui Wang · 王天锐 ·
+       <a href="https://github.com/wangtianrui/wangtianrui.github.io" target="_blank">Source</a></p>
+  </div>
+</footer>
+
+<!-- ========== 数据 + 行为脚本 ========== -->
+<script src="assets/publications.js"></script>
+<script src="assets/main.js"></script>
+</body>
+</html>
