@@ -63,7 +63,10 @@
           <a class="btn btn-primary" href="assets/CV_TianruiWang.pdf" target="_blank" data-i18n-key="hero_cv">📄 下载完整简历 (PDF)</a>
           <a class="btn" href="https://scholar.google.com/citations?user=eGqo7CYAAAAJ&hl=en" target="_blank">Google Scholar</a>
           <a class="btn" href="https://github.com/wangtianrui" target="_blank">GitHub</a>
-          <a class="btn" href="mailto:wangtianrui@tju.edu.cn">Email</a>
+          <!-- 邮箱同样走反爬逻辑（见 Contact 区说明） -->
+          <a class="btn obf-email" href="#"
+             data-eu="d2FuZ3RpYW5ydWk=" data-ed="dGp1" data-es="ZWR1LmNu"
+             data-i18n-key="hero_email">✉️ 点击查看邮箱</a>
         </div>
       </div>
     </div>
@@ -91,6 +94,16 @@
         慧言科技、华为 2012 实验室、腾讯（语音大模型算法中心）等机构进行研究与实习，
         并入选中国科协青年科技人才培育工程博士生专项计划、中国移动研究院"超星计划"。
       </p>
+
+      <!-- 个人信息 / 联系方式摘要：与 Contact 区保持一致，邮箱仍然使用反爬逻辑 -->
+      <div class="info-card">
+        <h3 data-i18n-key="info_title">个人信息</h3>
+        <ul class="info-list">
+          <li><strong>Email:</strong> <a href="#" class="obf-email" data-eu="d2FuZ3RpYW5ydWk=" data-ed="dGp1" data-es="ZWR1LmNu" data-i18n-key="contact_email_label">点击查看邮箱</a></li>
+          <li><strong>Google Scholar:</strong> <a href="https://scholar.google.com/citations?user=eGqo7CYAAAAJ&hl=en" target="_blank">eGqo7CYAAAAJ</a></li>
+          <li><strong>GitHub:</strong> <a href="https://github.com/wangtianrui" target="_blank">github.com/wangtianrui</a></li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -249,6 +262,16 @@
           <button class="chip"             data-type="preprint"   data-i18n-key="pub_type_preprint">预印本</button>
         </div>
       </div>
+
+      <!-- 能力 / 任务标签：点击可过滤论文；四类里都至少包含一篇一作论文 -->
+      <div class="task-filter">
+        <span class="filter-label" data-i18n-key="pub_task_filter">任务：</span>
+        <button class="chip chip-active" data-task="all"           data-i18n-key="pub_task_all">全部</button>
+        <button class="chip"             data-task="understanding" data-i18n-key="pub_task_understanding">语音理解</button>
+        <button class="chip"             data-task="generation"    data-i18n-key="pub_task_generation">语音生成</button>
+        <button class="chip"             data-task="pretraining"   data-i18n-key="pub_task_pretraining">语音表征预训练</button>
+        <button class="chip"             data-task="enhancement"   data-i18n-key="pub_task_enhancement">语音增强</button>
+      </div>
       <p class="pub-note" data-i18n-key="pub_note">
         论文按发表/收录年份倒序展示；标题前的 ★ 表示王天锐为第一作者；点击标签可筛选。
       </p>
@@ -358,10 +381,33 @@
     <div class="container">
       <h2 data-i18n-key="sec_contact">联系方式</h2>
       <ul class="contact-list">
-        <li><strong>Email:</strong> <a href="mailto:wangtianrui@tju.edu.cn">wangtianrui@tju.edu.cn</a></li>
-        <li><strong>WeChat / 手机:</strong> 18381077123</li>
-        <li><strong>Google Scholar:</strong> <a href="https://scholar.google.com/citations?user=eGqo7CYAAAAJ&hl=en" target="_blank">scholar.google.com/citations?user=eGqo7CYAAAAJ</a></li>
-        <li><strong>GitHub:</strong> <a href="https://github.com/wangtianrui" target="_blank">github.com/wangtianrui</a></li>
+
+        <!-- ============================================================
+             Email 反爬策略：
+             - HTML 中不出现明文 email（"@" 符号、完整域名等）
+             - 用 data-* 保存 Base64 分段的用户名 / 域名 / 域后缀
+             - JS 在页面加载后拼接，并用 Unicode 零宽字符打断文本
+             - 爬虫若只抓 HTML 拿不到邮箱；点击后打开 mailto:
+             - 若要更新邮箱：只需修改下面 data-* 的 Base64 值即可，
+               可在浏览器控制台用 btoa('xxx') 生成
+             ============================================================ -->
+        <li>
+          <strong>Email:</strong>
+          <a href="#"
+             class="obf-email"
+             data-eu="d2FuZ3RpYW5ydWk="  data-ed="dGp1"  data-es="ZWR1LmNu"
+             data-i18n-key="contact_email_label">点击查看邮箱</a>
+        </li>
+
+        <li>
+          <strong>Google Scholar:</strong>
+          <a href="https://scholar.google.com/citations?user=eGqo7CYAAAAJ&hl=en" target="_blank">scholar.google.com/citations?user=eGqo7CYAAAAJ</a>
+        </li>
+        <li>
+          <strong>GitHub:</strong>
+          <a href="https://github.com/wangtianrui" target="_blank">github.com/wangtianrui</a>
+        </li>
+
       </ul>
     </div>
   </section>

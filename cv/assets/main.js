@@ -64,7 +64,14 @@ const I18N = {
     pub_type_journal: "期刊",
     pub_type_conference: "会议",
     pub_type_preprint: "预印本",
-    pub_note: "论文按发表/收录年份倒序展示；标题前的 ★ 表示王天锐为第一作者；点击标签可筛选。",
+    pub_task_filter: "任务：",
+    pub_task_all: "全部",
+    pub_task_understanding: "语音理解",
+    pub_task_generation: "语音生成",
+    pub_task_pretraining: "语音表征预训练",
+    pub_task_enhancement: "语音增强",
+    pub_note: "论文按发表/收录年份倒序展示；标题前的 ★ 表示王天锐为第一作者；点击任务标签可筛选。",
+    info_title: "个人信息",
 
     sec_projects: "开源项目参与",
     proj_slamllm: "X-LANCE 团队开源的大型语音语言模型框架（SLAM-LLM），用于构建和训练语音 LLM。",
@@ -90,6 +97,8 @@ const I18N = {
     award_google_android: "全国大学生 Google Android 挑战赛 优秀奖",
 
     sec_contact: "联系方式",
+    contact_email_label: "点击查看邮箱",
+    hero_email: "✉️ 点击查看邮箱",
 
     /* publications dynamic */
     pub_first_author_tag: "一作",
@@ -149,7 +158,14 @@ const I18N = {
     pub_type_journal: "Journal",
     pub_type_conference: "Conference",
     pub_type_preprint: "Preprint",
-    pub_note: "Publications are listed in reverse chronological order. Items prefixed with ★ are first-authored by Tianrui Wang. Use the chips above to filter.",
+    pub_task_filter: "Task:",
+    pub_task_all: "All",
+    pub_task_understanding: "Speech Understanding",
+    pub_task_generation: "Speech Generation",
+    pub_task_pretraining: "Speech Representation Pre-training",
+    pub_task_enhancement: "Speech Enhancement",
+    pub_note: "Publications are listed in reverse chronological order. Items prefixed with ★ are first-authored by Tianrui Wang. Use the task chips above to filter.",
+    info_title: "Personal Information",
 
     sec_projects: "Open-Source Project Contributions",
     proj_slamllm: "SLAM-LLM — an open-source large speech-language model framework from X-LANCE for building and training speech LLMs.",
@@ -175,6 +191,8 @@ const I18N = {
     award_google_android: "National Google Android Challenge for College Students: Honorable Mention",
 
     sec_contact: "Contact",
+    contact_email_label: "Click to reveal email",
+    hero_email: "✉️ Click to reveal email",
 
     /* publications dynamic */
     pub_first_author_tag: "1st Author",
@@ -213,6 +231,13 @@ function applyLang(lang) {
   const btn = document.getElementById('lang-toggle');
   if (btn) btn.textContent = (lang === 'zh') ? 'EN' : '中文';
 
+  // 语言切换会用 innerHTML 覆盖邮箱按钮的文案（"点击查看邮箱"），
+  // 这里重置每个 .obf-email 的 revealed 标记，允许它在下次 hover/click
+  // 时重新按当前语言揭示；href 保持原样（mailto: 已填的依旧可用）。
+  document.querySelectorAll('a.obf-email').forEach(el => {
+    el.dataset.revealed = '';
+  });
+
   // 重新渲染论文（venue 是中英文不同字段）
   renderPublications();
 }
@@ -220,7 +245,8 @@ function applyLang(lang) {
 /* ----------- 3) 论文渲染与筛选 ----------- */
 const filterState = {
   author: 'all',  // 'all' | 'first'
-  type:   'all'   // 'all' | 'journal' | 'conference' | 'preprint'
+  type:   'all',  // 'all' | 'journal' | 'conference' | 'preprint'
+  task:   'all'   // 'all' | 'understanding' | 'generation' | 'pretraining' | 'enhancement'
 };
 
 function getTypeBadgeText(t, lang) {
@@ -231,11 +257,19 @@ function getTypeBadgeText(t, lang) {
   return t;
 }
 
+function getTaskBadgeText(t, lang) {
+  const dict = I18N[lang] || {};
+  const key = 'pub_task_' + t;
+  return dict[key] || t;
+}
+
 /* 每篇论文都应该能点进去："标题" = 论文正式页面；
- * 顶级链接优先级：paper_url (手填) > doi > arxiv > Scholar 搜索（兜底）。
+ * 顶级链接优先级：paper_url (手填) > doi > arxiv
+ *   - 三者都没有时，标题不是可点击链接（留给你后续手填 paper_url）；
+ *   - 之前 Scholar 搜索的兜底已去掉，避免误导读者。
  * 额外按钮：
  *   - Abstract : 若 p.abstract 存在则展开/收起摘要
- *   - Demo     : 若 p.demo_url 存在
+ *   - Demo     : 若 p.demo_url 存在（支持完整 URL 或站内相对路径）
  *   - Code     : 若 p.code_url 存在
  *   - arXiv    : 若 p.arxiv 存在，且 primaryUrl 不是 arxiv
  *   - DOI      : 若 p.doi   存在，且 primaryUrl 不是 doi
@@ -244,8 +278,8 @@ function getPrimaryUrl(p) {
   if (p.paper_url) return p.paper_url;
   if (p.doi)       return 'https://doi.org/' + p.doi;
   if (p.arxiv)     return 'https://arxiv.org/abs/' + p.arxiv;
-  // 兜底：Scholar 搜索
-  return 'https://scholar.google.com/scholar?q=' + encodeURIComponent(p.title || '');
+  // 没有明确链接：返回 null，让标题保持为纯文本
+  return null;
 }
 
 function buildPaperButtons(p, primaryUrl) {
@@ -278,6 +312,7 @@ function renderPublications() {
   let pubs = window.PUBLICATIONS.slice();
   if (filterState.author === 'first') pubs = pubs.filter(p => p.first);
   if (filterState.type   !== 'all'  ) pubs = pubs.filter(p => p.type === filterState.type);
+  if (filterState.task   !== 'all'  ) pubs = pubs.filter(p => (p.task_tags || []).includes(filterState.task));
 
   // 按年份分组
   const byYear = {};
@@ -305,18 +340,29 @@ function renderPublications() {
   years.forEach(y => {
     html += `<div class="pub-year-group"><h3>${y}</h3>`;
     byYear[y].forEach(p => {
-      const venue = (lang === 'zh' ? p.venue_zh : p.venue_en) || p.venue_en || '';
+      // 论文卡片内部统一使用英文 venue；即使页面切到中文，也不展示中文论文信息。
+      const venue = p.venue_en || '';
       const star = p.first ? '<span class="pub-star" title="First author">★</span>' : '';
       const badges = [];
       badges.push(`<span class="pub-badge badge-${p.type}">${getTypeBadgeText(p.type, lang)}</span>`);
       if (p.first)     badges.push(`<span class="pub-badge badge-highlight">${dict.pub_first_author_tag}</span>`);
       if (p.highlight) badges.push(`<span class="pub-badge badge-highlight">${p.highlight}</span>`);
+      (p.task_tags || []).forEach(task => {
+        badges.push(`<span class="pub-badge badge-task">${getTaskBadgeText(task, lang)}</span>`);
+      });
+      const keywordList = (lang === 'zh' ? p.keywords_zh : p.keywords_en) || p.keywords_en || [];
+      const keywordsHtml = keywordList.length
+        ? `<div class="pub-keywords">${keywordList.map(k => `<span>${k}</span>`).join('')}</div>`
+        : '';
 
       const primaryUrl = getPrimaryUrl(p);
       const externals  = buildPaperButtons(p, primaryUrl);
 
-      // 标题链接 -> 论文主页
-      const titleHtml = `<a class="pub-title-link" href="${primaryUrl}" target="_blank" rel="noopener">${star}${p.title}</a>`;
+      // 标题链接 -> 论文主页；若没有任何论文链接，标题渲染为纯文本
+      const titleInner = `${star}${p.title}`;
+      const titleHtml = primaryUrl
+        ? `<a class="pub-title-link" href="${primaryUrl}" target="_blank" rel="noopener">${titleInner}</a>`
+        : titleInner;
 
       // Abstract 按钮（即使无摘要也展示一个禁用态，方便视觉一致）
       const pubKey = 'pub-' + (idx++);
@@ -341,6 +387,7 @@ function renderPublications() {
           <div class="pub-authors">${p.authors}</div>
           <div class="pub-venue">${venue}</div>
           <div class="pub-badges">${badges.join('')}</div>
+          ${keywordsHtml}
           <div class="pub-links">${abstractBtn}${extHtml}</div>
           ${absHtml}
         </div>`;
@@ -395,8 +442,77 @@ document.addEventListener('DOMContentLoaded', () => {
       renderPublications();
     });
   });
+  document.querySelectorAll('.chip[data-task]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.chip[data-task]').forEach(b => b.classList.remove('chip-active'));
+      btn.classList.add('chip-active');
+      filterState.task = btn.getAttribute('data-task');
+      renderPublications();
+    });
+  });
 
   // c) 当前年份
   const yearSpan = document.getElementById('year');
   if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+
+  // d) 邮箱反爬：把 Base64 拆分的用户名/域名拼起来
+  setupObfuscatedEmails();
 });
+
+/* ============================================================
+ * 邮箱反爬（Anti-scraping email obfuscation）
+ *
+ * - HTML 中不出现任何明文 email（不含 "@"、不含完整域名）
+ * - data-eu / data-ed / data-es 分别存放 Base64 编码的
+ *   用户名(user) / 子域(domain) / 顶级域(suffix)
+ * - 普通爬虫仅解析 HTML，抓到的是乱码 Base64 片段
+ * - 只有执行到 JS 这一步、且通过用户点击才会触发组装与跳转
+ * - 同时监听 hover，按需懒填入 href + 显示文本，减少机器读取概率
+ *
+ * 更换邮箱：替换 data-eu/ed/es 即可，用浏览器控制台：
+ *   btoa('wangtianrui'); btoa('tju'); btoa('edu.cn');
+ * ============================================================ */
+function setupObfuscatedEmails() {
+  const decode = s => {
+    try { return atob(s || ''); } catch (e) { return ''; }
+  };
+
+  document.querySelectorAll('a.obf-email').forEach(el => {
+    const u = decode(el.getAttribute('data-eu'));
+    const d = decode(el.getAttribute('data-ed'));
+    const s = decode(el.getAttribute('data-es'));
+    if (!u || !d || !s) return;
+
+    // 在运行时拼接字符串；没有任何一步把完整 email 写进 HTML
+    const at = String.fromCharCode(64);   // "@"
+    const dot = String.fromCharCode(46);  // "."
+    const email = u + at + d + dot + s;
+
+    // 展示用字符串：在文本节点中插入零宽字符，避免简单正则匹配
+    // （点击时用真实 email 发起 mailto，不受零宽字符影响）
+    const zwsp = '\u200B';
+    const pretty = u + zwsp + at + zwsp + d + dot + s;
+
+    // 只有用户真正交互时才把 mailto 写进 href
+    const reveal = () => {
+      if (el.dataset.revealed === '1') return;
+      el.href = 'mailto:' + email;
+      // 若原始文本是 "点击查看邮箱 / Click to reveal"，首次揭示后替换成真实邮箱
+      const placeholder = (el.textContent || '').trim();
+      if (/reveal|点击|click|email|邮箱/i.test(placeholder) || placeholder === '' ) {
+        // 保留按钮上原本的 emoji 前缀（如 ✉️），把 "点击查看邮箱" 替换为真实邮箱
+        const prefix = (placeholder.match(/^[^a-zA-Z]+/) || [''])[0];
+        el.textContent = (prefix ? prefix + ' ' : '') + pretty;
+      }
+      el.dataset.revealed = '1';
+    };
+
+    // 鼠标悬停 / 获得焦点时懒揭示；点击时兜底一次
+    el.addEventListener('mouseenter', reveal);
+    el.addEventListener('focus',      reveal);
+    el.addEventListener('click', function () {
+      reveal();
+      // href 已经是 mailto:，浏览器接着处理跳转；这里不做阻止
+    });
+  });
+}
