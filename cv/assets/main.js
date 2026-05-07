@@ -28,8 +28,8 @@ const I18N = {
 
     sec_about: "关于我",
     about_p1: "我是王天锐，目前是<strong>天津大学</strong>智能与计算学部电子信息专业博士生（学位授予方）；博士阶段由四位导师<strong>联合指导</strong>：<a href=\"https://cic.tju.edu.cn/faculty/wanglongbiao/wang.html\" target=\"_blank\">王龙标 教授（TJU）</a>、党建武 教授（TJU）、<a href=\"https://personal.ntu.edu.sg/aseschng/speechLab_intro.html\" target=\"_blank\">Eng Siong Chng 教授（NTU）</a>、<a href=\"https://chenxie95.github.io/en\" target=\"_blank\">陈谐 副教授（SJTU）</a>。受国家公派留学奖学金资助，目前在<strong>南洋理工大学（NTU）</strong>访学交流；同时长期在<strong>上海交通大学</strong>跨媒体语言智能实验室（X-LANCE）联培研究。",
-    about_p2: "研究方向涵盖：语音合成（尤其是细粒度情感与韵律控制）、自监督语音预训练、语音理解与生成统一大模型、语音增强、鲁棒语音识别等。代表工作包括 ProgRE、VioLA、HGCN、Harmonic Attention，以及 NeurIPS 2025 Spotlight 的 WeScon（Word-level Emotion Control）等。",
-    about_p3: "我曾在微软亚洲研究院（自然语言计算组）、中国移动研究院（人工智能与智慧运营部）、慧言科技、华为、腾讯（语音大模型算法中心）等机构进行研究与实习，并入选中国科协青年科技人才培育工程博士生专项计划、中国移动研究院\"超星计划\"。",
+    about_p2: "研究方向涵盖：语音合成（尤其是细粒度情感与韵律控制）、自监督语音预训练、语音理解与生成统一大模型、语音增强、鲁棒语音识别等。代表工作包括 ProgRE、VioLA、HGCN、Harmonic Attention、NeurIPS 2025 Spotlight 的 WeScon（Word-level Emotion Control）、以及 ACL 2026 Oral (Top 5%) 的 CEAEval（Expressive Appropriateness Evaluation）等。",
+    about_p3: "我曾在微软亚洲研究院（自然语言计算组）、中国移动研究院（人工智能与智慧运营部）、慧言科技、华为 2012 实验室、腾讯（语音大模型算法中心）等机构进行研究与实习，并入选中国科协青年科技人才培育工程博士生专项计划、中国移动研究院\"超星计划\"。",
 
     sec_education: "教育背景",
     edu_tju_school: "天津大学（Tianjin University），天津",
@@ -46,7 +46,7 @@ const I18N = {
     sec_experience: "科研交流与实习",
     exp_tencent_org: "腾讯集团 · 语音大模型算法中心",
     exp_tencent_detail: "实习生，方向：音频理解生成统一相关模型研究",
-    exp_huawei_org: "华为技术有限公司",
+    exp_huawei_org: "华为 2012 实验室",
     exp_huawei_detail: "校企合作项目学生负责人；方向：细粒度情感可控端到端对话模型研究",
     exp_huiyan_org: "慧言科技有限公司",
     exp_huiyan_detail: "语音合成算法实习生；主导中英双语语音合成系统的研发：数据爬虫、海量数据预处理（15 万小时）、多语言语音合成系统的搭建和训练",
@@ -113,8 +113,8 @@ const I18N = {
 
     sec_about: "About Me",
     about_p1: "I am Tianrui Wang, a Ph.D. candidate in Electronic Information at the <strong>College of Intelligence and Computing, Tianjin University</strong> (the degree-granting institution). My Ph.D. is <strong>jointly supervised</strong> by four advisors: <a href=\"https://cic.tju.edu.cn/faculty/wanglongbiao/wang.html\" target=\"_blank\">Prof. Longbiao Wang (TJU)</a>, Prof. Jianwu Dang (TJU), <a href=\"https://personal.ntu.edu.sg/aseschng/speechLab_intro.html\" target=\"_blank\">Prof. Eng Siong Chng (NTU)</a>, and <a href=\"https://chenxie95.github.io/en\" target=\"_blank\">Assoc. Prof. Xie Chen (SJTU)</a>. Supported by the China Scholarship Council, I am currently a visiting Ph.D. student at <strong>Nanyang Technological University (NTU)</strong>; I have also been collaborating long-term with the X-LANCE Lab at <strong>Shanghai Jiao Tong University</strong>.",
-    about_p2: "My research covers speech synthesis (especially fine-grained emotion & prosody control), self-supervised speech pre-training, unified speech understanding/generation, speech enhancement, and robust speech recognition. Representative works include ProgRE, VioLA, HGCN, Harmonic Attention, and WeScon (Word-level Emotion Control, NeurIPS 2025 Spotlight).",
-    about_p3: "I have done research and internships at Microsoft Research Asia (Natural Language Computing Group), China Mobile Research Institute (AI & Smart Operations), Huiyan Tech, Huawei, and Tencent (Speech LLM Algorithm Center). I am a recipient of the CAST Young Talent Cultivation Program (Ph.D. Track) and the China Mobile \"Chaoxing\" Internship Program (the first awardee since its founding).",
+    about_p2: "My research covers speech synthesis (especially fine-grained emotion & prosody control), self-supervised speech pre-training, unified speech understanding/generation, speech enhancement, and robust speech recognition. Representative works include ProgRE, VioLA, HGCN, Harmonic Attention, WeScon (Word-level Emotion Control, NeurIPS 2025 Spotlight), and CEAEval (Expressive Appropriateness Evaluation, ACL 2026 Oral / Top 5%).",
+    about_p3: "I have done research and internships at Microsoft Research Asia (Natural Language Computing Group), China Mobile Research Institute (AI & Smart Operations), Huiyan Tech, Huawei 2012 Labs, and Tencent (Speech LLM Algorithm Center). I am a recipient of the CAST Young Talent Cultivation Program (Ph.D. Track) and the China Mobile \"Chaoxing\" Internship Program (the first awardee since its founding).",
 
     sec_education: "Education",
     edu_tju_school: "Tianjin University (TJU), Tianjin, China",
@@ -131,7 +131,7 @@ const I18N = {
     sec_experience: "Experience",
     exp_tencent_org: "Tencent Inc. · Speech LLM Algorithm Center",
     exp_tencent_detail: "Research Intern. Topic: unified models for audio understanding and generation.",
-    exp_huawei_org: "Huawei Technologies Co., Ltd.",
+    exp_huawei_org: "Huawei 2012 Labs",
     exp_huawei_detail: "Student Lead, university-industry collaboration project. Topic: fine-grained emotion-controllable end-to-end conversational models.",
     exp_huiyan_org: "Huiyan Tech",
     exp_huiyan_detail: "TTS Algorithm Intern. Led the development of a Chinese-English bilingual TTS system: data crawling, large-scale preprocessing (~150K hours), and multi-lingual TTS training.",
@@ -231,67 +231,43 @@ function getTypeBadgeText(t, lang) {
   return t;
 }
 
-/* 每篇论文都应该能点进去：
- * - 若 publications.js 显式给了 p.links，原样使用；
- * - 否则根据 venue / title 中的 arXiv ID、已知的 GitHub 仓库、
- *   或本仓库内的 demo 子目录自动补一个"Paper / Demo"链接。
- * 如果你希望某篇论文完全不显示任何链接，只需把自动生成的字段
- * 放到 links=[] 传空数组即可。
+/* 每篇论文都应该能点进去："标题" = 论文正式页面；
+ * 顶级链接优先级：paper_url (手填) > doi > arxiv > Scholar 搜索（兜底）。
+ * 额外按钮：
+ *   - Abstract : 若 p.abstract 存在则展开/收起摘要
+ *   - Demo     : 若 p.demo_url 存在
+ *   - Code     : 若 p.code_url 存在
+ *   - arXiv    : 若 p.arxiv 存在，且 primaryUrl 不是 arxiv
+ *   - DOI      : 若 p.doi   存在，且 primaryUrl 不是 doi
  */
-function autoPaperLinks(p) {
-  // 若用户手动填了 links，直接返回
-  if (p.links && p.links.length) return p.links;
+function getPrimaryUrl(p) {
+  if (p.paper_url) return p.paper_url;
+  if (p.doi)       return 'https://doi.org/' + p.doi;
+  if (p.arxiv)     return 'https://arxiv.org/abs/' + p.arxiv;
+  // 兜底：Scholar 搜索
+  return 'https://scholar.google.com/scholar?q=' + encodeURIComponent(p.title || '');
+}
 
-  const links = [];
+function buildPaperButtons(p, primaryUrl) {
+  const btns = [];
 
-  // 1) 本站内已有的 demo 目录（相对 /cv/ 下，故用 ../xxx/）
-  const DEMO_ROUTES = [
-    { match: /wescon|word-level emotional expression/i, url: '../wescon/',      label: 'Demo' },
-    { match: /progressive generation framework|expressive voice conversion/i,
-                                                         url: '../pm_evc_icme/', label: 'Demo' },
-    { match: /\bprogre\b|progressive residual extraction/i,
-                                                         url: '../progre_vc/',   label: 'Demo' },
-    { match: /expressive appropriateness|ceaeval/i,      url: '../ceaeval/',     label: 'Demo' }
-  ];
-  for (const r of DEMO_ROUTES) {
-    if (r.match.test(p.title || '')) {
-      links.push({ label: r.label, url: r.url });
-      break;
-    }
+  if (p.demo_url) {
+    btns.push({ label: 'Demo', url: p.demo_url });
   }
-
-  // 2) 已知 GitHub 仓库（代码/开源主页）
-  const CODE_MAP = [
-    { match: /^hgcn\b|harmonic gated compensation/i,     url: 'https://github.com/wangtianrui/HGCN' },
-    { match: /progressive residual extraction|^progre/i, url: 'https://github.com/CCA-Lab/ProgRE' },
-    { match: /word-level emotional expression|wescon/i,  url: 'https://github.com/CCA-Lab/VocalStory/tree/main/wescon' },
-    { match: /refining underlying information/i,         url: 'https://github.com/caoruitju/RUI_SE' },
-    { match: /environmental sound classification.*mel/i, url: 'https://github.com/wangtianrui/NutritionMaster' }
-  ];
-  for (const r of CODE_MAP) {
-    if (r.match.test(p.title || '')) {
-      links.push({ label: 'Code', url: r.url });
-      break;
-    }
+  if (p.code_url) {
+    btns.push({ label: 'Code', url: p.code_url });
   }
-
-  // 3) venue / 标题中若有 arXiv id，附一个 arXiv 链接
-  const venueStr = [p.venue_en || '', p.venue_zh || '', p.title || ''].join(' ');
-  const arxivMatch = venueStr.match(/arXiv:?\s*([0-9]{4}\.[0-9]{4,5})/i);
-  if (arxivMatch) {
-    links.push({ label: 'arXiv', url: 'https://arxiv.org/abs/' + arxivMatch[1] });
+  // arXiv
+  if (p.arxiv) {
+    const arxivUrl = 'https://arxiv.org/abs/' + p.arxiv;
+    if (arxivUrl !== primaryUrl) btns.push({ label: 'arXiv', url: arxivUrl });
   }
-
-  // 4) 如果到这里仍然没有任何链接，就给一个 Google Scholar 搜索兜底
-  if (links.length === 0) {
-    const q = encodeURIComponent(p.title || '');
-    links.push({
-      label: (CURRENT_LANG === 'zh' ? '搜索' : 'Search'),
-      url: 'https://scholar.google.com/scholar?q=' + q
-    });
+  // DOI
+  if (p.doi) {
+    const doiUrl = 'https://doi.org/' + p.doi;
+    if (doiUrl !== primaryUrl) btns.push({ label: 'DOI', url: doiUrl });
   }
-
-  return links;
+  return btns;
 }
 
 function renderPublications() {
@@ -321,8 +297,11 @@ function renderPublications() {
 
   const lang = CURRENT_LANG;
   const dict = I18N[lang] || {};
+  const labelAbstract    = (lang === 'zh') ? '摘要' : 'Abstract';
+  const labelNoAbstract  = (lang === 'zh') ? '（未录入摘要；点击"论文链接"查看）' : '(Abstract not available; see paper link)';
 
   let html = '';
+  let idx = 0;
   years.forEach(y => {
     html += `<div class="pub-year-group"><h3>${y}</h3>`;
     byYear[y].forEach(p => {
@@ -333,21 +312,28 @@ function renderPublications() {
       if (p.first)     badges.push(`<span class="pub-badge badge-highlight">${dict.pub_first_author_tag}</span>`);
       if (p.highlight) badges.push(`<span class="pub-badge badge-highlight">${p.highlight}</span>`);
 
-      // 计算链接（自动补全）
-      const links = autoPaperLinks(p);
-      // 标题使用第一个链接，作为整条 item 的"主页"入口
-      const primaryUrl = links[0] ? links[0].url : null;
-      const titleInner = `${star}${p.title}`;
-      const titleHtml = primaryUrl
-        ? `<a class="pub-title-link" href="${primaryUrl}" target="_blank" rel="noopener">${titleInner}</a>`
-        : titleInner;
+      const primaryUrl = getPrimaryUrl(p);
+      const externals  = buildPaperButtons(p, primaryUrl);
 
-      let linksHtml = '';
-      if (links.length) {
-        linksHtml = `<div class="pub-links">${
-          links.map(l => `<a href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join('')
-        }</div>`;
-      }
+      // 标题链接 -> 论文主页
+      const titleHtml = `<a class="pub-title-link" href="${primaryUrl}" target="_blank" rel="noopener">${star}${p.title}</a>`;
+
+      // Abstract 按钮（即使无摘要也展示一个禁用态，方便视觉一致）
+      const pubKey = 'pub-' + (idx++);
+      const hasAbs = !!(p.abstract && p.abstract.trim());
+      const abstractBtn = hasAbs
+        ? `<button class="pub-linkbtn pub-abstract-btn" data-target="${pubKey}">${labelAbstract} ▾</button>`
+        : `<button class="pub-linkbtn pub-abstract-btn is-disabled" title="${labelNoAbstract}" disabled>${labelAbstract}</button>`;
+
+      // 外部链接按钮
+      const extHtml = externals.map(l =>
+        `<a class="pub-linkbtn" href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`
+      ).join('');
+
+      // 摘要区（默认折叠）
+      const absHtml = hasAbs
+        ? `<div class="pub-abstract" id="${pubKey}" hidden>${p.abstract}</div>`
+        : '';
 
       html += `
         <div class="pub-item${p.first ? ' is-first' : ''}">
@@ -355,12 +341,30 @@ function renderPublications() {
           <div class="pub-authors">${p.authors}</div>
           <div class="pub-venue">${venue}</div>
           <div class="pub-badges">${badges.join('')}</div>
-          ${linksHtml}
+          <div class="pub-links">${abstractBtn}${extHtml}</div>
+          ${absHtml}
         </div>`;
     });
     html += `</div>`;
   });
   root.innerHTML = html;
+
+  // 绑定 Abstract 展开/收起
+  root.querySelectorAll('.pub-abstract-btn:not(.is-disabled)').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-target');
+      const box = document.getElementById(id);
+      if (!box) return;
+      const visible = !box.hasAttribute('hidden');
+      if (visible) {
+        box.setAttribute('hidden', '');
+        btn.innerHTML = btn.innerHTML.replace('▴', '▾');
+      } else {
+        box.removeAttribute('hidden');
+        btn.innerHTML = btn.innerHTML.replace('▾', '▴');
+      }
+    });
+  });
 }
 
 /* ----------- 4) 事件绑定 ----------- */
