@@ -27,6 +27,23 @@
 const PUBLICATIONS = [
   {
     year: 2026,
+    title: "Evaluating the Expressive Appropriateness of Speech in Rich Contexts",
+    paper_url: "https://arxiv.org/abs/2605.09413",
+    authors: "Tianrui Wang, Ziyang Ma, Yizhou Peng, Haoyu Wang, Zhikang Niu, Zikang Huang, Yihao Wu, Yi-Wen Chao, Yu Jiang, Yuheng Lu, Guanrou Yang, Xuanchen Li, Hexin Liu, Chunyu Qiang, Cheng Gong, Yifan Yang, Tianchi Liu, Junyu Wang, Nana Hou, Meng Ge, Fuming You, Wei Yang, Zhongqian Sun, Haifeng Hu, Xiaobao Wang, Eng Siong Chng, Xie Chen, Longbiao Wang, Jianwu Dang",
+    venue_en: "Association for Computational Linguistics (ACL), 2026",
+    venue_zh: "Association for Computational Linguistics (ACL), 2026",
+    type: "conference",
+    first: true,
+    arxiv: "2602.10656",
+    demo_url: "https://wangtianrui.github.io/ceaeval/",
+    highlight: "Top 5% & Seminal Paper",
+    task_tags: ["understanding"],
+    keywords_en: ["Audio Reasoning", "AudioLLM as a Judge", "Benchmark", "Audio Understanding", "Large Audio-Language Model"],
+    keywords_zh: ["音频推理", "基准测试", "音频理解", "音频语言大模型"],
+    abstract: "Evaluating expressive speech remains challenging, as existing methods mainly assess emotional intensity and overlook whether a speech sample is expressively appropriate for its contextual setting. This limitation hinders reliable evaluation of speech systems used in narrative-driven and interactive applications, such as audiobooks and conversational agents. We introduce CEAEval, a Context-rich framework for Evaluating Expressive Appropriateness in speech, which assesses whether a speech sample expressively aligns with the underlying communicative intent implied by its discourse-level narrative context. To support this task, we construct CEAEval-D, the first context-rich speech dataset with real human performances in Mandarin conversational speech, providing narrative descriptions together with fifteen dimensions of human annotations covering expressive attributes and expressive appropriateness. We further develop CEAEval-M, a model that integrates knowledge distillation, planner-based multi-model collaboration, adaptive audio attention bias, and reinforcement learning to perform context-rich expressive appropriateness evaluation. Experiments on a human-annotated test set demonstrate that CEAEval-M substantially outperforms existing speech evaluation and analysis systems."
+  },
+  {
+    year: 2026,
     title: "AudioRAG: A Challenging Benchmark for Audio Reasoning and Information Retrieval",
     paper_url: "https://proceedings.mlr.press/v312/lin26a",
     authors: "Jingru Lin, Chen Zhang, Tianrui Wang, Haizhou Li",
