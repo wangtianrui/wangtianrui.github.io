@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Cross-Speaker Emotion Adaptation — Audio Samples</title>
+<style>
+  :root {
+    --bg:#f7f8fa; --panel:#ffffff; --line:#e6e8ec; --ink:#1f2328;
+    --muted:#6e7681; --accent:#2f6feb;
+    --refbg:#fff7e6; --refline:#f3a626;
+    --gtbg:#eaf4ff;  --gtline:#2f6feb;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+         font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,sans-serif;}
+  header { position:sticky; top:0; z-index:50; background:var(--panel);
+           border-bottom:1px solid var(--line); padding:14px 24px;
+           display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+           box-shadow:0 1px 3px rgba(0,0,0,0.04); }
+  header h1 { margin:0; font-size:18px; font-weight:600; }
+  header .meta { color:var(--muted); font-size:13px; }
+  header .spacer { flex:1; }
+  header button {
+    border:1px solid var(--line); background:#fff; color:var(--ink);
+    padding:6px 14px; border-radius:6px; font-size:13px; cursor:pointer; font-weight:500;
+  }
+  header button:hover { background:#eef2f7; }
+  header button.primary { background:var(--accent); color:#fff; border-color:var(--accent); }
+  header button.primary:hover { background:#1a5cd4; }
+  header label { font-size:13px; color:var(--muted); display:inline-flex; align-items:center; gap:6px; }
+
+  main { padding:20px 24px 80px; max-width:1800px; margin:0 auto; }
+
+  .sample {
+    background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    margin-bottom:22px; padding:16px 18px 14px;
+    box-shadow:0 1px 2px rgba(0,0,0,0.03);
+  }
+  .sample h2 { margin:0 0 6px; font-size:16px; font-weight:600; }
+  .text {
+    font-size:13px; color:var(--muted);
+    background:#f4f6f9; border-left:3px solid var(--accent);
+    padding:8px 12px; margin:8px 0 14px; border-radius:4px;
+    white-space:pre-wrap; word-break:break-word;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  /* reference/groundtruth strip */
+  .refgt-strip {
+    display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:14px;
+  }
+  .refgt-strip .box {
+    border:1px solid var(--line); border-radius:8px; padding:10px 12px;
+    display:flex; flex-direction:column; gap:6px;
+  }
+  .refgt-strip .box.ref { background:var(--refbg); border-left:4px solid var(--refline); }
+  .refgt-strip .box.gt  { background:var(--gtbg);  border-left:4px solid var(--gtline); }
+  .refgt-strip .box .lab { font-size:11.5px; font-weight:600; letter-spacing:0.4px;
+                           text-transform:uppercase; color:var(--muted); }
+  .refgt-strip .box.ref .lab { color:#a06a00; }
+  .refgt-strip .box.gt  .lab { color:#0848a6; }
+  .refgt-strip audio { width:100%; height:32px; }
+
+  table.grid { width:100%; border-collapse:separate; border-spacing:0;
+               table-layout:fixed; font-size:12.5px; }
+  table.grid th, table.grid td {
+    border-bottom:1px solid var(--line); border-right:1px solid var(--line);
+    padding:8px 8px; vertical-align:top;
+  }
+  table.grid thead th { background:#f4f6f9; font-weight:600; text-align:center; }
+  table.grid tbody th { background:#fafbfc; text-align:left; font-weight:600; width:110px; }
+  table.grid tbody tr.csp th { background:#e6f7ec; color:#116329; font-weight:700; }
+  table.grid tbody tr.csp td { background:#f5fbf7; }
+  table.grid td:last-child, table.grid th:last-child { border-right:none; }
+  table.grid tr:last-child td, table.grid tr:last-child th { border-bottom:none; }
+
+  .cell { display:flex; flex-direction:column; gap:5px; }
+  .cell audio { width:100%; height:32px; }
+  .scores { display:flex; flex-wrap:wrap; gap:4px; }
+  .chip {
+    display:inline-flex; gap:3px; align-items:baseline;
+    padding:1px 6px; border-radius:999px; font-size:11px; line-height:1.6;
+    background:#eef2f7; border:1px solid #dfe3ea;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  .chip b { font-weight:600; color:var(--muted); }
+  .chip.good { background:#dafbe1; border-color:#aceebb; color:#116329; }
+  .chip.warn { background:#fff8c5; border-color:#f0d669; color:#7d4e00; }
+  .chip.bad  { background:#ffebe9; border-color:#ffc1bc; color:#82071e; }
+  .chip.wer0 { background:#9be9a8; border-color:#46c463; color:#0f4d18; font-weight:700; }
+
+  .legend {
+    display:flex; gap:14px; flex-wrap:wrap; font-size:12.5px; color:var(--muted);
+    padding:8px 14px; margin-bottom:14px; background:var(--panel);
+    border:1px solid var(--line); border-radius:8px;
+  }
+  .legend.notice {
+    background:#fff8e1; border-color:#f0d669; color:#5c4500; font-size:13px;
+    border-left:4px solid #f3a626; line-height:1.55;
+  }
+  .legend.notice b { color:#3b2e00; }
+
+  .floater {
+    position:fixed; bottom:18px; right:18px; z-index:100;
+    background:#fff; border:1px solid var(--line); border-radius:10px;
+    padding:8px 12px; display:flex; gap:8px; align-items:center;
+    box-shadow:0 4px 16px rgba(0,0,0,0.08); font-size:13px;
+  }
+  body.hide-scores .scores { display:none !important; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Cross-Speaker Emotion Adaptation — Audio Samples</h1>
+  <span class="meta" id="meta"></span>
+  <span class="spacer"></span>
+  <label><input type="checkbox" id="showScores" checked /> Show objective scores</label>
+  <button id="stopAll">Stop all</button>
+</header>
+
+<main>
+  <div class="legend notice">
+    <span><b>Note:</b> The test set contains only one utterance per (speaker, emotion) pair. We therefore use the first <b>3&nbsp;seconds</b> of the ground-truth audio as the prompt (<b style="color:#a06a00">REF</b>); if the utterance is shorter than 3&nbsp;s, the entire clip is used. The synthesis task is then essentially a reconstruction of the original utterance from this short prompt.</span>
+  </div>
+  <div class="legend">
+    <span>Each sample: <b style="color:#a06a00">REF</b> (3-second prompt) + <b style="color:#0848a6">GT</b> (ground truth) + 4 backbones × 4 fine-tuning methods.</span>
+    <span><b style="color:var(--ink)">CSP-FT</b> denotes our proposed method.</span>
+    <span><b>SS</b>: speaker similarity (%, ↑) &nbsp; <b>ERS</b>: emotion-recognition similarity (%, ↑) &nbsp; <b>WER</b>: word error rate (%, ↓)</span>
+  </div>
+  <div id="root"></div>
+</main>
+
+<div class="floater">
+  <span id="playStatus">Idle</span>
+  <button id="stopAll2">Stop</button>
+</div>
+
+<script>
+const DATA = {"models": ["GPT-SoVITS", "VALLE-X", "CosyVoice", "Fun-CosyVoice3.0"], "methods": ["Origin", "FullFT", "LoRA", "CSP-FT"], "samples": [{"sample": 1, "text": "he saw only the effects in a general sketchy way", "dir": "sample_01", "ref": "sample_01/ref.wav", "gt": "sample_01/gt.wav", "cells": {"GPT-SoVITS|Origin": {"wav": "sample_01/GPT-SoVITS_Origin.wav", "SS": "65.67", "ERS": "75.34", "WER": "4.25"}, "GPT-SoVITS|FullFT": {"wav": "sample_01/GPT-SoVITS_FullFT.wav", "SS": "68.97", "ERS": "84.58", "WER": "10.00"}, "GPT-SoVITS|LoRA": {"wav": "sample_01/GPT-SoVITS_LoRA.wav", "SS": "69.31", "ERS": "82.93", "WER": "10.00"}, "GPT-SoVITS|CSP-FT": {"wav": "sample_01/GPT-SoVITS_CSP-FT.wav", "SS": "69.37", "ERS": "84.95", "WER": "0.00"}, "VALLE-X|Origin": {"wav": "sample_01/VALLE-X_Origin.wav", "SS": "82.92", "ERS": "85.34", "WER": "4.82"}, "VALLE-X|FullFT": {"wav": "sample_01/VALLE-X_FullFT.wav", "SS": "89.51", "ERS": "94.70", "WER": "0.00"}, "VALLE-X|LoRA": {"wav": "sample_01/VALLE-X_LoRA.wav", "SS": "90.06", "ERS": "90.78", "WER": "0.00"}, "VALLE-X|CSP-FT": {"wav": "sample_01/VALLE-X_CSP-FT.wav", "SS": "90.28", "ERS": "95.34", "WER": "0.00"}, "CosyVoice|Origin": {"wav": "sample_01/CosyVoice_Origin.wav", "SS": "86.68", "ERS": "92.05", "WER": "10.64"}, "CosyVoice|FullFT": {"wav": "sample_01/CosyVoice_FullFT.wav", "SS": "93.42", "ERS": "95.20", "WER": "50.00"}, "CosyVoice|LoRA": {"wav": "sample_01/CosyVoice_LoRA.wav", "SS": "90.70", "ERS": "94.75", "WER": "10.00"}, "CosyVoice|CSP-FT": {"wav": "sample_01/CosyVoice_CSP-FT.wav", "SS": "93.62", "ERS": "96.52", "WER": "0.00"}, "Fun-CosyVoice3.0|Origin": {"wav": "sample_01/Fun-CosyVoice30_Origin.wav", "SS": "91.20", "ERS": "94.69", "WER": "0.00"}, "Fun-CosyVoice3.0|FullFT": {"wav": "sample_01/Fun-CosyVoice30_FullFT.wav", "SS": "94.93", "ERS": "95.57", "WER": "50.00"}, "Fun-CosyVoice3.0|LoRA": {"wav": "sample_01/Fun-CosyVoice30_LoRA.wav", "SS": "92.02", "ERS": "94.98", "WER": "10.00"}, "Fun-CosyVoice3.0|CSP-FT": {"wav": "sample_01/Fun-CosyVoice30_CSP-FT.wav", "SS": "95.39", "ERS": "97.89", "WER": "0.00"}}}, {"sample": 2, "text": "the high security prison was surrounded by barbed wire", "dir": "sample_02", "ref": "sample_02/ref.wav", "gt": "sample_02/gt.wav", "cells": {"GPT-SoVITS|Origin": {"wav": "sample_02/GPT-SoVITS_Origin.wav", "SS": "63.64", "ERS": "78.28", "WER": "8.72"}, "GPT-SoVITS|FullFT": {"wav": "sample_02/GPT-SoVITS_FullFT.wav", "SS": "68.99", "ERS": "85.89", "WER": "44.44"}, "GPT-SoVITS|LoRA": {"wav": "sample_02/GPT-SoVITS_LoRA.wav", "SS": "67.61", "ERS": "82.17", "WER": "11.11"}, "GPT-SoVITS|CSP-FT": {"wav": "sample_02/GPT-SoVITS_CSP-FT.wav", "SS": "71.01", "ERS": "86.07", "WER": "0.00"}, "VALLE-X|Origin": {"wav": "sample_02/VALLE-X_Origin.wav", "SS": "82.50", "ERS": "86.86", "WER": "7.04"}, "VALLE-X|FullFT": {"wav": "sample_02/VALLE-X_FullFT.wav", "SS": "90.49", "ERS": "92.54", "WER": "44.44"}, "VALLE-X|LoRA": {"wav": "sample_02/VALLE-X_LoRA.wav", "SS": "89.79", "ERS": "91.77", "WER": "33.33"}, "VALLE-X|CSP-FT": {"wav": "sample_02/VALLE-X_CSP-FT.wav", "SS": "91.06", "ERS": "94.83", "WER": "0.00"}, "CosyVoice|Origin": {"wav": "sample_02/CosyVoice_Origin.wav", "SS": "89.80", "ERS": "87.10", "WER": "4.37"}, "CosyVoice|FullFT": {"wav": "sample_02/CosyVoice_FullFT.wav", "SS": "93.65", "ERS": "96.60", "WER": "33.33"}, "CosyVoice|LoRA": {"wav": "sample_02/CosyVoice_LoRA.wav", "SS": "92.81", "ERS": "92.46", "WER": "22.22"}, "CosyVoice|CSP-FT": {"wav": "sample_02/CosyVoice_CSP-FT.wav", "SS": "93.76", "ERS": "97.06", "WER": "0.00"}, "Fun-CosyVoice3.0|Origin": {"wav": "sample_02/Fun-CosyVoice30_Origin.wav", "SS": "92.30", "ERS": "95.30", "WER": "10.93"}, "Fun-CosyVoice3.0|FullFT": {"wav": "sample_02/Fun-CosyVoice30_FullFT.wav", "SS": "95.29", "ERS": "97.03", "WER": "33.33"}, "Fun-CosyVoice3.0|LoRA": {"wav": "sample_02/Fun-CosyVoice30_LoRA.wav", "SS": "91.92", "ERS": "94.50", "WER": "22.22"}, "Fun-CosyVoice3.0|CSP-FT": {"wav": "sample_02/Fun-CosyVoice30_CSP-FT.wav", "SS": "96.12", "ERS": "97.32", "WER": "0.00"}}}, {"sample": 3, "text": "is that why it hurts some less to shoot them and dismember them into trophies", "dir": "sample_03", "ref": "sample_03/ref.wav", "gt": "sample_03/gt.wav", "cells": {"GPT-SoVITS|Origin": {"wav": "sample_03/GPT-SoVITS_Origin.wav", "SS": "62.49", "ERS": "76.82", "WER": "5.86"}, "GPT-SoVITS|FullFT": {"wav": "sample_03/GPT-SoVITS_FullFT.wav", "SS": "68.38", "ERS": "85.71", "WER": "13.33"}, "GPT-SoVITS|LoRA": {"wav": "sample_03/GPT-SoVITS_LoRA.wav", "SS": "69.97", "ERS": "83.87", "WER": "6.67"}, "GPT-SoVITS|CSP-FT": {"wav": "sample_03/GPT-SoVITS_CSP-FT.wav", "SS": "70.64", "ERS": "85.87", "WER": "0.00"}, "VALLE-X|Origin": {"wav": "sample_03/VALLE-X_Origin.wav", "SS": "83.51", "ERS": "89.00", "WER": "10.11"}, "VALLE-X|FullFT": {"wav": "sample_03/VALLE-X_FullFT.wav", "SS": "91.12", "ERS": "91.96", "WER": "6.67"}, "VALLE-X|LoRA": {"wav": "sample_03/VALLE-X_LoRA.wav", "SS": "88.72", "ERS": "92.17", "WER": "0.00"}, "VALLE-X|CSP-FT": {"wav": "sample_03/VALLE-X_CSP-FT.wav", "SS": "91.63", "ERS": "95.26", "WER": "0.00"}, "CosyVoice|Origin": {"wav": "sample_03/CosyVoice_Origin.wav", "SS": "91.29", "ERS": "90.03", "WER": "6.32"}, "CosyVoice|FullFT": {"wav": "sample_03/CosyVoice_FullFT.wav", "SS": "91.38", "ERS": "96.24", "WER": "6.67"}, "CosyVoice|LoRA": {"wav": "sample_03/CosyVoice_LoRA.wav", "SS": "93.34", "ERS": "91.76", "WER": "46.67"}, "CosyVoice|CSP-FT": {"wav": "sample_03/CosyVoice_CSP-FT.wav", "SS": "93.92", "ERS": "96.26", "WER": "0.00"}, "Fun-CosyVoice3.0|Origin": {"wav": "sample_03/Fun-CosyVoice30_Origin.wav", "SS": "93.34", "ERS": "93.79", "WER": "0.00"}, "Fun-CosyVoice3.0|FullFT": {"wav": "sample_03/Fun-CosyVoice30_FullFT.wav", "SS": "95.07", "ERS": "97.85", "WER": "33.33"}, "Fun-CosyVoice3.0|LoRA": {"wav": "sample_03/Fun-CosyVoice30_LoRA.wav", "SS": "92.80", "ERS": "94.69", "WER": "46.67"}, "Fun-CosyVoice3.0|CSP-FT": {"wav": "sample_03/Fun-CosyVoice30_CSP-FT.wav", "SS": "95.40", "ERS": "98.26", "WER": "0.00"}}}, {"sample": 4, "text": "the fish began to leap frantically on the surface of the small lake", "dir": "sample_04", "ref": "sample_04/ref.wav", "gt": "sample_04/gt.wav", "cells": {"GPT-SoVITS|Origin": {"wav": "sample_04/GPT-SoVITS_Origin.wav", "SS": "62.74", "ERS": "74.65", "WER": "7.36"}, "GPT-SoVITS|FullFT": {"wav": "sample_04/GPT-SoVITS_FullFT.wav", "SS": "67.96", "ERS": "84.12", "WER": "7.69"}, "GPT-SoVITS|LoRA": {"wav": "sample_04/GPT-SoVITS_LoRA.wav", "SS": "68.97", "ERS": "80.23", "WER": "7.69"}, "GPT-SoVITS|CSP-FT": {"wav": "sample_04/GPT-SoVITS_CSP-FT.wav", "SS": "70.90", "ERS": "84.25", "WER": "0.00"}, "VALLE-X|Origin": {"wav": "sample_04/VALLE-X_Origin.wav", "SS": "81.86", "ERS": "84.41", "WER": "6.75"}, "VALLE-X|FullFT": {"wav": "sample_04/VALLE-X_FullFT.wav", "SS": "90.24", "ERS": "92.11", "WER": "0.00"}, "VALLE-X|LoRA": {"wav": "sample_04/VALLE-X_LoRA.wav", "SS": "89.46", "ERS": "92.06", "WER": "0.00"}, "VALLE-X|CSP-FT": {"wav": "sample_04/VALLE-X_CSP-FT.wav", "SS": "91.24", "ERS": "95.62", "WER": "0.00"}, "CosyVoice|Origin": {"wav": "sample_04/CosyVoice_Origin.wav", "SS": "89.28", "ERS": "88.00", "WER": "10.89"}, "CosyVoice|FullFT": {"wav": "sample_04/CosyVoice_FullFT.wav", "SS": "92.42", "ERS": "95.23", "WER": "46.15"}, "CosyVoice|LoRA": {"wav": "sample_04/CosyVoice_LoRA.wav", "SS": "90.78", "ERS": "93.74", "WER": "30.77"}, "CosyVoice|CSP-FT": {"wav": "sample_04/CosyVoice_CSP-FT.wav", "SS": "92.75", "ERS": "95.79", "WER": "0.00"}, "Fun-CosyVoice3.0|Origin": {"wav": "sample_04/Fun-CosyVoice30_Origin.wav", "SS": "93.02", "ERS": "88.88", "WER": "0.00"}, "Fun-CosyVoice3.0|FullFT": {"wav": "sample_04/Fun-CosyVoice30_FullFT.wav", "SS": "94.96", "ERS": "97.58", "WER": "46.15"}, "Fun-CosyVoice3.0|LoRA": {"wav": "sample_04/Fun-CosyVoice30_LoRA.wav", "SS": "91.78", "ERS": "94.91", "WER": "30.77"}, "Fun-CosyVoice3.0|CSP-FT": {"wav": "sample_04/Fun-CosyVoice30_CSP-FT.wav", "SS": "96.02", "ERS": "97.78", "WER": "0.00"}}}, {"sample": 5, "text": "we will achieve a more vivid sense of what it is by realizing what it is not", "dir": "sample_05", "ref": "sample_05/ref.wav", "gt": "sample_05/gt.wav", "cells": {"GPT-SoVITS|Origin": {"wav": "sample_05/GPT-SoVITS_Origin.wav", "SS": "64.18", "ERS": "75.18", "WER": "8.49"}, "GPT-SoVITS|FullFT": {"wav": "sample_05/GPT-SoVITS_FullFT.wav", "SS": "68.45", "ERS": "83.75", "WER": "23.53"}, "GPT-SoVITS|LoRA": {"wav": "sample_05/GPT-SoVITS_LoRA.wav", "SS": "69.82", "ERS": "80.50", "WER": "11.76"}, "GPT-SoVITS|CSP-FT": {"wav": "sample_05/GPT-SoVITS_CSP-FT.wav", "SS": "71.14", "ERS": "84.55", "WER": "0.00"}, "VALLE-X|Origin": {"wav": "sample_05/VALLE-X_Origin.wav", "SS": "82.19", "ERS": "86.67", "WER": "5.72"}, "VALLE-X|FullFT": {"wav": "sample_05/VALLE-X_FullFT.wav", "SS": "90.32", "ERS": "91.06", "WER": "0.00"}, "VALLE-X|LoRA": {"wav": "sample_05/VALLE-X_LoRA.wav", "SS": "88.28", "ERS": "92.91", "WER": "0.00"}, "VALLE-X|CSP-FT": {"wav": "sample_05/VALLE-X_CSP-FT.wav", "SS": "90.66", "ERS": "94.48", "WER": "0.00"}, "CosyVoice|Origin": {"wav": "sample_05/CosyVoice_Origin.wav", "SS": "90.72", "ERS": "92.62", "WER": "8.62"}, "CosyVoice|FullFT": {"wav": "sample_05/CosyVoice_FullFT.wav", "SS": "91.49", "ERS": "93.61", "WER": "17.65"}, "CosyVoice|LoRA": {"wav": "sample_05/CosyVoice_LoRA.wav", "SS": "91.67", "ERS": "94.81", "WER": "41.18"}, "CosyVoice|CSP-FT": {"wav": "sample_05/CosyVoice_CSP-FT.wav", "SS": "93.78", "ERS": "95.48", "WER": "0.00"}, "Fun-CosyVoice3.0|Origin": {"wav": "sample_05/Fun-CosyVoice30_Origin.wav", "SS": "92.18", "ERS": "93.61", "WER": "0.00"}, "Fun-CosyVoice3.0|FullFT": {"wav": "sample_05/Fun-CosyVoice30_FullFT.wav", "SS": "95.35", "ERS": "97.65", "WER": "17.65"}, "Fun-CosyVoice3.0|LoRA": {"wav": "sample_05/Fun-CosyVoice30_LoRA.wav", "SS": "93.06", "ERS": "92.76", "WER": "41.18"}, "Fun-CosyVoice3.0|CSP-FT": {"wav": "sample_05/Fun-CosyVoice30_CSP-FT.wav", "SS": "95.82", "ERS": "97.78", "WER": "0.00"}}}, {"sample": 6, "text": "they are not feeling the pain a few of them are feeling the pain a few of them are irrelevant and never going to make the rule", "dir": "sample_06", "ref": "sample_06/ref.wav", "gt": "sample_06/gt.wav", "cells": {"GPT-SoVITS|Origin": {"wav": "sample_06/GPT-SoVITS_Origin.wav", "SS": "63.07", "ERS": "74.55", "WER": "3.70"}, "GPT-SoVITS|FullFT": {"wav": "sample_06/GPT-SoVITS_FullFT.wav", "SS": "69.33", "ERS": "85.58", "WER": "29.63"}, "GPT-SoVITS|LoRA": {"wav": "sample_06/GPT-SoVITS_LoRA.wav", "SS": "68.79", "ERS": "80.43", "WER": "11.11"}, "GPT-SoVITS|CSP-FT": {"wav": "sample_06/GPT-SoVITS_CSP-FT.wav", "SS": "70.42", "ERS": "85.71", "WER": "0.00"}, "VALLE-X|Origin": {"wav": "sample_06/VALLE-X_Origin.wav", "SS": "82.04", "ERS": "88.13", "WER": "6.87"}, "VALLE-X|FullFT": {"wav": "sample_06/VALLE-X_FullFT.wav", "SS": "89.91", "ERS": "94.77", "WER": "0.00"}, "VALLE-X|LoRA": {"wav": "sample_06/VALLE-X_LoRA.wav", "SS": "89.71", "ERS": "92.22", "WER": "33.33"}, "VALLE-X|CSP-FT": {"wav": "sample_06/VALLE-X_CSP-FT.wav", "SS": "90.34", "ERS": "95.15", "WER": "0.00"}, "CosyVoice|Origin": {"wav": "sample_06/CosyVoice_Origin.wav", "SS": "87.98", "ERS": "88.13", "WER": "8.95"}, "CosyVoice|FullFT": {"wav": "sample_06/CosyVoice_FullFT.wav", "SS": "93.01", "ERS": "94.86", "WER": "37.04"}, "CosyVoice|LoRA": {"wav": "sample_06/CosyVoice_LoRA.wav", "SS": "91.30", "ERS": "91.62", "WER": "44.44"}, "CosyVoice|CSP-FT": {"wav": "sample_06/CosyVoice_CSP-FT.wav", "SS": "93.45", "ERS": "95.90", "WER": "0.00"}, "Fun-CosyVoice3.0|Origin": {"wav": "sample_06/Fun-CosyVoice30_Origin.wav", "SS": "93.35", "ERS": "95.05", "WER": "0.00"}, "Fun-CosyVoice3.0|FullFT": {"wav": "sample_06/Fun-CosyVoice30_FullFT.wav", "SS": "93.03", "ERS": "97.48", "WER": "37.04"}, "Fun-CosyVoice3.0|LoRA": {"wav": "sample_06/Fun-CosyVoice30_LoRA.wav", "SS": "93.29", "ERS": "92.40", "WER": "44.44"}, "Fun-CosyVoice3.0|CSP-FT": {"wav": "sample_06/Fun-CosyVoice30_CSP-FT.wav", "SS": "95.39", "ERS": "97.65", "WER": "0.00"}}}, {"sample": 7, "text": "it is a pretty wild claim for sure i would be curious", "dir": "sample_07", "ref": "sample_07/ref.wav", "gt": "sample_07/gt.wav", "cells": {"GPT-SoVITS|Origin": {"wav": "sample_07/GPT-SoVITS_Origin.wav", "SS": "63.25", "ERS": "74.68", "WER": "4.75"}, "GPT-SoVITS|FullFT": {"wav": "sample_07/GPT-SoVITS_FullFT.wav", "SS": "68.63", "ERS": "83.04", "WER": "8.33"}, "GPT-SoVITS|LoRA": {"wav": "sample_07/GPT-SoVITS_LoRA.wav", "SS": "68.51", "ERS": "82.37", "WER": "0.00"}, "GPT-SoVITS|CSP-FT": {"wav": "sample_07/GPT-SoVITS_CSP-FT.wav", "SS": "69.93", "ERS": "84.86", "WER": "0.00"}, "VALLE-X|Origin": {"wav": "sample_07/VALLE-X_Origin.wav", "SS": "85.74", "ERS": "85.80", "WER": "6.12"}, "VALLE-X|FullFT": {"wav": "sample_07/VALLE-X_FullFT.wav", "SS": "90.70", "ERS": "93.22", "WER": "0.00"}, "VALLE-X|LoRA": {"wav": "sample_07/VALLE-X_LoRA.wav", "SS": "90.80", "ERS": "90.31", "WER": "0.00"}, "VALLE-X|CSP-FT": {"wav": "sample_07/VALLE-X_CSP-FT.wav", "SS": "91.61", "ERS": "94.13", "WER": "0.00"}, "CosyVoice|Origin": {"wav": "sample_07/CosyVoice_Origin.wav", "SS": "90.85", "ERS": "91.50", "WER": "5.82"}, "CosyVoice|FullFT": {"wav": "sample_07/CosyVoice_FullFT.wav", "SS": "91.47", "ERS": "94.73", "WER": "33.33"}, "CosyVoice|LoRA": {"wav": "sample_07/CosyVoice_LoRA.wav", "SS": "91.13", "ERS": "92.47", "WER": "33.33"}, "CosyVoice|CSP-FT": {"wav": "sample_07/CosyVoice_CSP-FT.wav", "SS": "93.55", "ERS": "96.85", "WER": "0.00"}, "Fun-CosyVoice3.0|Origin": {"wav": "sample_07/Fun-CosyVoice30_Origin.wav", "SS": "91.23", "ERS": "90.26", "WER": "7.04"}, "Fun-CosyVoice3.0|FullFT": {"wav": "sample_07/Fun-CosyVoice30_FullFT.wav", "SS": "95.72", "ERS": "95.20", "WER": "33.33"}, "Fun-CosyVoice3.0|LoRA": {"wav": "sample_07/Fun-CosyVoice30_LoRA.wav", "SS": "93.50", "ERS": "95.32", "WER": "33.33"}, "Fun-CosyVoice3.0|CSP-FT": {"wav": "sample_07/Fun-CosyVoice30_CSP-FT.wav", "SS": "95.89", "ERS": "96.90", "WER": "0.00"}}}, {"sample": 8, "text": "joey wins the super chat war it is not a war we are in it together we are all on the same side", "dir": "sample_08", "ref": "sample_08/ref.wav", "gt": "sample_08/gt.wav", "cells": {"GPT-SoVITS|Origin": {"wav": "sample_08/GPT-SoVITS_Origin.wav", "SS": "66.40", "ERS": "75.33", "WER": "9.61"}, "GPT-SoVITS|FullFT": {"wav": "sample_08/GPT-SoVITS_FullFT.wav", "SS": "69.23", "ERS": "84.72", "WER": "0.00"}, "GPT-SoVITS|LoRA": {"wav": "sample_08/GPT-SoVITS_LoRA.wav", "SS": "68.88", "ERS": "80.65", "WER": "17.39"}, "GPT-SoVITS|CSP-FT": {"wav": "sample_08/GPT-SoVITS_CSP-FT.wav", "SS": "71.47", "ERS": "84.90", "WER": "0.00"}, "VALLE-X|Origin": {"wav": "sample_08/VALLE-X_Origin.wav", "SS": "81.88", "ERS": "84.68", "WER": "8.70"}, "VALLE-X|FullFT": {"wav": "sample_08/VALLE-X_FullFT.wav", "SS": "90.36", "ERS": "92.72", "WER": "0.00"}, "VALLE-X|LoRA": {"wav": "sample_08/VALLE-X_LoRA.wav", "SS": "88.13", "ERS": "91.36", "WER": "26.09"}, "VALLE-X|CSP-FT": {"wav": "sample_08/VALLE-X_CSP-FT.wav", "SS": "91.74", "ERS": "95.83", "WER": "0.00"}, "CosyVoice|Origin": {"wav": "sample_08/CosyVoice_Origin.wav", "SS": "86.60", "ERS": "88.80", "WER": "9.64"}, "CosyVoice|FullFT": {"wav": "sample_08/CosyVoice_FullFT.wav", "SS": "93.05", "ERS": "96.27", "WER": "13.04"}, "CosyVoice|LoRA": {"wav": "sample_08/CosyVoice_LoRA.wav", "SS": "91.56", "ERS": "93.34", "WER": "8.70"}, "CosyVoice|CSP-FT": {"wav": "sample_08/CosyVoice_CSP-FT.wav", "SS": "94.00", "ERS": "97.14", "WER": "0.00"}, "Fun-CosyVoice3.0|Origin": {"wav": "sample_08/Fun-CosyVoice30_Origin.wav", "SS": "92.45", "ERS": "94.98", "WER": "7.63"}, "Fun-CosyVoice3.0|FullFT": {"wav": "sample_08/Fun-CosyVoice30_FullFT.wav", "SS": "93.71", "ERS": "95.65", "WER": "13.04"}, "Fun-CosyVoice3.0|LoRA": {"wav": "sample_08/Fun-CosyVoice30_LoRA.wav", "SS": "94.00", "ERS": "92.71", "WER": "8.70"}, "Fun-CosyVoice3.0|CSP-FT": {"wav": "sample_08/Fun-CosyVoice30_CSP-FT.wav", "SS": "95.09", "ERS": "96.53", "WER": "0.00"}}}, {"sample": 9, "text": "his blood grew hot with rage at the thought", "dir": "sample_09", "ref": "sample_09/ref.wav", "gt": "sample_09/gt.wav", "cells": {"GPT-SoVITS|Origin": {"wav": "sample_09/GPT-SoVITS_Origin.wav", "SS": "66.12", "ERS": "79.68", "WER": "9.73"}, "GPT-SoVITS|FullFT": {"wav": "sample_09/GPT-SoVITS_FullFT.wav", "SS": "69.14", "ERS": "84.58", "WER": "0.00"}, "GPT-SoVITS|LoRA": {"wav": "sample_09/GPT-SoVITS_LoRA.wav", "SS": "69.41", "ERS": "81.19", "WER": "0.00"}, "GPT-SoVITS|CSP-FT": {"wav": "sample_09/GPT-SoVITS_CSP-FT.wav", "SS": "69.58", "ERS": "84.87", "WER": "0.00"}, "VALLE-X|Origin": {"wav": "sample_09/VALLE-X_Origin.wav", "SS": "81.89", "ERS": "85.39", "WER": "6.22"}, "VALLE-X|FullFT": {"wav": "sample_09/VALLE-X_FullFT.wav", "SS": "89.30", "ERS": "94.67", "WER": "0.00"}, "VALLE-X|LoRA": {"wav": "sample_09/VALLE-X_LoRA.wav", "SS": "89.05", "ERS": "93.18", "WER": "22.22"}, "VALLE-X|CSP-FT": {"wav": "sample_09/VALLE-X_CSP-FT.wav", "SS": "91.59", "ERS": "95.10", "WER": "0.00"}, "CosyVoice|Origin": {"wav": "sample_09/CosyVoice_Origin.wav", "SS": "88.39", "ERS": "88.25", "WER": "11.11"}, "CosyVoice|FullFT": {"wav": "sample_09/CosyVoice_FullFT.wav", "SS": "91.21", "ERS": "96.69", "WER": "44.44"}, "CosyVoice|LoRA": {"wav": "sample_09/CosyVoice_LoRA.wav", "SS": "91.55", "ERS": "93.14", "WER": "11.11"}, "CosyVoice|CSP-FT": {"wav": "sample_09/CosyVoice_CSP-FT.wav", "SS": "93.53", "ERS": "96.82", "WER": "0.00"}, "Fun-CosyVoice3.0|Origin": {"wav": "sample_09/Fun-CosyVoice30_Origin.wav", "SS": "90.36", "ERS": "88.69", "WER": "11.11"}, "Fun-CosyVoice3.0|FullFT": {"wav": "sample_09/Fun-CosyVoice30_FullFT.wav", "SS": "95.63", "ERS": "96.04", "WER": "44.44"}, "Fun-CosyVoice3.0|LoRA": {"wav": "sample_09/Fun-CosyVoice30_LoRA.wav", "SS": "93.34", "ERS": "95.93", "WER": "11.11"}, "Fun-CosyVoice3.0|CSP-FT": {"wav": "sample_09/Fun-CosyVoice30_CSP-FT.wav", "SS": "95.90", "ERS": "97.53", "WER": "0.00"}}}, {"sample": 10, "text": "the stout wood was crushed like an edge shell", "dir": "sample_10", "ref": "sample_10/ref.wav", "gt": "sample_10/gt.wav", "cells": {"GPT-SoVITS|Origin": {"wav": "sample_10/GPT-SoVITS_Origin.wav", "SS": "65.43", "ERS": "77.25", "WER": "8.82"}, "GPT-SoVITS|FullFT": {"wav": "sample_10/GPT-SoVITS_FullFT.wav", "SS": "70.85", "ERS": "82.36", "WER": "22.22"}, "GPT-SoVITS|LoRA": {"wav": "sample_10/GPT-SoVITS_LoRA.wav", "SS": "69.90", "ERS": "80.96", "WER": "22.22"}, "GPT-SoVITS|CSP-FT": {"wav": "sample_10/GPT-SoVITS_CSP-FT.wav", "SS": "71.21", "ERS": "83.55", "WER": "0.00"}, "VALLE-X|Origin": {"wav": "sample_10/VALLE-X_Origin.wav", "SS": "85.73", "ERS": "86.91", "WER": "22.22"}, "VALLE-X|FullFT": {"wav": "sample_10/VALLE-X_FullFT.wav", "SS": "91.52", "ERS": "93.95", "WER": "0.00"}, "VALLE-X|LoRA": {"wav": "sample_10/VALLE-X_LoRA.wav", "SS": "88.59", "ERS": "91.63", "WER": "44.44"}, "VALLE-X|CSP-FT": {"wav": "sample_10/VALLE-X_CSP-FT.wav", "SS": "91.78", "ERS": "95.71", "WER": "0.00"}, "CosyVoice|Origin": {"wav": "sample_10/CosyVoice_Origin.wav", "SS": "89.52", "ERS": "90.94", "WER": "11.11"}, "CosyVoice|FullFT": {"wav": "sample_10/CosyVoice_FullFT.wav", "SS": "91.37", "ERS": "97.20", "WER": "11.11"}, "CosyVoice|LoRA": {"wav": "sample_10/CosyVoice_LoRA.wav", "SS": "92.02", "ERS": "93.77", "WER": "22.22"}, "CosyVoice|CSP-FT": {"wav": "sample_10/CosyVoice_CSP-FT.wav", "SS": "92.68", "ERS": "97.58", "WER": "0.00"}, "Fun-CosyVoice3.0|Origin": {"wav": "sample_10/Fun-CosyVoice30_Origin.wav", "SS": "89.66", "ERS": "93.15", "WER": "11.11"}, "Fun-CosyVoice3.0|FullFT": {"wav": "sample_10/Fun-CosyVoice30_FullFT.wav", "SS": "94.14", "ERS": "97.99", "WER": "11.11"}, "Fun-CosyVoice3.0|LoRA": {"wav": "sample_10/Fun-CosyVoice30_LoRA.wav", "SS": "92.12", "ERS": "94.28", "WER": "22.22"}, "Fun-CosyVoice3.0|CSP-FT": {"wav": "sample_10/Fun-CosyVoice30_CSP-FT.wav", "SS": "95.07", "ERS": "98.10", "WER": "0.00"}}}]};
+document.getElementById("meta").textContent =
+  `${DATA.samples.length} samples · ${DATA.models.length} models × ${DATA.methods.length} methods`;
+
+function chipClass(metric, val) {
+  const v = parseFloat(val);
+  if (Number.isNaN(v)) return "";
+  if (metric === "WER") {
+    if (v === 0)  return "wer0";
+    if (v <= 5)   return "good";
+    if (v <= 15)  return "warn";
+    return "bad";
+  } else {
+    if (v >= 90) return "good";
+    if (v >= 75) return "warn";
+    return "bad";
+  }
+}
+function el(t, a={}, ...kids){
+  const e=document.createElement(t);
+  for(const k of Object.keys(a)){
+    if(k==="class") e.className=a[k];
+    else if(k==="html") e.innerHTML=a[k];
+    else if(k.startsWith("on")) e.addEventListener(k.slice(2), a[k]);
+    else e.setAttribute(k, a[k]);
+  }
+  for(const k of kids){ if(k==null) continue;
+    e.appendChild(typeof k==="string"? document.createTextNode(k): k); }
+  return e;
+}
+function cellEl(s, model, method) {
+  const td = el("td");
+  const c = s.cells[`${model}|${method}`];
+  if (!c) return td;
+  const wrap = el("div", { class: "cell" });
+  wrap.appendChild(el("audio", { controls: "", preload: "none", src: c.wav }));
+  const sc = el("div", { class: "scores" });
+  for (const k of ["SS","ERS","WER"]) {
+    sc.appendChild(el("span", {
+      class: "chip " + chipClass(k, c[k]),
+      html: `<b>${k}</b> ${parseFloat(c[k]).toFixed(1)}`
+    }));
+  }
+  wrap.appendChild(sc);
+  td.appendChild(wrap);
+  return td;
+}
+function refgtBox(label, src, cls) {
+  const box = el("div", { class: "box " + cls });
+  box.appendChild(el("div", { class: "lab" }, label));
+  if (src) box.appendChild(el("audio", { controls: "", preload: "none", src }));
+  else box.appendChild(el("div", { class: "lab", html: "<i>(not available)</i>" }));
+  return box;
+}
+function renderSample(s) {
+  const box = el("div", { class: "sample" });
+  box.appendChild(el("h2", {}, `Sample ${String(s.sample).padStart(2,"0")}`));
+  if (s.text) box.appendChild(el("div", { class: "text" }, s.text));
+
+  // ref/gt strip
+  const strip = el("div", { class: "refgt-strip" });
+  strip.appendChild(refgtBox("Reference (prompt)", s.ref, "ref"));
+  strip.appendChild(refgtBox("Ground Truth",       s.gt,  "gt"));
+  box.appendChild(strip);
+
+  // 4x4 table
+  const tbl = el("table", { class: "grid" });
+  const thead = el("thead"); const hr = el("tr");
+  hr.appendChild(el("th"));
+  for (const m of DATA.models) hr.appendChild(el("th", {}, m));
+  thead.appendChild(hr); tbl.appendChild(thead);
+  const tbody = el("tbody");
+  for (const me of DATA.methods) {
+    const tr = el("tr", { class: me === "CSP-FT" ? "csp" : "" });
+    tr.appendChild(el("th", {}, me));
+    for (const m of DATA.models) tr.appendChild(cellEl(s, m, me));
+    tbody.appendChild(tr);
+  }
+  tbl.appendChild(tbody); box.appendChild(tbl);
+  return box;
+}
+
+const root = document.getElementById("root");
+for (const s of DATA.samples) root.appendChild(renderSample(s));
+
+document.getElementById("showScores").addEventListener("change", e => {
+  document.body.classList.toggle("hide-scores", !e.target.checked);
+});
+
+function stopAll() {
+  document.querySelectorAll("audio").forEach(a => { a.pause(); a.currentTime = 0; });
+  document.getElementById("playStatus").textContent = "Idle";
+}
+document.getElementById("stopAll").addEventListener("click", stopAll);
+document.getElementById("stopAll2").addEventListener("click", stopAll);
+
+document.addEventListener("play", (ev) => {
+  if (ev.target.tagName !== "AUDIO") return;
+  document.querySelectorAll("audio").forEach(a => { if (a !== ev.target) a.pause(); });
+  // figure out a label
+  const cell = ev.target.closest("td");
+  const row  = ev.target.closest("tr");
+  const box  = ev.target.closest(".sample");
+  const refgtBox = ev.target.closest(".refgt-strip .box");
+  const sName = box?.querySelector("h2")?.textContent || "?";
+  let label;
+  if (refgtBox) {
+    label = `${sName} · ${refgtBox.querySelector(".lab")?.textContent || ""}`;
+  } else {
+    const col  = cell ? Array.from(cell.parentElement.children).indexOf(cell) : 0;
+    const model = DATA.models[col - 1] || "?";
+    const meth  = row?.querySelector("th")?.textContent || "?";
+    label = `${sName} · ${model} · ${meth}`;
+  }
+  document.getElementById("playStatus").textContent = label;
+}, true);
+</script>
+</body>
+</html>
