@@ -93,6 +93,7 @@ button:focus-visible {
 .method img {
   display: block;
   width: 100%;
+  max-width: 840px;
   margin: 18px auto 0;
 }
 
