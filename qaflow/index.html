@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>QAFlow: Quality-Aware Flow Matching for Speech Enhancement</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="simple.css">
+  </head>
+  <body>
+    <main class="page">
+      <header class="paper-header">
+        <h1>QAFlow: Quality-Aware Flow Matching for Speech Enhancement</h1>
+      </header>
+
+      <section class="overview" aria-labelledby="abstract-title">
+        <h2 id="abstract-title">Abstract</h2>
+        <p>
+          Conditional generative speech enhancement commonly treats the noisy observation
+          as its principal condition, requiring the model to infer speech content and
+          degradation severity from the same input. Task-relevant complementary conditions
+          can reduce this ambiguity and provide a more stable basis for estimating the
+          transport field. QAFlow addresses this problem with a quality-aware conditional
+          flow-matching framework conditioned on non-intrusive estimates of input quality.
+          It combines a trainable ASR-initialized acoustic encoder with flow matching in a
+          power-compressed complex STFT domain, avoiding a separate latent VAE or neural
+          vocoder. Supervised training uses spectral and perceptually weighted objectives,
+          followed by an offline stage guided by a non-intrusive perceptual judge. QAFlow
+          achieves the strongest overall quality among the compared systems while retaining
+          efficient eight-step inference.
+        </p>
+        <img
+          src="assets/qaflow_overview.png"
+          alt="Overview of the QAFlow speech enhancement framework"
+        >
+      </section>
+
+      <section class="method" aria-labelledby="method-title">
+        <h2 id="method-title">Method</h2>
+        <p>
+          QAFlow represents each noisy waveform with an explicit quality condition,
+          ASR-initialized acoustic features, and a compressed complex spectrum. These signals
+          condition a time-frequency Transformer whose velocity field restores the target
+          spectrum through a short flow trajectory. Perceptually guided post-training then
+          distills preferred outputs into the same model without changing its inference path.
+        </p>
+        <img
+          src="assets/qaflow_method.png"
+          alt="Architecture, Transformer block, training, and inference pipeline of QAFlow"
+        >
+      </section>
+
+      <section class="samples" aria-labelledby="samples-title">
+        <div class="samples-heading">
+          <h2 id="samples-title">Audio Samples</h2>
+          <button
+            id="score-toggle"
+            class="score-toggle"
+            type="button"
+            aria-label="Show DNSMOS scores"
+            aria-pressed="false"
+            title="Show DNSMOS scores"
+          >
+            <span class="score-toggle-label">Show DNSMOS Scores</span>
+            <span class="score-toggle-track" aria-hidden="true"><span></span></span>
+          </button>
+        </div>
+        <div class="comparison" aria-label="Audio result comparison">
+        <div class="comparison-scroll">
+          <div id="comparison-table" class="comparison-table"></div>
+        </div>
+        </div>
+      </section>
+    </main>
+
+    <noscript>JavaScript is required to load the audio comparison.</noscript>
+    <script src="demo_data.js"></script>
+    <script src="simple.js"></script>
+  </body>
+</html>
