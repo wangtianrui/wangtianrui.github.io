@@ -271,18 +271,55 @@ button:focus-visible {
 }
 
 .audio-progress {
-  display: block;
-  height: 4px;
+  --progress: 0%;
+  width: 100%;
+  min-width: 0;
+  height: 18px;
   flex: 1 1 auto;
-  overflow: hidden;
+  margin: 0;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.audio-progress::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--system-color) 0 var(--progress),
+    #dfe4e8 var(--progress) 100%
+  );
+}
+
+.audio-progress::-webkit-slider-thumb {
+  width: 10px;
+  height: 10px;
+  margin-top: -3px;
+  appearance: none;
+  border: 1px solid var(--system-color);
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.audio-progress::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
   background: #dfe4e8;
 }
 
-.audio-progress span {
-  display: block;
-  width: 0;
-  height: 100%;
+.audio-progress::-moz-range-progress {
+  height: 4px;
+  border-radius: 999px;
   background: var(--system-color);
+}
+
+.audio-progress::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--system-color);
+  border-radius: 50%;
+  background: #ffffff;
 }
 
 .score-note {

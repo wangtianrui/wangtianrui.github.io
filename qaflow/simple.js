@@ -63,12 +63,17 @@
     const audio = document.createElement("audio");
     audio.preload = "none";
     audio.src = track.audio;
+    let pendingSeek = null;
 
-    const progress = document.createElement("span");
+    const progress = document.createElement("input");
+    progress.type = "range";
     progress.className = "audio-progress";
-    progress.setAttribute("aria-hidden", "true");
-    const progressFill = document.createElement("span");
-    progress.appendChild(progressFill);
+    progress.min = "0";
+    progress.max = "100";
+    progress.step = "0.1";
+    progress.value = "0";
+    progress.setAttribute("aria-label", `Seek ${system.name}`);
+    progress.style.setProperty("--progress", "0%");
 
     const playerLine = document.createElement("span");
     playerLine.className = "player-line";
@@ -103,11 +108,28 @@
         Number.isFinite(audio.duration) && audio.duration > 0
           ? audio.currentTime / audio.duration
           : 0;
-      progressFill.style.width = `${ratio * 100}%`;
+      progress.value = String(ratio * 100);
+      progress.style.setProperty("--progress", `${ratio * 100}%`);
+    });
+    progress.addEventListener("input", () => {
+      if (!Number.isFinite(audio.duration) || audio.duration <= 0) {
+        pendingSeek = Number(progress.value);
+        audio.load();
+        return;
+      }
+      audio.currentTime = (Number(progress.value) / 100) * audio.duration;
+      progress.style.setProperty("--progress", `${progress.value}%`);
+    });
+    audio.addEventListener("loadedmetadata", () => {
+      if (pendingSeek === null) return;
+      audio.currentTime = (pendingSeek / 100) * audio.duration;
+      progress.style.setProperty("--progress", `${pendingSeek}%`);
+      pendingSeek = null;
     });
     audio.addEventListener("ended", () => {
       audio.currentTime = 0;
-      progressFill.style.width = "0%";
+      progress.value = "0";
+      progress.style.setProperty("--progress", "0%");
       stopCurrent();
     });
     cell.append(playerLine, score, audio);
